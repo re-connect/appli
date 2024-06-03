@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Reconnnect",
-    "slug": "Reconnnect",
+    "name": "Reconnect",
+    "slug": "Reconnect",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,7 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.reconnect.CloudSolidaire.debug"
     },
     "android": {
       "adaptiveIcon": {
