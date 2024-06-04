@@ -18,6 +18,7 @@ import {
   EnableBeneficiaryDataInterface,
   EnableBeneficiaryErrorsInterface,
 } from '../types/Beneficiaries';
+import { alert } from '../helpers/alertHelper';
 
 export const useFetchBeneficiaries = () => {
   const [isFetchingBeneficiaries, setIsFetchingBeneficiaries] = useState<boolean>(false);
@@ -34,7 +35,7 @@ export const useFetchBeneficiaries = () => {
       setIsFetchingBeneficiaries(false);
     } catch (error) {
       setIsFetchingBeneficiaries(false);
-      Alert.alert(t.t('error_fetching_beneficiary'));
+      alert('error_fetching_beneficiary');
     }
   }, [list, setList]);
 
@@ -98,7 +99,7 @@ export const useCreateBeneficiary = () => {
       } catch (error) {
         isCreatingActions.setFalse();
         if (!(error instanceof Error)) {
-          Alert.alert(t.t('error_creating_beneficiary'));
+          alert('error_creating_beneficiary');
         }
       }
     },
@@ -184,7 +185,7 @@ export const useDeleteBeneficiary = () => {
         ]);
       } catch (error) {
         isDeletingActions.setFalse();
-        Alert.alert(t('error_generic'));
+        alert('error_generic');
       }
     },
     [isDeletingActions, navigation],
@@ -218,7 +219,7 @@ export const useRequestDataForBeneficiary = () => {
         ]);
       } catch (error) {
         isGetingDataActions.setFalse();
-        Alert.alert(t('error_generic'));
+        alert('error_generic');
       }
     },
     [isGetingDataActions, navigation],

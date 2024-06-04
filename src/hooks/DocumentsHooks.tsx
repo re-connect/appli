@@ -15,6 +15,7 @@ import t from '../services/translation';
 import { DocumentInterface, ScannedGeniusDocumentInterface } from '../types/Documents';
 import { FolderInterface } from '../types/Folder';
 import { ImageInterface } from '../types/Image';
+import { alert } from '../helpers/alertHelper';
 
 export const useFetchDocuments = (beneficiaryId?: number) => {
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
@@ -224,7 +225,7 @@ export const useMoveDocumentInFolder = () => {
       hasMoved.setTrue();
     } catch {
       isMovingActions.setFalse();
-      Alert.alert(t.t('error_generic'));
+      alert('error_generic');
     }
   };
 
@@ -254,7 +255,7 @@ export const useMoveDocumentOutOfFolder = (document: DocumentInterface) => {
       navigation.goBack();
     } catch {
       setIsMovingOut(false);
-      Alert.alert(t.t('error_generic'));
+      alert('error_generic');
     }
   };
 
@@ -277,7 +278,7 @@ export const useSendDocumentByEmail = (document: DocumentInterface) => {
       isSent.setTrue();
     } catch {
       isSendingActions.setFalse();
-      Alert.alert(t.t('error_generic'));
+      alert('error_generic');
     }
   };
 
