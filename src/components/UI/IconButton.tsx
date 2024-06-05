@@ -54,7 +54,7 @@ const IconButton: React.FC<Props> = ({
       {!isLoading ? (
         <>
           <Icon
-            style={{ fontSize: iconSize, width: iconSize }}
+            style={{ fontSize: iconSize, width: iconSize, paddingLeft: 3}}
             color={!iconColor ? colors.white : iconColor}
             name={iconName}
           />

@@ -1,43 +1,34 @@
 const getUniqueIdentifier = () => {
-  if (process.env.ENV === 'debug') {
-    return 'com.reconnect.CloudSolidaire.debug';
+  switch (process.env.ENV) {
+    case 'debug': return 'com.reconnect.CloudSolidaire.debug';
+    case 'preprod': return 'com.reconnect.CloudSolidaire.preprod';
+    default: return 'com.reconnect.prod.debug';
   }
-
-  if (process.env.ENV === 'preprod') {
-    return 'com.reconnect.CloudSolidaire.preprod';
-  }
-
-  return 'com.reconnect.CloudSolidaire.prod';
 };
 
 const getAppName = () => {
-  if (process.env.ENV === 'debug') {
-    return 'Reconnect (Dev)';
+  switch (process.env.ENV) {
+    case 'debug': return 'Reconnect (Dev)';
+    case 'preprod': return 'Reconnect (Preprod)';
+    default: return 'Reconnect';
   }
-
-  if (process.env.ENV === 'preprod') {
-    return 'Reconnect (Preprod)';
-  }
-
-  return 'Reconnect';
 };
-
-const versionCode = '174';
 
 module.exports = ({ config }) => {
   return {
     ...config,
     name: getAppName(),
     ios: {
-      buildNumber: versionCode,
+      buildNumber: process.env.APP_VERSION,
       bundleIdentifier: getUniqueIdentifier(),
+      infoPlist: { UIBackgroundModes: ["audio"] }
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff'
       },
-      versionCode: versionCode,
+      versionCode: process.env.APP_VERSION,
       package: getUniqueIdentifier(),
     },
   }

@@ -19,22 +19,18 @@ export interface Track {
   flag: string;
 }
 
-export interface CurrentTrack {
-  key: string | null;
-  isStarted: boolean;
-  isPlaying: boolean;
-}
-
 interface Props {
   track: Track;
   play: (track: Track) => void;
   pause: (track: Track) => void;
   stop: (track: Track) => void;
+  isPlaying: boolean;
+  isStarted: boolean;
 }
 
 const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
-const Pitch: React.FC<Props> = ({ track, play, pause, stop }) => 
+const Pitch: React.FC<Props> = ({ track, play, pause, stop, isPlaying, isStarted }) => 
   <View style={styles.item}>
     <View style={styles.text}>
       {track.flag === 'AR' ? (
@@ -46,9 +42,13 @@ const Pitch: React.FC<Props> = ({ track, play, pause, stop }) =>
       <Text>{capitalize(track.name)}</Text>
     </View>
     <View style={styles.actions}>
-        <IconButton iconName='stop' onPress={() => stop(track)} />
-        <IconButton iconName='pause' onPress={() => pause(track)} />
-        <IconButton iconName='play' onPress={() => play(track)} />
+      {isStarted ?
+        <>
+          <IconButton iconName='stop' onPress={() => stop(track)} />
+          <IconButton iconName={ isPlaying ? 'pause' : 'play'} onPress={() => pause(track)} />
+        </>
+        : <IconButton iconName='play' onPress={() => play(track)} />
+      }
     </View>
   </View>
 

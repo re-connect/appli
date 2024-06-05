@@ -67,7 +67,7 @@ const CenterCard: React.FC<CenterCardProps> = ({ center }) => {
       ) : (
         <TouchableOpacity disabled={isLeaving} onPress={leave}>
           {!isLeaving ? (
-            <Icon style={styles.leaveIcon} name='sign-out-alt' color={colors.red} />
+            <Icon style={styles.leaveIcon} name='right-from-bracket' color={colors.red} />
           ) : (
             <ActivityIndicator size='large' color={colors.red} />
           )}

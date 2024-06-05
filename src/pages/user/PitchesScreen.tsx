@@ -48,27 +48,41 @@ const getTrackSound = async (key: string): Promise<SoundObject> => {
 }
 
 const PitchesScreen: React.FC = () => {
+  const [currentSound, setCurrentSound] = React.useState<SoundObject | null>(null);
+  const [currentTrack, setCurrentTrack] = React.useState<Track | null>(null);
+  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
+
   const playTrack = async (track: Track) => {
     try {
-      const soundObject = getTrackSound(track.key);
-      const { sound } = await soundObject;
-      console.log('soundObject', soundObject);
-      await sound.playAsync();
+      if (currentSound) {
+        await currentSound.sound?.stopAsync();
+      }
+      await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+      const soundObject = await getTrackSound(track.key);
+      await soundObject.sound.playAsync();
+      setIsPlaying(true);
+      setCurrentSound(soundObject);
+      setCurrentTrack(track);
     } catch (error) {
-      console.error(error);
+      setIsPlaying(false);
     }
   };
-
-  const stopTrack = async (track: Track) => {
-    const soundObject = await getTrackSound(track.key);
-    console.log('soundObject', soundObject);
-    await soundObject.sound.stopAsync();
+  
+  const stopTrack = async () => {
+    await currentSound?.sound.stopAsync();
+    setIsPlaying(false);
+    setCurrentSound(null);
+    setCurrentTrack(null);
   };
-
-  const pauseTrack = async (track: Track) => {
-    const soundObject = await getTrackSound(track.key);
-    console.log('soundObject', soundObject);
-    await soundObject.sound.pauseAsync();
+  
+  const pauseTrack = async () => {
+    if (isPlaying) {
+      await currentSound?.sound.pauseAsync();
+      setIsPlaying(false);
+    } else {
+      await currentSound?.sound.playAsync();
+      setIsPlaying(true);
+    }
   };
 
   return (
@@ -79,6 +93,8 @@ const PitchesScreen: React.FC = () => {
             <Pitch
               key={track.key}
               track={track}
+              isStarted={currentTrack?.key === track.key}
+              isPlaying={isPlaying}
               play={playTrack}
               pause={pauseTrack}
               stop={stopTrack}
