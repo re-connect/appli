@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react-native';
 import * as React from 'react';
 import { useBoolean } from 'react-hanger/array';
-import { StatusBar } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import SplashScreen from 'react-native-splash-screen';
 import BeneficiaryContext from './src/context/BeneficiaryContext';
 import CenterContext from './src/context/CenterContext';
@@ -63,7 +63,7 @@ const App: React.FC = () => {
                   <DocumentContext.Provider value={{ list: documents, setList: setDocuments }}>
                     <FolderContext.Provider value={{ list: folders, setList: setFolders }}>
                       <ThemeContext.Provider value={{ value: theme, actions: themeActions }}>
-                        <StatusBar barStyle='light-content' />
+                        <StatusBar style='light' />
                         <Routes user={user} />
                       </ThemeContext.Provider>
                     </FolderContext.Provider>

@@ -46,13 +46,9 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
       <ChatButton />
       <View style={styles.versionsContainer}>
         <Text>v1.0.{config.version}</Text>
-        {environments && environments.ENV === 'prod' ? null : (
-          <>
-            <Text>{environments && environments.ENV}</Text>
-            <Text>{backendUrl}</Text>
-            <Text>{DeviceInfo.getBundleId()}</Text>
-          </>
-        )}
+        <Text>{environments && config.env}</Text>
+        <Text>{backendUrl}</Text>
+        <Text>{DeviceInfo.getBundleId()}</Text>
       </View>
     </Screen>
   );
