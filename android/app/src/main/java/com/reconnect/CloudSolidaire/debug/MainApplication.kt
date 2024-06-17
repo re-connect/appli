@@ -1,4 +1,4 @@
-package com.reconnect.CloudSolidaire.debug
+package com.reconnect.CloudSolidaire
 
 import android.app.Application
 import android.content.res.Configuration

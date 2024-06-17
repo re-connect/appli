@@ -54,7 +54,7 @@
     "expo-font": "~12.0.6",
     "expo-modules-core": "^1.12.12",
     "expo-status-bar": "~1.12.1",
-    "expo-updates": "~0.25.15",
+    "expo-updates": "~0.25.16",
     "fbjs": "^3.0.4",
     "formik": "^2.2.9",
     "i18next": "^23.8.2",
