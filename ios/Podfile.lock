@@ -252,7 +252,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - EXStructuredHeaders (3.8.0)
-  - EXUpdates (0.25.15):
+  - EXUpdates (0.25.16):
     - DoubleConversion
     - EASClient
     - EXManifests
@@ -1918,7 +1918,7 @@ SPEC CHECKSUMS:
   ExpoKeepAwake: 3b8815d9dd1d419ee474df004021c69fdd316d08
   ExpoModulesCore: 828d63de45d4fbacabe2963fc406a8e9daeed992
   EXStructuredHeaders: cb8d1f698e144f4c5547b4c4963e1552f5d2b457
-  EXUpdates: 7a8a8570e73902599b4650bd502011219b10b3e8
+  EXUpdates: 07352d170973460389e26e6847da4badd23aa9d6
   EXUpdatesInterface: 996527fd7d1a5d271eb523258d603f8f92038f24
   FBLazyVector: 898d14d17bf19e2435cafd9ea2a1033efe445709
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120

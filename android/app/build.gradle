@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.reconnect.CloudSolidaire'
+    namespace 'com.reconnect.CloudSolidaire.preprod'
     defaultConfig {
-        applicationId 'com.reconnect.CloudSolidaire.debug'
+        applicationId 'com.reconnect.CloudSolidaire.preprod'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 177
