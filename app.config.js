@@ -6,7 +6,7 @@ dotenv.config();
 export default ({ config }) => ({
   ...config,
   ios: {
-    buildNumber: '177',
+    buildNumber: '191',
     bundleIdentifier: process.env.EXPO_PUBLIC_BUNDLE_ID,
     infoPlist: { 
       UIBackgroundModes: ['audio']
@@ -17,7 +17,7 @@ export default ({ config }) => ({
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff'
       },
-      versionCode: '177',
+      versionCode: '191',
       package: process.env.EXPO_PUBLIC_BUNDLE_ID,
     },
 });
