@@ -2,7 +2,7 @@
   "expo": {
     "name": "Reconnect",
     "slug": "Reconnect",
-    "version": "1.0.191",
+    "version": "1.0.192",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

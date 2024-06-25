@@ -3,5 +3,5 @@ eas.json  filter=crypt diff=crypt merge=crypt
 .ENV  filter=crypt diff=crypt merge=crypt
 .ENV.preprod  filter=crypt diff=crypt merge=crypt
 .ENV.prod  filter=crypt diff=crypt merge=crypt
-credentials.json  filter=crypt diff=crypt merge=crypt
-keystores/  filter=crypt diff=crypt merge=crypt
+credentials*.json  filter=crypt diff=crypt merge=crypt
+credentials filter=crypt diff=crypt merge=crypt

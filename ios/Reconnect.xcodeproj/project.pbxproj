@@ -26,6 +26,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Reconnect/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Reconnect/main.m; sourceTree = "<group>"; };
 		2239C36CE91DD3C5D68650AE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Reconnect/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		49556187996F7D547D1C294F /* Pods-Reconnect.preprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconnect.preprod.xcconfig"; path = "Target Support Files/Pods-Reconnect/Pods-Reconnect.preprod.xcconfig"; sourceTree = "<group>"; };
 		53C9F0592C299D33005F7CF0 /* Reconnect copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Reconnect copy-Info.plist"; path = "/Users/thib/Dev/vault-app-expo/Reconnnect/ios/Reconnect copy-Info.plist"; sourceTree = "<absolute>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-Reconnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reconnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-Reconnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconnect.debug.xcconfig"; path = "Target Support Files/Pods-Reconnect/Pods-Reconnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 			children = (
 				6C2E3173556A471DD304B334 /* Pods-Reconnect.debug.xcconfig */,
 				7A4D352CD337FB3A3BF06240 /* Pods-Reconnect.release.xcconfig */,
+				49556187996F7D547D1C294F /* Pods-Reconnect.preprod.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -395,6 +397,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Reconnect/Reconnect.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8BKBA8SNQV;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -431,6 +434,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Reconnect/Reconnect.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8BKBA8SNQV;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -514,12 +518,13 @@
 		};
 		53C9F0412C2999CB005F7CF0 /* Preprod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A4D352CD337FB3A3BF06240 /* Pods-Reconnect.release.xcconfig */;
+			baseConfigurationReference = 49556187996F7D547D1C294F /* Pods-Reconnect.preprod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Reconnect/Reconnect.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8BKBA8SNQV;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -533,7 +538,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reconnect.CloudSolidaire.preprod;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reconnect.CloudSolidaire.prod;
 				PRODUCT_NAME = Reconnect;
 				SWIFT_OBJC_BRIDGING_HEADER = "Reconnect/Reconnect-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

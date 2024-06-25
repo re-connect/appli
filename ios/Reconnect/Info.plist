@@ -19,7 +19,7 @@
     <key>CFBundlePackageType</key>
     <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.191</string>
+    <string>1.0.192</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleURLTypes</key>
@@ -38,7 +38,7 @@
       </dict>
     </array>
     <key>CFBundleVersion</key>
-    <string>191</string>
+    <string>192</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -48,8 +48,16 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Cloud Solidaire a besoin d'accéder à votre caméra si vous désirez scanner vos documents pour les ajouter dans le Cloud Solidaire</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Reconnect n'utilise pas vos données de géolocalisation</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Reconnect n'utilise pas vos données de géolocalisation</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Allow $(PRODUCT_NAME) to access your microphone</string>
+    <string>Cloud Solidaire a besoin d'accéder à votre microphone si vous désirez utiliser la dictée pour écrire</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Cloud Solidaire a besoin d'accéder à votre photos si vous désirez ajouter des photos existantes dans le Cloud Solidaire</string>
     <key>UIBackgroundModes</key>
     <array>
       <string>audio</string>
