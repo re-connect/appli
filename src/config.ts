@@ -7,7 +7,6 @@ const config = {
     grant_type: 'password',
   },
   geniusSdkLicense: process.env.EXPO_PUBLIC_GENIUS_KEY,
-  version: process.env.EXPO_PUBLIC_APP_VERSION,
   env: process.env.EXPO_PUBLIC_ENV,
   backendUrl: `https://${process.env.EXPO_PUBLIC_ENV === 'prod' ? '' : 'preprod.'}reconnect.fr`,
 };

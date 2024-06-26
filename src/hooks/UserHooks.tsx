@@ -22,6 +22,7 @@ import { ResetPasswordData, UserField } from '../types/Users';
 import { useFetchInvitations } from './CentersHooks';
 import { useTranslation } from 'react-i18next';
 import { resetPassword } from '../services/passwordResetter';
+import { registerForPushNotifications } from '../services/notificator';
 
 export const useGetLastUsername = () => {
   const { lastUsername, setLastUsername } = React.useContext(UserContext);
@@ -116,6 +117,7 @@ export const useLogin = () => {
         await login(values.username, values.password);
         await getUser();
         fetchInvitations();
+        registerForPushNotifications();
         isLoginInActions.setFalse();
         setAttempts(0);
       } catch (error) {

@@ -5,5 +5,4 @@ declare module '@env' {
     export const CRISP_WEBSITE_ID: string;
     export const SENTRY_SECRET: string;
     export const GENIUS_SDK_LICENSE: string;
-    export const APP_VERSION: number;
 }
