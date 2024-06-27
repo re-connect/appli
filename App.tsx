@@ -14,7 +14,7 @@ import ThemeContext from './src/context/ThemeContext';
 import UserContext from './src/context/UserContext';
 import LoginTemporisationContext from './src/context/LoginTemporisationContext';
 // import { isCodePushEnabled } from './src/helpers/codePushHelper';
-import Routes from './src/routing/Router.tsx';
+import Routes from './src/routing/Router';
 import './src/services/translation';
 import { BeneficiaryInterface } from './src/types/Beneficiaries';
 import { UserCenterInterface } from './src/types/Centers';

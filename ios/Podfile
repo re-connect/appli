@@ -14,6 +14,8 @@ install! 'cocoapods',
 prepare_react_native_project!
 
 target 'Reconnect' do
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
   use_expo_modules!
   config = use_native_modules!
 

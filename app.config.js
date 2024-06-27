@@ -7,7 +7,7 @@ export default ({ config }) => ({
   ...config,
   ios: {
     buildNumber: '193',
-    bundleIdentifier: process.env.EXPO_PUBLIC_BUNDLE_ID,
+    bundleIdentifier: 'com.reconnect.CloudSolidaire' + process.env.EXPO_PUBLIC_ENV,
     infoPlist: { 
       UIBackgroundModes: ['audio']
     }
@@ -18,6 +18,7 @@ export default ({ config }) => ({
         backgroundColor: '#ffffff'
       },
       versionCode: '100000193',
-      package: process.env.EXPO_PUBLIC_BUNDLE_ID,
+      package: 'com.reconnect.CloudSolidaire' + process.env.EXPO_PUBLIC_ENV,
+      googleServicesFile: './google-services-notif.json'
     },
 });
