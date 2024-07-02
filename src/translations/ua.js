@@ -153,6 +153,7 @@ export default {
   update_event: 'Змінити подію',
   update_note: 'Змінити запис',
   update: 'Оновити',
+  update_username_field_warning: "Увага, це оновлення змінить ваше ім'я користувача, і вас буде виведено з системи",
   username: "Ім'я користувача",
   validate: 'Підтвердити',
   view: 'Проглянути',

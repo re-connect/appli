@@ -154,6 +154,7 @@ export default {
   update_contact: 'اړیکه کې بدلون راوستل',
   update_event: 'پیښه کې بدلون راوستل',
   update_note: 'یادونه کې بدلون راوستل',
+  update_username_field_warning: 'خبرتیا، دا تازه کول به ستاسو د کارن نوم تازه کړي، او تاسو به له سیستم څخه ووځئ',
   update: 'تازه کول',
   username: 'کاروونکي نوم',
   validate: 'تصدیق کول',

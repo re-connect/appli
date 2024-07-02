@@ -151,6 +151,7 @@ export default {
   update_contact: 'ویرایش مخاطب',
   update_event: 'ویرایش رویداد',
   update_note: 'ویرایش یادداشت',
+  update_username_field_warning: 'اخطار، این به‌روزرسانی نام کاربری شما را به‌روزرسانی می‌کند و شما خارج خواهید شد',
   update: 'به روز رسانی',
   username: 'نام کاربری',
   validate: 'تائید کردن',

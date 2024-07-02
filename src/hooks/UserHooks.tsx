@@ -13,12 +13,12 @@ import LoginTemporisationContext from '../context/LoginTemporisationContext';
 import NoteContext from '../context/NoteContext';
 import ThemeContext from '../context/ThemeContext';
 import UserContext from '../context/UserContext';
-import { getTruncatedFullName, isBeneficiary, isPro } from '../helpers/userHelpers';
+import { getTruncatedFullName, isBeneficiary, isPro, updateContainsUsernameFields } from '../helpers/userHelpers';
 import { login } from '../services/authentication';
 import { LoginFormValues } from '../services/forms';
 import { fetchCurrentUser, makeRequestv2, makeRequestv3 } from '../services/requests';
 import t from '../services/translation';
-import { ResetPasswordData, UserField } from '../types/Users';
+import { ResetPasswordData, UserField, UserUpdate } from '../types/Users';
 import { useFetchInvitations } from './CentersHooks';
 import { useTranslation } from 'react-i18next';
 import { resetPassword } from '../services/passwordResetter';
@@ -154,25 +154,41 @@ export const useUpdateUser = () => {
   const [isUpdating, actions] = useBoolean(false);
   const { user, setUser } = React.useContext(UserContext);
   const { setCurrent } = React.useContext(BeneficiaryContext);
+  const navigation = useNavigation<any>();
+
+  const updateUserField = async (newValues: UserUpdate) => {
+    actions.setTrue();
+      const updatedUser = { ...user, ...newValues };
+      if (updatedUser.date_naissance) {
+        updatedUser.date_naissance = format(new Date(updatedUser.date_naissance), 'yyyy-MM-dd');
+      }
+      const newData = await makeRequestv2(`/users/${user?.id}`, 'PUT', updatedUser);
+      if (newData) {
+        if (isBeneficiary(newData)) {
+          setCurrent(newData);
+        }
+        setUser(newData);
+      }
+    actions.setFalse();
+  }
 
   const update = React.useCallback(
     async (newValues: Record<UserField, string>) => {
+      if (!user) {
+        return;
+      }
       try {
-        actions.setTrue();
-        if (user) {
-          const updatedUser = { ...user, ...newValues };
-          if (updatedUser.date_naissance) {
-            updatedUser.date_naissance = format(new Date(updatedUser.date_naissance), 'yyyy-MM-dd');
-          }
-          const newData = await makeRequestv2(`/users/${user?.id}`, 'PUT', updatedUser);
-          if (newData) {
-            if (isBeneficiary(newData)) {
-              setCurrent(newData);
-            }
-            setUser(newData);
-          }
+        if (updateContainsUsernameFields(newValues)) {
+          Alert.alert(t.t('update_username_field_warning'), null, [
+            { text: t.t('confirm'), onPress: async () => {
+              await updateUserField(newValues);
+              navigation.navigate('Auth');
+            }},
+            { text: t.t('cancel'), onPress: () => {}, style: 'cancel' },
+          ], {});
+        } else {
+          updateUserField(newValues);
         }
-        actions.setFalse();
       } catch (error) {
         actions.setFalse();
         Alert.alert(t.t('error_updating_user'));

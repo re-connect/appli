@@ -153,6 +153,7 @@ export default {
   update_contact: 'Kontakt bearbeiten',
   update_event: 'Termin bearbeiten',
   update_note: 'Notiz bearbeiten',
+  update_username_field_warning: 'Warnung, dieses Update wird Ihren Benutzernamen aktualisieren, und Sie werden abgemeldet',
   update: 'Aktualisieren',
   username: 'Benutzername',
   validate: 'bestätigen',

@@ -27,6 +27,8 @@ export interface UserInterface {
   reponse_secrete?: string;
 }
 
+export const usernameFields = ['email', 'nom', 'prenom', 'date_naissance'];
+
 export type UserField =
   | 'email'
   | 'nom'
@@ -36,6 +38,8 @@ export type UserField =
   | 'date_naissance'
   | 'question_secrete'
   | 'reponse_secrete';
+
+export type UserUpdate = Record<UserField, string>;
 
 export interface ResetPasswordData {
   password: string;

@@ -4,10 +4,15 @@ import IconButton from '../UI/IconButton';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../style';
 
+const styles = StyleSheet.create({
+  container: { position: 'absolute', bottom: 20, right: 20, zIndex: 1 },
+});
+
 const ChatButton = () => {
   const navigation = useNavigation<any>();
+
   return (
-    <View style={styles.chatIconContainer}>
+    <View style={styles.container}>
       <IconButton
         iconName='comment-alt'
         onPress={() => navigation.navigate('Chat')}
@@ -18,18 +23,5 @@ const ChatButton = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  chatIconContainer: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60,
-    width: 60,
-    borderRadius: 30,
-    zIndex: 2,
-  },
-});
 
 export default ChatButton;

@@ -152,6 +152,7 @@ export default {
   update_event: 'ርክብ ኣርም ',
   update_note: 'ንኹነት ኣርም',
   update: 'ንመዘኻኸሪ ኣርም ',
+  update_username_field_warning: 'ሓበሬታ ነዚ እተሻሂቡ እተተሻሒቱ ሽም ስምዒኻ ይሕድር እዩ፣ ንዚ እተተጻሒሑ እተሓወትካ እዩ',
   username: 'ንምምሕያሽ ',
   validate: 'ሽም ተጠቓማይ ',
   view: 'ዋጋ ንክረክብ',

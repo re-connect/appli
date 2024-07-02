@@ -24,6 +24,7 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
     return null;
   }
   const isMember = isPro(user);
+  const hideBeneficiaryActions = !current || !current.subject_id || isMember;
 
   const { nom, prenom, email, username, telephone, date_naissance, reponse_secrete, question_secrete } = user;
 
@@ -33,27 +34,9 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
     { field: 'prenom', value: prenom, label: 'first_name', iconName: 'user-large' },
     { field: 'email', value: email, label: 'email', iconName: 'at' },
     { field: 'telephone', value: telephone, label: 'phone', iconName: 'phone' },
-    {
-      field: 'question_secrete',
-      value: question_secrete ?? '',
-      label: 'secret_question',
-      iconName: 'question',
-      beneficiaryField: true,
-    },
-    {
-      field: 'reponse_secrete',
-      value: reponse_secrete ?? '',
-      label: 'secret_answer',
-      iconName: 'circle-question',
-      beneficiaryField: true,
-    },
-    {
-      field: 'date_naissance',
-      value: !date_naissance ? '' : format(new Date(date_naissance), 'dd/MM/yyyy'),
-      label: 'birth_date',
-      iconName: 'cake-candles',
-      beneficiaryField: true,
-    },
+    { field: 'question_secrete', value: question_secrete ?? '', label: 'secret_question', iconName: 'question', beneficiaryField: true },
+    { field: 'reponse_secrete', value: reponse_secrete ?? '', label: 'secret_answer', iconName: 'circle-question', beneficiaryField: true },
+    { field: 'date_naissance', value: !date_naissance ? '' : format(new Date(date_naissance), 'dd/MM/yyyy'), label: 'birth_date', iconName: 'cake-candles', beneficiaryField: true },
   ];
 
   return (
@@ -65,26 +48,22 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
         <View style={{ marginHorizontal: 32, marginTop: 15 }}>
           <RoundedButton text='new_password' onPress={() => navigation.navigate('ResetPassword')} />
           <Separator height={2} />
-          {!current || !current.subject_id || isMember ? null : (
-            <RoundedButton
-              isLoading={isDeleting}
-              color={colors.red}
-              text='delete_my_account'
-              onPress={() => {
-                triggerDeleteBeneficiary(current.subject_id);
-              }}
-            />
-          )}
-          <Separator height={2} />
-          {!current || !current.subject_id || isMember ? null : (
-            <RoundedButton
-              isLoading={isGetingData}
-              color={colors.darkGrayTransparent}
-              text='get_my_data'
-              onPress={() => {
-                triggerRequestDataBeneficiary(current.subject_id);
-              }}
-            />
+          {hideBeneficiaryActions ? null : (
+            <>
+              <RoundedButton
+                isLoading={isDeleting}
+                color={colors.red}
+                text='delete_my_account'
+                onPress={() => triggerDeleteBeneficiary(current.subject_id)}
+              />
+              <Separator height={2} />
+              <RoundedButton
+                isLoading={isGetingData}
+                color={colors.darkGrayTransparent}
+                text='get_my_data'
+                onPress={() => triggerRequestDataBeneficiary(current.subject_id) }
+              />
+            </>
           )}
           <Separator height={4} />
         </View>

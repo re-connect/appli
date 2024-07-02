@@ -151,6 +151,7 @@ export default {
   update_contact: 'تحديث جهة اتصال',
   update_event: 'تحديث حدث',
   update_note: 'تحديث ملاحظة',
+  update_username_field_warning: 'تحذير، هذا التحديث سيقوم بتحديث اسم المستخدم الخاص بك، وسوف يتم تسجيل خروجك',
   update: 'تحديث',
   username: 'اسم المستخدم',
   validate: 'تحقّق',

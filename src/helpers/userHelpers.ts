@@ -1,5 +1,5 @@
 import { colors } from '../style';
-import { UserField, UserInterface } from '../types/Users';
+import { UserField, UserInterface, usernameFields } from '../types/Users';
 import { getTruncatedText } from './dataHelper';
 import { dateToOldApiFormat, stringToDate } from './dateHelpers';
 
@@ -60,3 +60,6 @@ export const isPro = (user: UserInterface | null) => !!user && user.type_user !=
 export const isBeneficiary = (user: UserInterface | null) => !!user && user.type_user === roleBeneficiary;
 
 export const getUserColor = (user: UserInterface | null) => (isPro(user) ? colors.blue : colors.primary);
+
+export const updateContainsUsernameFields = (values: Record<UserField, string>) =>
+  Object.keys(values).some((field) => usernameFields.includes(field));

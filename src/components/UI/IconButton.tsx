@@ -45,16 +45,12 @@ const IconButton: React.FC<Props> = ({
   return (
     <TouchableOpacity
       disabled={disabled || isLoading}
-      style={{
-        ...styles.container,
-        ...sizedStyle,
-        backgroundColor: computedBackgroundColor,
-      }}
+      style={{ ...styles.container, ...sizedStyle, backgroundColor: computedBackgroundColor }}
       onPress={onPress}>
       {!isLoading ? (
         <>
           <Icon
-            style={{ fontSize: iconSize, width: iconSize, paddingLeft: 3}}
+            style={{ fontSize: iconSize, width: iconSize}}
             color={!iconColor ? colors.white : iconColor}
             name={iconName}
           />

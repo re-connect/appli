@@ -152,6 +152,7 @@ export default {
   update_contact: 'обновить контактную информацию',
   update_event: 'обновить событие',
   update_note: 'обновить заметку',
+  update_username_field_warning: 'Предупреждение: это обновление обновит ваше имя пользователя, и вы выйдете из системы',
   update: 'обновить',
   username: 'логин',
   validate: 'подтвердить',
