@@ -10,7 +10,5 @@ const config = {
   env: process.env.EXPO_PUBLIC_ENV,
   backendUrl: `https://${process.env.EXPO_PUBLIC_ENV === 'prod' ? '' : 'preprod.'}reconnect.fr`,
 };
-  
-console.log('config', config);
 
 export { config };

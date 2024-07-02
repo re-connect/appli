@@ -13,9 +13,7 @@ import { colors } from '../../style';
 import { View } from 'react-native';
 import { isPro } from '../../helpers/userHelpers';
 
-interface Props {
-  navigation: NavigationProp<any>;
-}
+interface Props { navigation: NavigationProp<any> }
 
 const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   const { user } = React.useContext(UserContext);

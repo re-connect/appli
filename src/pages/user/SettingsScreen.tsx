@@ -11,11 +11,12 @@ import Icon from '../../components/UI/Icon';
 import { geniusSdkLicense } from '../../appConstants';
 
 const styles = StyleSheet.create({
-  item: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderColor: colors.darkGrayMoreTransparent,
-  },
+  item: { padding: 16, borderBottomWidth: 1, borderColor: colors.darkGrayMoreTransparent },
+  itemContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  itemText: { marginLeft: 16, textAlign: 'left', flex: 1 },
+  container: { padding: 8 },
+  title: { fontSize: 20, textAlign: 'center', marginVertical: 16 },
+  langageSwitchContainer: { flexDirection: 'row', justifyContent: 'flex-end' },
 });
 
 const SettingsScreen: React.FC = () => {
@@ -47,9 +48,9 @@ const SettingsScreen: React.FC = () => {
   ];
 
   return (
-    <View style={{ padding: 8 }}>
-      <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 16 }}>{getTruncatedFullName(user)}</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+    <View style={styles.container}>
+      <Text style={styles.title}>{getTruncatedFullName(user)}</Text>
+      <View style={styles.langageSwitchContainer}>
         <LanguageSwitch />
       </View>
       <FlatList
@@ -57,9 +58,9 @@ const SettingsScreen: React.FC = () => {
         renderItem={({ item: { onPress, name, color = colors.black, label } }) => (
           <TouchableOpacity onPress={onPress}>
             <View style={styles.item}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <View style={styles.itemContent}>
                 <Icon name={name} color={color} />
-                <Text style={{ color, marginLeft: 16, textAlign: 'left', flex: 1 }}>{label}</Text>
+                <Text style={{...styles.itemText, color}}>{label}</Text>
                 <Icon name='chevron-right' color={color} />
               </View>
             </View>

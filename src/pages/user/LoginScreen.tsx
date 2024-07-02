@@ -45,10 +45,10 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
       </View>
       <ChatButton />
       <View style={styles.versionsContainer}>
-        <Text>v1.0.{DeviceInfo.getVersion()}</Text>
-        <Text>{environments && config.env}</Text>
+        <Text>{DeviceInfo.getVersion()}</Text>
+        {/* <Text>{environments && config.env}</Text>
         <Text>{backendUrl}</Text>
-        <Text>{DeviceInfo.getBundleId()}</Text>
+        <Text>{DeviceInfo.getBundleId()}</Text> */}
       </View>
     </Screen>
   );
