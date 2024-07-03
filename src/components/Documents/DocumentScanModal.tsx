@@ -32,16 +32,8 @@ const DocumentScanModal: React.FC<{
       setVisible={setVisible}
       content={
         <>
-          <ItemModal
-            iconName='file-pdf'
-            label={t.t('save_file_to_one_pdf')}
-            onPress={() => handleDocumentUpload(true)}
-          />
-          <ItemModal
-            iconName='images'
-            label={t.t('save_file_to_pictures')}
-            onPress={() => handleDocumentUpload(false)}
-          />
+          <ItemModal iconName='file-pdf' label='save_file_to_one_pdf' onPress={() => handleDocumentUpload(true)} />
+          <ItemModal iconName='images' label='save_file_to_pictures' onPress={() => handleDocumentUpload(false)} />
         </>
       }
     />

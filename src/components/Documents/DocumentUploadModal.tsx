@@ -68,15 +68,9 @@ const DocumentUploadModal: React.FC<{
       setVisible={setVisible}
       content={
         <>
-          <ItemModal
-            iconName='file-invoice'
-            label={t.t('scan_document')}
-            onPress={() => {
-              handleScanDocument();
-            }}
-          />
-          <ItemModal iconName='file' label={t.t('choose_file')} onPress={() => handleChooseFile()} />
-          <ItemModal iconName='image' label={t.t('choose_picture')} onPress={() => handleScanPicture()} />
+          <ItemModal iconName='file-invoice' label='scan_document' onPress={() => handleScanDocument()} />
+          <ItemModal iconName='file' label='choose_file' onPress={() => handleChooseFile()} />
+          <ItemModal iconName='image' label='choose_picture' onPress={() => handleScanPicture()} />
         </>
       }
     />
