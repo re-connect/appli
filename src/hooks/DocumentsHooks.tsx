@@ -9,7 +9,7 @@ import { geniusSdkLicense } from '../appConstants';
 import DocumentContext from '../context/DocumentContext';
 import FolderContext from '../context/FolderContext';
 import { updateDatumInList } from '../helpers/dataHelper';
-import { renameItem, showDocument, uploadDocuments } from '../services/documents';
+import { createEmpty, createLoadingDocument, renameItem, showDocument, uploadDocuments } from '../services/documents';
 import { makeRequestv2 } from '../services/requests';
 import t from '../services/translation';
 import { DocumentInterface, ScannedGeniusDocumentInterface } from '../types/Documents';
@@ -61,33 +61,30 @@ export const useScanDocument = () => {
 };
 
 export const useUploadDocument = (beneficiaryId?: number, folderId?: number) => {
-  const isUploadingDocument = useBoolean(false);
   const { list, setList } = React.useContext(DocumentContext);
 
   const triggerDocumentUpload = async (images: Partial<ImageInterface & File>[]) => {
-    isUploadingDocument.setTrue();
     if (!beneficiaryId) {
-      isUploadingDocument.setFalse();
       return;
     }
     try {
+      setList([createLoadingDocument(), ...list]);
       const response = await uploadDocuments(images, beneficiaryId, folderId);
       if (response) {
         setList([...response, ...list]);
         Alert.alert(images.length > 1 ? t.t('files_added') : t.t('file_added'));
       } else {
-        isUploadingDocument.setFalse();
+        setList(list);
         throw new Error('Error uploading documents');
       }
-      isUploadingDocument.setFalse();
     } catch (e: any) {
-      isUploadingDocument.setFalse();
+      setList(list);
       Alert.alert(t.t('error_loading_document'));
       throw new Error('Error uploading documents');
     }
   };
 
-  return { isUploadingDocument, triggerDocumentUpload };
+  return { triggerDocumentUpload };
 };
 
 export const useShowDocument = (documentId: number) => {

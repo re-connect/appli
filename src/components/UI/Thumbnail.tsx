@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import DocumentContext from '../../context/DocumentContext';
 import { findNestedDocument } from '../../helpers/documentsHelper';
 import { useShowPreview } from '../../hooks/DocumentsHooks';
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     backgroundColor: colors.gray,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -42,12 +44,17 @@ const Thumbnail: React.FC<Props> = ({ documentId }) => {
   const { list } = React.useContext(DocumentContext);
   const document = findNestedDocument(list, documentId);
   const thumbnailUrl = useShowPreview(documentId);
+
   if (!document || document.is_folder) {
     return (
       <View style={styles.folderIconContainer}>
         <Icon style={{ ...styles.folderIcon }} name="folder-open" />
       </View>
     );
+  } else if (-1 == documentId) {
+    return (<View style={{...styles.thumbnailPlaceholder, backgroundColor: colors.white}}>
+      <ActivityIndicator style={{}} size='large' color={colors.primary} />
+    </View>);
   } else if (!thumbnailUrl) {
     return <View style={styles.thumbnailPlaceholder} />;
   }
