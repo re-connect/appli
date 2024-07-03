@@ -70,15 +70,21 @@ export const useUploadDocument = (beneficiaryId?: number, folderId?: number) => 
       isUploadingDocument.setFalse();
       return;
     }
-    const response = await uploadDocuments(images, beneficiaryId, folderId);
-    if (response) {
-      setList([...response, ...list]);
-      Alert.alert(images.length > 1 ? t.t('files_added') : t.t('file_added'));
-    } else {
+    try {
+      const response = await uploadDocuments(images, beneficiaryId, folderId);
+      if (response) {
+        setList([...response, ...list]);
+        Alert.alert(images.length > 1 ? t.t('files_added') : t.t('file_added'));
+      } else {
+        isUploadingDocument.setFalse();
+        throw new Error('Error uploading documents');
+      }
+      isUploadingDocument.setFalse();
+    } catch (e: any) {
+      isUploadingDocument.setFalse();
       Alert.alert(t.t('error_loading_document'));
       throw new Error('Error uploading documents');
     }
-    isUploadingDocument.setFalse();
   };
 
   return { isUploadingDocument, triggerDocumentUpload };
