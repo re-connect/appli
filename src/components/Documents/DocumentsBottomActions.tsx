@@ -20,7 +20,7 @@ interface Props {
 
 const DocumentsBottomActions: React.FC<Props> = ({ folderId }) => {
   const { current } = React.useContext(BeneficiaryContext);
-  const { isUploadingDocument, triggerDocumentUpload } = useUploadDocument(current?.subject_id, folderId);
+  const { triggerDocumentUpload } = useUploadDocument(current?.subject_id, folderId);
   const { triggerScanDocument } = useScanDocument();
   const { isCreatingFolder, triggerCreateFolder } = useCreateFolder(current?.subject_id, folderId);
   const isModalDocumentVisible = useBoolean(false);
@@ -68,7 +68,6 @@ const DocumentsBottomActions: React.FC<Props> = ({ folderId }) => {
       </View>
       <View style={styles.rightButton}>
         <IconButton
-          isLoading={isUploadingDocument.value}
           size={60}
           iconName='file'
           onPress={() => isModalDocumentVisible.setTrue()}

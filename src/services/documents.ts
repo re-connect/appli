@@ -7,6 +7,7 @@ import { ImageInterface } from '../types/Image';
 import { handleError } from './errors';
 import { checkNetworkConnection } from './networking';
 import { makeAuthenticatedUrlv2, makeRequestv2 } from './requests';
+import t from './translation';
 
 export const addDocumentsToFormData = (data: any, documents: Partial<ImageInterface & File>[]): FormData => {
   documents.forEach(document => {
@@ -130,3 +131,11 @@ export const renameItem = async (document: DocumentInterface, name: string) => {
     return null;
   }
 };
+
+export const createLoadingDocument = () => ({
+  id: -1,
+  b_prive: false,
+  nom: t.t('loading'),
+  created_at: new Date(),
+  updated_at: new Date(),
+});

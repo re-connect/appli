@@ -8,6 +8,7 @@ import { ImageInterface } from '../../types/Image';
 import { geniusSdkLicense } from '../../appConstants';
 //@ts-ignore
 import RNGeniusScan from '@thegrizzlylabs/react-native-genius-scan';
+import { getScanConfig, imageLibraryOptions } from '../../config/scan';
 
 const DocumentUploadModal: React.FC<{
   visible: boolean;
@@ -40,25 +41,12 @@ const DocumentUploadModal: React.FC<{
   const handleScanPicture = async () => {
     setVisible(false);
     await RNGeniusScan.setLicenseKey(geniusSdkLicense, /* autoRefresh = */ true);
-    const res = await launchImageLibrary({
-      mediaType: 'photo',
-      maxWidth: 2000,
-      maxHeight: 2000,
-      quality: 1,
-    });
-    const geniusImageScanned = await RNGeniusScan.scanWithConfiguration({
-      source: 'image',
-      sourceImageUrl: res.assets && res.assets[0].uri,
-      multiPage: false,
-      defaultFilter: 'none',
-    });
-    const images: Partial<ImageInterface & File>[] = [];
-    geniusImageScanned.scans.map((enhancedImage: any) => {
-      images.push({
-        path: enhancedImage.enhancedUrl,
-      });
-    });
-    triggerDocumentUpload(images);
+    const res = await launchImageLibrary(imageLibraryOptions);
+    const geniusImageScanned = await RNGeniusScan.scanWithConfiguration(getScanConfig(res));
+    triggerDocumentUpload(geniusImageScanned.scans.reduce(
+      (images: Partial<ImageInterface & File>[], enhancedImage: any) => [...images, { path: enhancedImage.enhancedUrl }],
+      [],
+    ));
   };
 
   return (
@@ -68,15 +56,9 @@ const DocumentUploadModal: React.FC<{
       setVisible={setVisible}
       content={
         <>
-          <ItemModal
-            iconName='file-invoice'
-            label={t.t('scan_document')}
-            onPress={() => {
-              handleScanDocument();
-            }}
-          />
-          <ItemModal iconName='file' label={t.t('choose_file')} onPress={() => handleChooseFile()} />
-          <ItemModal iconName='image' label={t.t('choose_picture')} onPress={() => handleScanPicture()} />
+          <ItemModal iconName='file-invoice' label='scan_document' onPress={() => handleScanDocument()} />
+          <ItemModal iconName='file' label='choose_file' onPress={() => handleChooseFile()} />
+          <ItemModal iconName='image' label='choose_picture' onPress={() => handleScanPicture()} />
         </>
       }
     />

@@ -6,7 +6,7 @@ dotenv.config();
 export default ({ config }) => ({
   ...config,
   ios: {
-    buildNumber: '193',
+    buildNumber: '194',
     bundleIdentifier: 'com.reconnect.CloudSolidaire' + process.env.EXPO_PUBLIC_ENV,
     infoPlist: { 
       UIBackgroundModes: ['audio']
@@ -17,7 +17,7 @@ export default ({ config }) => ({
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff'
       },
-      versionCode: '100000193',
+      versionCode: '100000194',
       package: 'com.reconnect.CloudSolidaire' + process.env.EXPO_PUBLIC_ENV,
       googleServicesFile: './google-services-notif.json'
     },

@@ -14,12 +14,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
   },
-  menuIcon: {
-    fontSize: 20,
-    paddingRight: 10,
-    width: 30,
-    textAlign: 'center',
-  },
+  menuIcon: { fontSize: 20, paddingRight: 10, width: 30, textAlign: 'center' },
   text: { fontSize: 16, color: '#666666' },
   documentName: {
     textAlign: 'center',
@@ -28,17 +23,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
-  wrapper: {
-    backgroundColor: 'white',
-    width: '95%',
-    borderRadius: 10,
-    padding: 10,
-  },
-  wrapperItems: {
-    borderBottomWidth: 0.5,
-    borderColor: '#cecece',
-    marginVertical: 8,
-  },
+  wrapper: { backgroundColor: 'white', width: '95%', borderRadius: 10, padding: 10 },
+  wrapperItems: { borderBottomWidth: 0.5, borderColor: '#cecece', marginVertical: 8 },
 });
 
 interface Props {

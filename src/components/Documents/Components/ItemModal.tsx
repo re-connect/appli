@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import RoundedButton from '../../UI/RoundedButton';
+import t from '../../../services/translation';
 
 const ItemModal: React.FC<{ label: string; onPress: () => void; iconName: string }> = ({
   label,
@@ -10,7 +11,7 @@ const ItemModal: React.FC<{ label: string; onPress: () => void; iconName: string
   return (
     <View style={styles.wrapper}>
       <RoundedButton
-        text={label}
+        text={t.t(label)}
         onPress={onPress}
         iconName={iconName}
         fontSize={16}
