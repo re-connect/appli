@@ -21,17 +21,6 @@ import LoginTemporisation from './LoginTemporisation';
 import ProUsernameHelpText from './ProUsernameHelpText';
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    paddingTop: 32,
-    paddingHorizontal: 16,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginTop: 32,
-    marginBottom: 32,
-  },
   form: {
     alignSelf: 'stretch',
     backgroundColor: 'white',
@@ -42,21 +31,12 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderBottomWidth: 2,
   },
-  proSwitch: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  proCheckbox: {
-    marginVertical: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
+  container: { alignItems: 'center', paddingTop: 32, paddingHorizontal: 16 },
+  logo: { width: 100, height: 100, marginTop: 32, marginBottom: 32 },
+  proSwitch: { flexDirection: 'row', justifyContent: 'flex-end' },
+  proCheckbox: { marginVertical: 16, flexDirection: 'row', justifyContent: 'space-around' },
   resetPasswordButton: { flexDirection: 'row', justifyContent: 'center' },
-  resetPasswordText: {
-    textDecorationLine: 'underline',
-    color: colors.darkGray,
-    fontWeight: 'bold',
-  },
+  resetPasswordText: { textDecorationLine: 'underline', color: colors.darkGray, fontWeight: 'bold' },
   textStyle: { color: colors.darkGray },
 });
 

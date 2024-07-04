@@ -44,7 +44,6 @@ export const useTriggerGetUser = () => {
   const route = useRoute();
   const { user, setUser } = React.useContext(UserContext);
   const { setCurrent } = React.useContext(BeneficiaryContext);
-  // const registerToNotificationsService = useRegisterToNotificationsService();
   const theme = React.useContext(ThemeContext);
   const triggerGetUser = React.useCallback(async () => {
     try {
@@ -61,7 +60,6 @@ export const useTriggerGetUser = () => {
         }
         return;
       }
-      // await registerToNotificationsService();
       const newUser = await fetchCurrentUser();
       if (JSON.stringify(user) !== JSON.stringify(newUser)) {
         setUser(newUser);
@@ -106,7 +104,6 @@ export const useLogin = () => {
   const [isLoginIn, isLoginInActions] = useBoolean(false);
   const getUser = useGetUser();
   const fetchInvitations = useFetchInvitations();
-  // const registerToNotificationsService = useRegisterToNotificationsService();
   const { setAttempts } = React.useContext(LoginTemporisationContext);
 
   const triggerLogin = React.useCallback(
