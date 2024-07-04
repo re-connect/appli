@@ -79,22 +79,16 @@ const retryLogin = async (params: LoginParams): Promise<void> => {
   }
 };
 
-export const login = async (username: string, password: string, additionalParams: object = {}) => {
-  const isConnected = await checkNetworkConnection();
-  if (!isConnected) {
-    return;
+export const login = async (username: string, password: string, additionalParams: object = {}): Promise<void> => {
+  const hasNetwork = await checkNetworkConnection();
+  if (!hasNetwork) {
+    return false;
   }
 
   const params = {
     ...connexionInformation,
     ...additionalParams,
-    username: utf8.encode(
-      username
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .trim(),
-    ),
+    username: utf8.encode(username.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()),
     password: utf8.encode(password).trim(),
   };
 

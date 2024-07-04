@@ -113,9 +113,9 @@ export const useLogin = () => {
         AsyncStorage.setItem('lastUsername', values.username.toLowerCase());
         await login(values.username, values.password);
         await getUser();
+        isLoginInActions.setFalse();
         fetchInvitations();
         registerForPushNotifications();
-        isLoginInActions.setFalse();
         setAttempts(0);
       } catch (error) {
         isLoginInActions.setFalse();
