@@ -26,6 +26,7 @@ export default {
   content: 'Inhalt',
   create_beneficiary: 'neue Empfänger',
   create: 'schaffen',
+  current_password_wrong: 'Das aktuelle Passwort ist falsch',
   date_placeholder: 'Datum (z.B. 15/04/2001)',
   datetime_placeholder: 'Datum/Uhrzeit (z.B. 15/04/2001 12:30)',
   day: 'Tag',

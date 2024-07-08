@@ -256,16 +256,22 @@ export const useResetPassword = (username?: string) => {
   const reset = React.useCallback(
     async ({ password, currentPassword, confirm }: ResetPasswordData) => {
       try {
-        if (password && password === confirm) {
-          resetActions.setTrue();
-          await resetPassword(password, username, currentPassword);
-          await getUser();
-          navigation.reset({ routes: [{ name: 'Home' }] });
-          resetActions.setFalse();
+        if (!password) {
+          return;
         }
+        if (password !== confirm) {
+          Alert.alert(t.t('form_field_confirm_dont_match'));
+
+          return;
+        }
+        resetActions.setTrue();
+        await resetPassword(password, username, currentPassword);
+        await getUser();
+        navigation.reset({ routes: [{ name: 'Home' }] });
+        resetActions.setFalse();
       } catch (error) {
         resetActions.setFalse();
-        Alert.alert(t.t('error_updating_password'));
+        Alert.alert(t.t('current_password_wrong'));
       }
     },
     [resetActions, navigation],

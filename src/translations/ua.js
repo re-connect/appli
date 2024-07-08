@@ -26,6 +26,7 @@ export default {
   content: 'Зміст',
   create_beneficiary: 'Новий одержувач',
   create: 'Створити',
+  current_password_wrong: 'Поточний пароль неправильний',
   date: 'Дата',
   date_placeholder: 'Дата (Напр. 15/04/2001)',
   datetime_placeholder: 'Дата (Напр. 15/04/2001 12:30 )',
