@@ -44,7 +44,6 @@ export const useTriggerGetUser = () => {
   const route = useRoute();
   const { user, setUser } = React.useContext(UserContext);
   const { setCurrent } = React.useContext(BeneficiaryContext);
-  // const registerToNotificationsService = useRegisterToNotificationsService();
   const theme = React.useContext(ThemeContext);
   const triggerGetUser = React.useCallback(async () => {
     try {
@@ -61,7 +60,6 @@ export const useTriggerGetUser = () => {
         }
         return;
       }
-      // await registerToNotificationsService();
       const newUser = await fetchCurrentUser();
       if (JSON.stringify(user) !== JSON.stringify(newUser)) {
         setUser(newUser);
@@ -106,7 +104,6 @@ export const useLogin = () => {
   const [isLoginIn, isLoginInActions] = useBoolean(false);
   const getUser = useGetUser();
   const fetchInvitations = useFetchInvitations();
-  // const registerToNotificationsService = useRegisterToNotificationsService();
   const { setAttempts } = React.useContext(LoginTemporisationContext);
 
   const triggerLogin = React.useCallback(
@@ -116,9 +113,9 @@ export const useLogin = () => {
         AsyncStorage.setItem('lastUsername', values.username.toLowerCase());
         await login(values.username, values.password);
         await getUser();
+        isLoginInActions.setFalse();
         fetchInvitations();
         registerForPushNotifications();
-        isLoginInActions.setFalse();
         setAttempts(0);
       } catch (error) {
         isLoginInActions.setFalse();
@@ -259,16 +256,22 @@ export const useResetPassword = (username?: string) => {
   const reset = React.useCallback(
     async ({ password, currentPassword, confirm }: ResetPasswordData) => {
       try {
-        if (password && password === confirm) {
-          resetActions.setTrue();
-          await resetPassword(password, username, currentPassword);
-          await getUser();
-          navigation.reset({ routes: [{ name: 'Home' }] });
-          resetActions.setFalse();
+        if (!password) {
+          return;
         }
+        if (password !== confirm) {
+          Alert.alert(t.t('form_field_confirm_dont_match'));
+
+          return;
+        }
+        resetActions.setTrue();
+        await resetPassword(password, username, currentPassword);
+        await getUser();
+        navigation.reset({ routes: [{ name: 'Home' }] });
+        resetActions.setFalse();
       } catch (error) {
         resetActions.setFalse();
-        Alert.alert(t.t('error_updating_password'));
+        Alert.alert(t.t('current_password_wrong'));
       }
     },
     [resetActions, navigation],

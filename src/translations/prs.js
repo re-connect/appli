@@ -26,6 +26,7 @@ export default {
   content: 'محتوا',
   create_beneficiary: 'ایجاد کردن حساب شخص ذی نفع',
   create: 'ایجاد کردن',
+  current_password_wrong: 'رمز عبور فعلی نادرست است',
   date: 'تاریخ',
   date_placeholder: 'تاریخ',
   datetime_placeholder: 'تاریخ',

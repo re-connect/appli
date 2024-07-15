@@ -26,6 +26,7 @@ export default {
   content: 'ትሕዝቶ ',
   create_beneficiary: 'ተጠቓማይ ፍጠር ',
   create: 'ፍጠር ',
+  current_password_wrong: 'ቀኑ የይለፍ ቃል ትክክል አይደለም',
   date: 'ዕለት ',
   date_placeholder: 'ዕለት (አብነት 04/15/2001 )',
   datetime_placeholder: 'ዕለት (አብነት 04/15/2001  12፡30)',

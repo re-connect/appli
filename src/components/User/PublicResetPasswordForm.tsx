@@ -23,29 +23,29 @@ const PublicResetPasswordForm: React.FC<Props> = ({ username }) => {
         <KeyboardAwareScrollView keyboardShouldPersistTaps='handled'>
           <Separator height={4} />
           <FormikTextField
-            formikBag={formikBag}
-            name="currentPassword"
             contentType="password"
-            label="current_password"
-            icon="key"
             displayError
+            formikBag={formikBag}
+            icon="key"
+            label="current_password"
+            name="currentPassword"
           />
           <FormikTextField
-            formikBag={formikBag}
             contentType="password"
-            name="password"
-            label="new_password"
-            icon="key"
             displayError
+            formikBag={formikBag}
+            icon="key"
+            label="new_password"
+            name="password"
           />
           <PasswordValidityWidget password={formikBag.values.password} />
           <FormikTextField
-            formikBag={formikBag}
             contentType="password"
-            name="confirm"
-            label="confirm_password"
-            icon="key"
             displayError
+            formikBag={formikBag}
+            icon="key"
+            label="confirm_password"
+            name="confirm"
           />
           <RoundedButton
             isLoading={isResetting}

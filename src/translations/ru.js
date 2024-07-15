@@ -26,6 +26,7 @@ export default {
   content: 'Содержание',
   create_beneficiary: 'Создать Получатель',
   create: 'создать',
+  current_password_wrong: 'Текущий пароль неверен',
   date: 'дата',
   date_placeholder: 'дата',
   datetime_placeholder: 'дата',

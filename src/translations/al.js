@@ -27,6 +27,7 @@ export default {
   content: 'Përmbajtje',
   create_beneficiary: 'Krijo nje përdorues të ri',
   create: 'Krijo',
+  current_password_wrong: 'Fjalëkalimi aktual është i pasaktë',
   date: 'Data',
   date_placeholder: 'Data ( P.sh 15/04/2001 )',
   datetime_placeholder: 'Data ( P.sh 15/04/2001 12:30 )',

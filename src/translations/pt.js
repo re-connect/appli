@@ -27,6 +27,7 @@ export default {
   content: 'Conteúdo',
   create_beneficiary: 'Criar um beneficiário',
   create: 'Criar',
+  current_password_wrong: 'A senha atual está incorreta',
   date: 'Data',
   date_placeholder: 'Data (Ex. 15/04/2001)',
   datetime_placeholder: 'Data (Ex. 15/04/2001 12:30)',
