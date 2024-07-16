@@ -15,9 +15,7 @@ export const getTabScreenOptions =
       tabBarLabel: t(route.name.toLowerCase()),
       tabBarActiveTintColor: isMember ? colors.primaryPro : colors.primary,
       tabBarInactiveTintColor: 'gray',
-      tabBarStyle: {
-        backgroundColor: 'white',
-      },
+      tabBarStyle: { backgroundColor: 'white' },
     });
 
 export const getHeader =
