@@ -34,21 +34,9 @@ const MemberHome = () => {
 
   return (
     <MemberBeneficiariesStack.Navigator initialRouteName='Beneficiaries'>
-      <MemberBeneficiariesStack.Screen
-        name="Beneficiaries"
-        component={BeneficiariesScreen}
-        options={getHeader(t('beneficiaries'))}
-      />
-      <MemberBeneficiariesStack.Screen
-        name="Beneficiary"
-        component={BeneficiaryHome}
-        options={{ headerShown: false }}
-      />
-      <MemberBeneficiariesStack.Screen
-        name="CreateBeneficiary"
-        component={CreateBeneficiaryScreen}
-        options={getHeader(t('create_beneficiary'))}
-      />
+      <MemberBeneficiariesStack.Screen name="Beneficiaries" component={BeneficiariesScreen} options={getHeader(t('beneficiaries'))} />
+      <MemberBeneficiariesStack.Screen name="Beneficiary" component={BeneficiaryHome} options={{ headerShown: false }} />
+      <MemberBeneficiariesStack.Screen name="CreateBeneficiary" component={CreateBeneficiaryScreen} options={getHeader(t('create_beneficiary'))} />
     </MemberBeneficiariesStack.Navigator>
   );
 };

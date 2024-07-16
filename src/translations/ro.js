@@ -153,7 +153,7 @@ export default {
   update_contact: 'Actualizați contactul',
   update_event: 'Actualizați evenimentul',
   update_note: 'Notă de actualizare',
-  update_username_field_warning: 'Avertisment, această actualizare vă va actualiza numele de utilizator și veți fi deconectat',
+  update_username_field_warning: 'Această actualizare vă va actualiza numele de utilizator și veți fi deconectat',
   update: 'Actualizați',
   username: 'Nume de utilizator',
   validate: ' A valida',

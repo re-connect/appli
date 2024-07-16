@@ -5,6 +5,8 @@ import { SettingsButton, TabBarButton } from './Components';
 import { getTabStackIcon } from '../services/navigation';
 import { isMember } from '../helpers/userHelpers';
 
+const settingsScreens = ['Chat', 'Profile', 'SettingsIndex', 'Centers', 'TermsOfUse', 'LegalNotices', 'PrivacyPolicy', 'Pitches'];
+
 export const getTabScreenOptions =
   (t: any) =>
     ({ route }: { route: RouteProp<ParamListBase, string> }) => ({
@@ -20,9 +22,9 @@ export const getTabScreenOptions =
 
 export const getHeader =
   (title: string) =>
-    ({ navigation }: { navigation: NavigationProp<any, any> }) => ({
+    ({ navigation, route }: { navigation: NavigationProp<any, any>, route: RouteProp<any, any> }) => ({
       title,
       headerStyle: { backgroundColor: isMember ? colors.blue : colors.green },
       headerTintColor: colors.white,
-      headerRight: title === 'Support' ? undefined : () => <SettingsButton navigation={navigation} />,
+      headerRight: settingsScreens.includes(route.name) ? undefined : () => <SettingsButton navigation={navigation} />,
     });

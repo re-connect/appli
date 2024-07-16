@@ -156,7 +156,7 @@ export default {
   update_contact: 'Editar o contato',
   update_event: 'Editar o evento',
   update_note: 'Editar a nota',
-  update_username_field_warning: 'Aviso, esta atualização irá atualizar seu nome de usuário e você será desconectado',
+  update_username_field_warning: 'Esta atualização irá atualizar seu nome de usuário e você será desconectado',
   update: 'Atualizar',
   username: 'Nome de usuário (utilizador)',
   validate: 'Validar (confirmar)',

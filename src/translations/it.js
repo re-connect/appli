@@ -164,7 +164,7 @@ export default {
   update_contact: 'Modifica contatto',
   update_event: 'Modifica evento',
   update_note: 'Modifica nota',
-  update_username_field_warning: 'Attenzione, questo aggiornamento aggiornerà il tuo nome utente e verrai disconnesso',
+  update_username_field_warning: 'Questo aggiornamento aggiornerà il tuo nome utente e verrai disconnesso',
   update: 'Aggiornare',
   username: 'Nome utente',
   validate: 'Convalida',

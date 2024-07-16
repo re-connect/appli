@@ -176,7 +176,7 @@ export const useUpdateUser = () => {
       }
       try {
         if (updateContainsUsernameFields(newValues)) {
-          Alert.alert(t.t('update_username_field_warning'), null, [
+          Alert.alert(t.t('warning'), t.t('update_username_field_warning'), [
             { text: t.t('confirm'), onPress: async () => {
               await updateUserField(newValues);
               navigation.navigate('Auth');

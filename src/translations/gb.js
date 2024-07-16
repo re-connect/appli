@@ -152,7 +152,7 @@ export default {
   update_contact: 'Update contact',
   update_event: 'Update event',
   update_note: 'Update note',
-  update_username_field_warning: 'Warning, this update will update your username, and you will be logged out',
+  update_username_field_warning: 'This update will update your username, and you will be logged out',
   update: 'Update',
   username: 'Username',
   validate: 'Validate',
