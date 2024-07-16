@@ -1,6 +1,7 @@
 export interface LoginFormValues {
   username: string;
   password: string;
+  accept_terms_of_use?: boolean;
 }
 
 interface LoginFormErrors {

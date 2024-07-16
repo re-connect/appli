@@ -28,33 +28,33 @@ export async function registerForPushNotifications() {
     });
   }
 
-  if (Device.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      handleRegistrationError('Permission not granted to get push token for push notification!');
-      return;
-    }
-    const projectId =
-      Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
-    if (!projectId) {
-      handleRegistrationError('Project ID not found');
-    }
-    try {
-      const pushTokenString = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
-      console.log(pushTokenString);
+  if (!Device.isDevice) {
+    return;
+  }
 
-      await makeRequestv3('/users/me/register-notification-token', 'POST', { notification_token: pushTokenString });
+  const { status: existingStatus } = await Notifications.getPermissionsAsync();
+  let finalStatus = existingStatus;
+  if (existingStatus !== 'granted') {
+    const { status } = await Notifications.requestPermissionsAsync();
+    finalStatus = status;
+  }
+  if (finalStatus !== 'granted') {
+    handleRegistrationError('Permission not granted to get push token for push notification!');
+    return;
+  }
+  const projectId =
+    Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
+  if (!projectId) {
+    handleRegistrationError('Project ID not found');
+  }
+  try {
+    const pushTokenString = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
+    console.log(pushTokenString);
 
-      return pushTokenString;
-    } catch (e: unknown) {
-      handleRegistrationError(`${e}`);
-    }
-  } else {
-    handleRegistrationError('Must use physical device for push notifications');
+    await makeRequestv3('/users/me/register-notification-token', 'POST', { notification_token: pushTokenString });
+
+    return pushTokenString;
+  } catch (e: unknown) {
+    handleRegistrationError(`${e}`);
   }
 }

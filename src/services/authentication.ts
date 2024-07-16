@@ -22,6 +22,7 @@ interface PartialAuthBody {
   two_factor_complete?: boolean;
   weak_password?: boolean;
   expired_password?: boolean;
+  cgs_not_accepted?: boolean;
 }
 
 const setTokenInStorage = async (token: string) => await AsyncStorage.setItem('accessToken', token);
@@ -53,6 +54,10 @@ const handleResetPassword = async (params: LoginParams, subtitle: string): Promi
   RootNavigation.navigate('PublicResetPassword', { username: params.username, subtitle });
 };
 
+const handleAcceptTermsOfUse = async (params: LoginParams): Promise<void> => {
+  RootNavigation.navigate('AcceptTermsOfUse', { username: params.username, password: params.password });
+};
+
 const handlePartialAuth = async (params: LoginParams, response: PartialAuthBody): Promise<void> =>
   new Promise((resolve: any) => {
    if (response.two_factor_complete === false) {
@@ -62,6 +67,9 @@ const handlePartialAuth = async (params: LoginParams, response: PartialAuthBody)
       resolve();
     } else if (response.expired_password === true) {
       handleResetPassword(params, 'reset_password_expired_subtitle');
+      resolve();
+    } else if (response.cgs_not_accepted === true) {
+      handleAcceptTermsOfUse(params);
       resolve();
     } else {
       resolve();
