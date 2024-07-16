@@ -111,7 +111,7 @@ export const useLogin = () => {
       try {
         isLoginInActions.setTrue();
         AsyncStorage.setItem('lastUsername', values.username.toLowerCase());
-        await login(values.username, values.password);
+        await login(values.username, values.password, {_accept_terms_of_use: values._accept_terms_of_use});
         await triggerGetUser();
         isLoginInActions.setFalse();
         fetchInvitations();

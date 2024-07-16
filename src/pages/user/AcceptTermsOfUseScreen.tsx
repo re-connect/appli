@@ -15,10 +15,10 @@ const AcceptTermsOfUseScreen: React.FC<TermsOfUseScreenProps> = ({ route }) => {
   
   return (
     <Screen>
-      <PdfComponent uri="https://www.reconnect.fr/annexe/cgs-cs" />
+      <PdfComponent uri="https://www.reconnect.fr/cgs" />
       <View style={styles.subtitle}>
         <RoundedButton
-          onPress={() => triggerLogin({...route.params, accept_terms_of_use: true})}
+          onPress={() => triggerLogin({...route.params, _accept_terms_of_use: true})}
           text='accept'
           fontSize={16}
           wrapperStyle={{paddingHorizontal: 10}}
