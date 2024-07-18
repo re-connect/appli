@@ -157,7 +157,7 @@ export default {
   update_event: 'Modifiko eventin',
   update_note: 'Modifiko shënimin',
   update: 'Përditëso',
-  update_username_field_warning: 'Kujdes, kjo përditësim do të përditësojë emrin tuaj të përdoruesit dhe ju do të dilni nga sistemi',
+  update_username_field_warning: 'Kjo përditësim do të përditësojë emrin tuaj të përdoruesit dhe ju do të dilni nga sistemi',
   username: 'Emri i përdoruesit',
   validate: 'Validoj',
   view: 'Shikoj',

@@ -154,7 +154,7 @@ export default {
   update_contact: 'Actualizar el contacto',
   update_event: 'Evento de actualización',
   update_note: 'Nota de actualización',
-  update_username_field_warning: 'Advertencia, esta actualización actualizará su nombre de usuario y se cerrará su sesión',
+  update_username_field_warning: 'Esta actualización actualizará su nombre de usuario y se cerrará su sesión',
   update: 'Actualización',
   username: 'Nombre de usuario',
   validate: 'Validar',

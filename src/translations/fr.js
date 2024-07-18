@@ -160,7 +160,7 @@ export default {
   update_contact: 'Éditer le contact',
   update_event: "Éditer l'évènement",
   update_note: 'Éditer la note',
-  update_username_field_warning: 'Attention, cette modification changera votre nom d\'utilisateur, et vous serez déconnecté·e',
+  update_username_field_warning: 'Cette modification changera votre nom d\'utilisateur, et vous serez déconnecté·e',
   update: 'Mettre à jour',
   username: "Nom d'utilisateur",
   validate: 'Valider',

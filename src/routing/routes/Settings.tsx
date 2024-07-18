@@ -21,18 +21,10 @@ export const Settings = () => {
     <SettingsStack.Navigator initialRouteName='SettingsIndex'>
       <SettingsStack.Screen name='SettingsIndex' component={SettingsScreen} options={getHeader(t('settings'))} />
       <SettingsStack.Screen name='Profile' component={ProfileScreen} options={getHeader(t('profil'))} />
-      <SettingsStack.Screen
-        name='ResetPassword'
-        component={ResetPasswordScreen}
-        options={getHeader(t('new_password'))}
-      />
+      <SettingsStack.Screen name='ResetPassword' component={ResetPasswordScreen} options={getHeader(t('new_password'))} />
       <SettingsStack.Screen name='TermsOfUse' component={TermsOfUseScreen} options={getHeader(t('terms_of_use'))} />
       <SettingsStack.Screen name='LegalNotices' component={LegalNoticesScreen} options={getHeader(t('legal_notice'))} />
-      <SettingsStack.Screen
-        name='PrivacyPolicy'
-        component={PrivacyPolicyScreen}
-        options={getHeader(t('privacy_policy'))}
-      />
+      <SettingsStack.Screen name='PrivacyPolicy' component={PrivacyPolicyScreen} options={getHeader(t('privacy_policy'))} />
       <SettingsStack.Screen name='Pitches' component={PitchesScreen} options={getHeader(t('pitches'))} />
       <SettingsStack.Screen name='Centers' component={CentersScreen} options={getHeader(t('centers'))} />
       <SettingsStack.Screen name='Chat' component={ChatScreen} options={getHeader(t('support'))} />
