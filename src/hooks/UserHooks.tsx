@@ -102,7 +102,7 @@ export const useGetUser = () => {
 
 export const useLogin = () => {
   const [isLoginIn, isLoginInActions] = useBoolean(false);
-  const getUser = useGetUser();
+  const triggerGetUser = useTriggerGetUser();
   const fetchInvitations = useFetchInvitations();
   const { setAttempts } = React.useContext(LoginTemporisationContext);
 
@@ -111,8 +111,8 @@ export const useLogin = () => {
       try {
         isLoginInActions.setTrue();
         AsyncStorage.setItem('lastUsername', values.username.toLowerCase());
-        await login(values.username, values.password);
-        await getUser();
+        await login(values.username, values.password, {_accept_terms_of_use: values._accept_terms_of_use});
+        await triggerGetUser();
         isLoginInActions.setFalse();
         fetchInvitations();
         registerForPushNotifications();
@@ -124,7 +124,7 @@ export const useLogin = () => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [getUser, isLoginInActions, fetchInvitations],
+    [triggerGetUser, isLoginInActions, fetchInvitations],
   );
 
   return { isLoginIn, triggerLogin };

@@ -7,6 +7,7 @@ import LoginScreen from '../../pages/user/LoginScreen';
 import PublicResetPasswordScreen from '../../pages/user/PublicResetPasswordScreen';
 import { getHeader } from '../helpers';
 import { AuthStackParamList } from './types/Auth';
+import AcceptCgsScreen from '../../pages/user/AcceptTermsOfUseScreen';
 
 const AuthLoadingStack = createStackNavigator();
 const AuthStack = createStackNavigator<AuthStackParamList>();
@@ -27,11 +28,8 @@ export const Auth = () => {
   return (
     <AuthStack.Navigator initialRouteName='Login'>
       <AuthStack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
-      <AuthStack.Screen
-        name='PublicResetPassword'
-        component={PublicResetPasswordScreen}
-        options={getHeader(t('reset_password_title'))}
-      />
+      <AuthStack.Screen name='PublicResetPassword' component={PublicResetPasswordScreen} options={getHeader(t('reset_password_title'))} />
+      <AuthStack.Screen name='AcceptTermsOfUse' component={AcceptCgsScreen} options={getHeader(t('terms_of_use'))} />
       <AuthStack.Screen name='Chat' component={ChatScreen} options={getHeader(t('loading'))} />
     </AuthStack.Navigator>
   );
