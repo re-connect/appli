@@ -4,6 +4,7 @@ eas.json  filter=crypt diff=crypt merge=crypt
 .ENV.preprod  filter=crypt diff=crypt merge=crypt
 .ENV.prod  filter=crypt diff=crypt merge=crypt
 credentials.json  filter=crypt diff=crypt merge=crypt
+credentials.prod.json  filter=crypt diff=crypt merge=crypt
 credentials/android/keystores/CloudSolidaire.keystore filter=crypt diff=crypt merge=crypt
 android/app/google-services.json filter=crypt diff=crypt merge=crypt
 android/google-services-notif.json filter=crypt diff=crypt merge=crypt
