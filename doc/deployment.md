@@ -38,3 +38,25 @@ The application has 3 bundle ids, the bundle id identifies the application on th
   * Obtaining these provisioning profiles is a really complex workflow, however, Expo abstracts all this complexity
 * 🤖 Android packages are signed with a keystore
   * Keystores are not needed on the debug environment
+
+**Bump version**
+
+Before deploying, you have to bump the version number, on the stores, you can not have multiple application with the same version number.
+You have to bump it manually on multiple places because I did not succeed in automating this task
+
+* buildNumber and versionCode in `app.config.js`
+* version in `app.json`
+* versionCode and versionName in `app/build.gradle`
+* CFBundleShortVersionString and CFBundleVersion in `Info.plist`
+
+**Do deploy**
+
+1. Bump the version number
+2. Prepare the appropriate credentials, see **Note on application signing**
+3. Build the bundle
+   * `npx eas build --platform {ios/android} --profile {preprod/prod}`
+4. Preprod builds
+   * You can share the expo link and qrcode to be installed directly to the devices
+5. Prod builds
+   * 🍏 [Apple] You can automatically submit the build via `eas submit -p ios`
+   * 🤖 [Android] I did not manage to get the automation working, so go to expo, download the built aab file, and manually drop it in the play store
