@@ -14,8 +14,7 @@ Notifications.setNotificationHandler({
 });
 
 function handleRegistrationError(errorMessage: string) {
-  alert(errorMessage);
-  throw new Error(errorMessage);
+  console.log(errorMessage);
 }
 
 export async function registerForPushNotifications() {
@@ -39,17 +38,12 @@ export async function registerForPushNotifications() {
     finalStatus = status;
   }
   if (finalStatus !== 'granted') {
-    handleRegistrationError('Permission not granted to get push token for push notification!');
     return;
   }
   const projectId =
     Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
-  if (!projectId) {
-    handleRegistrationError('Project ID not found');
-  }
   try {
     const pushTokenString = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
-    console.log(pushTokenString);
 
     await makeRequestv3('/users/me/register-notification-token', 'POST', { notification_token: pushTokenString });
 
