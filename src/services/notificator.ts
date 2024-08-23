@@ -14,8 +14,7 @@ Notifications.setNotificationHandler({
 });
 
 function handleRegistrationError(errorMessage: string) {
-  alert(errorMessage);
-  throw new Error(errorMessage);
+  console.log(errorMessage);
 }
 
 export async function registerForPushNotifications() {
