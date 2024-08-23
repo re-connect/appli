@@ -45,7 +45,6 @@ export async function registerForPushNotifications() {
     Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
   try {
     const pushTokenString = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
-    console.log(pushTokenString);
 
     await makeRequestv3('/users/me/register-notification-token', 'POST', { notification_token: pushTokenString });
 
