@@ -88,8 +88,8 @@ android {
         applicationId 'com.reconnect.CloudSolidaire.debug'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 100000200
-        versionName "1.0.200"
+        versionCode 100000201
+        versionName "1.0.201"
     }
     signingConfigs {
         debug {

@@ -486,7 +486,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reconnect.CloudSolidaire.prod;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reconnect.CloudSolidaire.preprod;
 				PRODUCT_NAME = Reconnect;
 				SWIFT_OBJC_BRIDGING_HEADER = "Reconnect/Reconnect-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -590,7 +590,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reconnect.CloudSolidaire.prod;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reconnect.CloudSolidaire.preprod;
 				PRODUCT_NAME = Reconnect;
 				SWIFT_OBJC_BRIDGING_HEADER = "Reconnect/Reconnect-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

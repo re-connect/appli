@@ -96,8 +96,8 @@ export const login = async (username: string, password: string, additionalParams
   const params = {
     ...connexionInformation,
     ...additionalParams,
-    username: utf8.encode(username.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()),
-    password: utf8.encode(password).trim(),
+    username: username.toLowerCase().normalize('NFD').trim(),
+    password: password.trim(),
   };
 
   try {

@@ -31,7 +31,8 @@ The application has 3 bundle ids, the bundle id identifies the application on th
 
 ⚠️⚠️⚠️⚠️
 > Application signing credentials is stores inside the encrypted `credentials.json` file, but I did not succeed in configuring the preprod and the prod environment
-> The best of the wortsts solution I found is to commit an extra file, `credentials.prod.json`. The `credentials.json` it the one used by `eas`, it will be committed with the preprod credentials. If you want to dpeloy in the production environemnt, you will need to copy the content of the `credentials.prod.json` inside the `credentials.json` before deploy
+> The best of the worsts solution I found is to commit an extra file, `credentials.prod.json`. The `credentials.json` it the one used by `eas`, it will be committed with the preprod credentials. If you want to dpeloy in the production environemnt, you will need to copy the content of the `credentials.prod.json` inside the `credentials.json` before deploy.
+> For iOS, you have also to update the bundleIds inside the Info.plist, update the `com.reconnect.CloudSolidaire.preprod` to `com.reconnect.CloudSolidaire.prod` we could have multiple targets in our Info.plist, but I dit not succeed configuring these
 
 * 🍏 Apple packages are signed with a provisioning profile, it ensures the identity of the developper that built the package
   * For debug, preprod, and prod, 3 different provisioning profile exist and you need to use the right one while building
@@ -59,4 +60,8 @@ You have to bump it manually on multiple places because I did not succeed in aut
    * You can share the expo link and qrcode to be installed directly to the devices
 5. Prod builds
    * 🍏 [Apple] You can automatically submit the build via `eas submit -p ios`
-   * 🤖 [Android] I did not manage to get the automation working, so go to expo, download the built aab file, and manually drop it in the play store
+     * The build will appear into testflight, you can click "handle" and check that application uses no of the above cryptographic technologies, and test it with a device with testflight
+     * When it is ready, draft a new release in production and pick the testflight build
+   * 🤖 [Android] You can automatically submit the build via `eas submit -p android`
+     * The build will appear in the section "open tests", it should now be available to beta users
+     * When it is ready, promote it to production
