@@ -4,7 +4,7 @@ import {
   documentsAndFoldersList,
   documentsList,
 } from '../../fixtures/documentsFixtures';
-import { findFolders, updateDocumentInList } from '../documentsHelper';
+import { updateDocumentInList } from '../documentsHelper';
 
 describe('updateDocumentInList', () => {
   it('should update the b_prive field in the object', () => {
@@ -36,21 +36,5 @@ describe('updateDocumentInList', () => {
     expect(newList).toBeDefined();
     expect(newList.length).toBe(3);
     expect(newList[2].documents[1].b_prive).toBe(true);
-  });
-});
-
-describe('findFolders', () => {
-  it('Should return only folders', () => {
-    const list = [...documentsAndFoldersList];
-    expect(list.length).toBe(3);
-    const folders = findFolders(list);
-    expect(folders.length).toBe(1);
-    expect(folders[0].is_folder).toBeTruthy();
-  });
-  it('Should return only folders', () => {
-    const list = [...documentsList];
-    expect(list.length).toBe(2);
-    const folders = findFolders(list);
-    expect(folders.length).toBe(0);
   });
 });

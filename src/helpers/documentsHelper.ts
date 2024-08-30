@@ -1,4 +1,6 @@
+import { folder } from '../fixtures/documentsFixtures';
 import { DocumentInterface } from '../types/Documents';
+import { FolderInterface } from '../types/Folder';
 
 const removeDocumentById = (list: DocumentInterface[], documentId: number) => [
   ...list.filter((item: DocumentInterface) => item.id !== documentId),
@@ -63,5 +65,18 @@ export const updateDocumentInList = (list: DocumentInterface[], document: Docume
   return updateDocument(list, document);
 };
 
-export const findFolders = (list: DocumentInterface[]) =>
-  list.filter((document: DocumentInterface) => !!document.is_folder);
+export const findFolder = (list: FolderInterface[], id: number) =>
+  list.find((document: FolderInterface) => !!document.is_folder && document.id === id);
+
+export const hasPrivateParent = (list: FolderInterface[], itemId: number): boolean => {
+  const parent = findFolder(list, itemId);
+  if (!parent) {
+    return false;
+  }
+
+  return parent.b_prive || (parent?.dossier_parent?.id && hasPrivateParent(list, parent?.dossier_parent?.id));
+
+}
+
+export const isPrivate = (list: DocumentInterface[], document: DocumentInterface): boolean =>
+  document.b_prive || (document.folder_id && hasPrivateParent(list, document.folder_id));
