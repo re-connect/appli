@@ -19,6 +19,6 @@ export default ({ config }) => ({
       },
       versionCode: '100000201',
       package: 'com.reconnect.CloudSolidaire' + process.env.EXPO_PUBLIC_ENV,
-      googleServicesFile: './google-services-notif.json'
+      googleServicesFile: './android/google-services-notif.json'
     },
 });
