@@ -6,7 +6,7 @@ import { DocumentInterface } from '../types/Documents';
 import { ImageInterface } from '../types/Image';
 import { handleError } from './errors';
 import { checkNetworkConnection } from './networking';
-import { makeAuthenticatedUrlv2, makeRequestv2 } from './requests';
+import { buildAuthenticatedUrlv2, makeRequestv2 } from './requests';
 import t from './translation';
 
 export const addDocumentsToFormData = (data: any, documents: Partial<ImageInterface & File>[]): FormData => {
@@ -99,7 +99,7 @@ export const uploadDocuments = async (
 export const showDocument = async (documentId: number, size?: string): Promise<string | undefined> => {
   try {
     const endpoint = !size ? `/documents/${documentId}` : `/documents/${documentId}/${size}`;
-    const url = await makeAuthenticatedUrlv2(endpoint);
+    const url = await buildAuthenticatedUrlv2(endpoint);
 
     return url;
   } catch (error: any) {
