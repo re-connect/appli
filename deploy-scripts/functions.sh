@@ -19,3 +19,25 @@ git_diff_is_valid() {
         return 1
     fi
 }
+
+check_platform_parameter() {
+  if [ "$#" -ne 1 ]; then
+    echo "Error: $0 [ios|android]"
+    exit 1
+  fi
+
+  local PLATFORM="$1"
+
+  case $PLATFORM in
+    ios)
+      echo "Prepare credentials for IOS"
+      ;;
+    android)
+      echo "Prepare credentials for Android"
+      ;;
+    *)
+      echo "Error : script only accepts 'ios' or 'android'."
+      exit 1
+      ;;
+  esac
+}
