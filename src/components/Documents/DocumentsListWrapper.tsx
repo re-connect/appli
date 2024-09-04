@@ -15,7 +15,10 @@ export interface DocumentsListWrapperProps {
   folderId?: number;
 }
 
-const getDocumentName = (item: AnyDataInterface) => item.nom;
+const getDocumentName = (item: AnyDataInterface) => {
+  return item.nom;
+}
+
 const getRightComponent =
   (
     item: DocumentInterface,

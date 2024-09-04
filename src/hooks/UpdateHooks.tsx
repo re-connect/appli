@@ -30,7 +30,6 @@ export const useCheckAndUpdateApp = () => {
       })
       .catch(error => {
         // Do nothing with the error
-        // console.log('inApp update error', error);
       });
   }, []);
 };

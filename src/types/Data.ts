@@ -1,6 +1,6 @@
 import { DocumentInterface } from './Documents';
 import { ReminderInterface } from './Event';
-import { FolderInterface } from './Folder';
+import { FolderIconInterface, FolderInterface } from './Folder';
 
 export interface CreateDataInterface {
   id?: number;
@@ -42,6 +42,7 @@ export interface AnyDataInterface extends DataInterface {
   dossier_parent?: {
     id?: number;
   };
+  icon?: FolderIconInterface;
 }
 
 export interface CreateAnyDataInterface extends CreateDataInterface {

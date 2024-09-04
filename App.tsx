@@ -21,7 +21,7 @@ import { UserCenterInterface } from './src/types/Centers';
 import { ContactInterface } from './src/types/Contact';
 import { DocumentInterface } from './src/types/Documents';
 import { EventInterface } from './src/types/Event';
-import { FolderInterface } from './src/types/Folder';
+import { FolderIconInterface, FolderInterface } from './src/types/Folder';
 import { NoteInterface } from './src/types/Note';
 import { UserInterface } from './src/types/Users';
 import { config } from './src/config';
@@ -35,6 +35,7 @@ Sentry.init({ dsn: config.sentrySecret });
 const App: React.FC = () => {
   const [documents, setDocuments] = React.useState<DocumentInterface[]>([]);
   const [folders, setFolders] = React.useState<FolderInterface[]>([]);
+  const [folderIcons, setFolderIcons] = React.useState<FolderIconInterface[]>([]);
   const [centers, setCenters] = React.useState<UserCenterInterface[]>([]);
   const [contacts, setContacts] = React.useState<ContactInterface[]>([]);
   const [notes, setNotes] = React.useState<NoteInterface[]>([]);
@@ -61,7 +62,7 @@ const App: React.FC = () => {
               <NoteContext.Provider value={{ list: notes, setList: setNotes }}>
                 <EventContext.Provider value={{ list: events, setList: setEvents }}>
                   <DocumentContext.Provider value={{ list: documents, setList: setDocuments }}>
-                    <FolderContext.Provider value={{ list: folders, setList: setFolders }}>
+                    <FolderContext.Provider value={{ list: folders, setList: setFolders, icons: folderIcons, setIcons: setFolderIcons }}>
                       <ThemeContext.Provider value={{ value: theme, actions: themeActions }}>
                         <StatusBar style='light' />
                         <Routes user={user} />
