@@ -16,7 +16,7 @@ import UserContext from '../context/UserContext';
 import { getTruncatedFullName, isBeneficiary, isPro, updateContainsUsernameFields } from '../helpers/userHelpers';
 import { login } from '../services/authentication';
 import { LoginFormValues } from '../services/forms';
-import { fetchCurrentUser, makeRequestv2, makeRequestv3 } from '../services/requests';
+import { makeRequestv2, makeRequestv3 } from '../services/requests';
 import t from '../services/translation';
 import { ResetPasswordData, UserField, UserUpdate } from '../types/Users';
 import { useFetchInvitations } from './CentersHooks';
@@ -60,7 +60,7 @@ export const useTriggerGetUser = () => {
         }
         return;
       }
-      const newUser = await fetchCurrentUser();
+      const newUser = await makeRequestv2('/user');
       if (JSON.stringify(user) !== JSON.stringify(newUser)) {
         setUser(newUser);
       }

@@ -6,12 +6,13 @@ import Screen from '../../components/Screen';
 import TogglePrivacySwitch from '../../components/UI/TogglePrivacySwitch';
 import DocumentContext from '../../context/DocumentContext';
 import { getTruncatedText } from '../../helpers/dataHelper';
-import { findNestedDocument } from '../../helpers/documentsHelper';
+import { findNestedDocument, hasPrivateParent } from '../../helpers/documentsHelper';
 import { colors } from '../../style';
 import { AnyDataInterface } from '../../types/Data';
 import { useBoolean } from 'react-hanger/array';
 import DocumentActionsModal from '../../components/Documents/DocumentActionsModal';
 import { DocumentScreenProps } from '../../routing/routes/types/Document';
+import FolderContext from '../../context/FolderContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
 const DocumentScreen: React.FC<DocumentScreenProps> = ({ navigation, route }) => {
   const { id } = route.params;
   const { list } = React.useContext(DocumentContext);
+  const { list: folders } = React.useContext(FolderContext);
   const { width } = Dimensions.get('window');
   const document = findNestedDocument(!list ? [] : list, id);
   const [isModalOpen, openModalActions] = useBoolean(false);
@@ -82,14 +84,14 @@ const DocumentScreen: React.FC<DocumentScreenProps> = ({ navigation, route }) =>
             openModalActions={openModalActions}
           />
         </View>
-        <View style={{ ...styles.switchContainer, width }}>
+        {hasPrivateParent(folders, document.folder_id) ? null : <View style={{ ...styles.switchContainer, width }}>
           <TogglePrivacySwitch
             Context={DocumentContext}
             isPrivate={document.b_prive}
             itemId={document.id}
             endpoint={`documents/${document.id}`}
           />
-        </View>
+        </View>}
       </View>
     </Screen>
   );

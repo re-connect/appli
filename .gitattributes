@@ -8,4 +8,4 @@ credentials.prod.json  filter=crypt diff=crypt merge=crypt
 credentials/android/keystores/CloudSolidaire.keystore filter=crypt diff=crypt merge=crypt
 credentials/android/keystores/CloudSolidaire.preprod.keystore filter=crypt diff=crypt merge=crypt
 android/app/google-services.json filter=crypt diff=crypt merge=crypt
-android/google-services-notif.json filter=crypt diff=crypt merge=crypt
+android/google-services.json filter=crypt diff=crypt merge=crypt

@@ -1,6 +1,6 @@
 import storage from '@react-native-async-storage/async-storage';
 import nock from 'nock';
-import { makeAuthenticatedUrlv2, makeRequestv2 } from '../requests';
+import { buildAuthenticatedUrlv2, makeRequestv2 } from '../requests';
 
 const accessToken = 'ThisIsMyTestAccessToken';
 
@@ -49,11 +49,11 @@ describe('request service', () => {
     });
   });
 
-  describe('makeAuthenticatedUrlv2', () => {
+  describe('buildAuthenticatedUrlv2', () => {
     it('should build a url with the api endpoint, the provided endmoint, and the token', async () => {
       const expectedUrl = `https://preprod.reconnect.fr/api/v2/documents?access_token=${accessToken}`;
       const endpoint = '/documents';
-      const url = await makeAuthenticatedUrlv2(endpoint);
+      const url = await buildAuthenticatedUrlv2(endpoint);
       expect(url).toBe(expectedUrl);
     });
   });

@@ -39,6 +39,9 @@ export interface AnyDataInterface extends DataInterface {
   telephone?: string;
   thumb?: string;
   url?: string;
+  dossier_parent?: {
+    id?: number;
+  };
 }
 
 export interface CreateAnyDataInterface extends CreateDataInterface {
