@@ -1,6 +1,6 @@
 import { Formik, FormikProps } from 'formik';
 import * as React from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import emailShape from '../../helpers/forms/emailShape';
 import { useSendDocumentByEmail } from '../../hooks/DocumentsHooks';
 import { colors } from '../../style';
@@ -21,6 +21,7 @@ interface Props {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingVertical: 64,
     paddingHorizontal: 32,
     backgroundColor: colors.darkGrayTransparent,
     justifyContent: 'center',
@@ -66,78 +67,80 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
   isSent && close();
 
   return (
-    <View style={styles.container}>
-      {isSending ? (
-        <View style={styles.content}>
-          <ActivityIndicator size='large' color={colors.primary} />
-        </View>
-      ) : (
-        <View style={styles.wrapper}>
-          <Formik
-            onSubmit={async values => {
-              await triggerSendDocumentByEmail(values.email);
-              onSubmit();
-            }}
-            initialValues={{ email: '' }}
-            validationSchema={emailShape}>
-            {({
-              handleBlur,
-              handleChange,
-              handleSubmit,
-              setFieldValue,
-              values,
-              errors,
-              touched,
-            }: FormikProps<Record<'email', string>>) => {
-              return (
-                <View>
-                  { list.filter((contact: ContactInterface) => contact.email).map((contact) => 
-                  <View style={styles.contactRow}>
-                    <View>
-                      <Text style={{fontWeight: 'bold'}}>{`${contact.prenom} ${contact.nom} : `}</Text>
-                      <Text>{contact.email}</Text>
-                    </View>
-                    <IconButton
-                      backgroundColor={colors.white}
-                      iconColor={colors.primary}
-                      iconName="copy"
-                      onPress={() => setFieldValue('email', contact.email)}
-                    />
-                  </View>
-                  )}
-                  <TextField
-                    autocompleteType='email'
-                    contentType='emailAddress'
-                    error={errors.email}
-                    fieldLabel='email'
-                    handleBlur={handleBlur('email')}
-                    handleChange={handleChange('email')}
-                    iconName='at'
-                    keyboardType='email-address'
-                    okIcon
-                    touched={touched.email}
-                    value={values.email}
-                  />
-                  <View style={styles.wrapperButtons}>
-                    <Pressable onPress={onSubmit}>
-                      <View style={styles.menuIconContainer}>
-                        <Icon style={styles.menuIcon} color={colors.darkGray} name='xmark' />
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
+        {isSending ? (
+          <View style={styles.content}>
+            <ActivityIndicator size='large' color={colors.primary} />
+          </View>
+        ) : (
+          <View style={styles.wrapper}>
+            <Formik
+              onSubmit={async values => {
+                await triggerSendDocumentByEmail(values.email);
+                onSubmit();
+              }}
+              initialValues={{ email: '' }}
+              validationSchema={emailShape}>
+              {({
+                handleBlur,
+                handleChange,
+                handleSubmit,
+                setFieldValue,
+                values,
+                errors,
+                touched,
+              }: FormikProps<Record<'email', string>>) => {
+                return (
+                  <View>
+                    { list.filter((contact: ContactInterface) => contact.email).map((contact) => 
+                    <View style={styles.contactRow}>
+                      <View>
+                        <Text style={{fontWeight: 'bold'}}>{`${contact.prenom} ${contact.nom} : `}</Text>
+                        <Text>{contact.email}</Text>
                       </View>
-                      <Text>cancel</Text>
-                    </Pressable>
-                    <IconButton
-                      backgroundColor={colors.blue}
-                      iconName="paper-plane"
-                      onPress={() => handleSubmit()}
+                      <IconButton
+                        backgroundColor={colors.white}
+                        iconColor={colors.primary}
+                        iconName="copy"
+                        onPress={() => setFieldValue('email', contact.email)}
+                      />
+                    </View>
+                    )}
+                    <TextField
+                      autocompleteType='email'
+                      contentType='emailAddress'
+                      error={errors.email}
+                      fieldLabel='email'
+                      handleBlur={handleBlur('email')}
+                      handleChange={handleChange('email')}
+                      iconName='at'
+                      keyboardType='email-address'
+                      okIcon
+                      touched={touched.email}
+                      value={values.email}
                     />
+                    <View style={styles.wrapperButtons}>
+                      <Pressable onPress={onSubmit}>
+                        <View style={styles.menuIconContainer}>
+                          <Icon style={styles.menuIcon} color={colors.darkGray} name='xmark' />
+                        </View>
+                        <Text>cancel</Text>
+                      </Pressable>
+                      <IconButton
+                        backgroundColor={colors.blue}
+                        iconName="paper-plane"
+                        onPress={() => handleSubmit()}
+                      />
+                    </View>
                   </View>
-                </View>
-              );
-            }}
-          </Formik>
-        </View>
-      )}
-    </View>
+                );
+              }}
+            </Formik>
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
