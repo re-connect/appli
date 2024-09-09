@@ -6,7 +6,7 @@ import { checkNetworkConnection } from './networking';
 
 type HTTPVerb = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH';
 
-export const buildUrl = async (baseUrl: string, endpoint: string) => {
+const buildUrl = async (baseUrl: string, endpoint: string) => {
   const isConnected = await checkNetworkConnection();
   if (!isConnected) {
     return;
@@ -15,7 +15,7 @@ export const buildUrl = async (baseUrl: string, endpoint: string) => {
   return `${baseUrl}${endpoint}`;
 }
 
-export const authenticateUrl = async (url: string) => {
+const authenticateUrl = async (url: string) => {
   const token = await AsyncStorage.getItem('accessToken');
   if (!token) {
     handle401();
@@ -26,7 +26,7 @@ export const authenticateUrl = async (url: string) => {
   return `${url}?access_token=${token}`;
 }
 
-export const buildAuthenticatedUrl = async (baseUrl: string, endpoint: string) => {
+const buildAuthenticatedUrl = async (baseUrl: string, endpoint: string) => {
   const unauthenticatedUrl = await buildUrl(baseUrl, endpoint);
 
   return await authenticateUrl(unauthenticatedUrl);
@@ -34,9 +34,9 @@ export const buildAuthenticatedUrl = async (baseUrl: string, endpoint: string) =
 
 export const buildAuthenticatedUrlv2 = async (endpoint: string) => await buildAuthenticatedUrl(apiv2Endpoint, endpoint);
 
-export const buildAuthenticatedUrlv3 = async (endpoint: string) => await buildAuthenticatedUrl(apiv3Endpoint, endpoint);
+const buildAuthenticatedUrlv3 = async (endpoint: string) => await buildAuthenticatedUrl(apiv3Endpoint, endpoint);
 
-const makeRequest = async (url?: string, method: HTTPVerb = 'GET', data?: Record<string, any>) => {
+export const makeRequest = async (url?: string, method: HTTPVerb = 'GET', data?: Record<string, any>) => {
   try {
     if (url) {
       const response = await axios({ method, url, data, timeout: 17000 });
@@ -62,4 +62,10 @@ export const makeRequestv3 = async (endpoint: string, method: HTTPVerb = 'GET', 
   const url = await buildAuthenticatedUrlv3(endpoint);
 
   return await makeRequest(url, method, data);
+};
+
+export const makePublicRequest = async (endpoint: string) => {
+  const url = await buildUrl(backendUrl, `/public${endpoint}`);
+
+  return await makeRequest(url);
 };

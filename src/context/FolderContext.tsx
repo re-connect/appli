@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { FolderInterface } from '../types/Folder';
+import { FolderIconInterface, FolderInterface } from '../types/Folder';
 
 export interface FolderContextInterface {
   list: FolderInterface[];
+  icons: FolderIconInterface[];
+  setIcons: (list: FolderIconInterface[]) => void;
   setList: (list: FolderInterface[]) => void;
 }
 
 const defaultState: FolderContextInterface = {
   list: [],
+  icons: [],
+  setIcons: () => null,
   setList: () => null,
 };
 

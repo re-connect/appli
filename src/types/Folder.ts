@@ -19,3 +19,10 @@ export interface FolderInterface extends AnyDataInterface {
 export interface FolderCardInterface {
   item: FolderInterface;
 }
+
+export interface FolderIconInterface {
+  id: number;
+  name: string;
+  url: string;
+  public_file_path: string;
+}

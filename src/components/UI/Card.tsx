@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { ActivityIndicator, StyleSheet, TouchableHighlight, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { colors } from '../../style';
 import Text from '../UI/Text';
 import Thumbnail from './Thumbnail';
 import { useBoolean } from 'react-hanger/array';
 import { AnyDataInterface } from '../../types/Data';
 import Icon from './Icon';
+import { backendUrl } from '../../appConstants';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginHorizontal: 16,
   },
+  icon_image: { width: 70, height: 70, marginRight: 8 },
 });
 
 interface Props {
@@ -83,8 +85,13 @@ const Card: React.FC<Props> = ({
         <ActivityIndicator size='large' color={colors.black} />
       ) : (
         <>
-          <Icon style={styles.icon} color={colors.darkGray} name={iconName} />
-          {!hasThumbnail ? null : <Thumbnail documentId={item.id} />}
+          {
+            item?.icon 
+            ? <Image source={{ uri: `${backendUrl}/${item?.icon?.public_file_path}` }} style={styles.icon_image}/>
+            : !hasThumbnail
+              ? <Icon style={styles.icon} color={colors.darkGray} name={iconName} />
+              : <Thumbnail documentId={item.id} />
+          }
           <View style={styles.content}>
             <Text>{title}</Text>
             {Subtitle === null ? null : <Subtitle />}
