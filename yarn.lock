@@ -2899,10 +2899,10 @@
     pretty-format "^29.7.0"
     redent "^3.0.0"
 
-"@thegrizzlylabs/react-native-genius-scan@^4.21.0":
-  version "4.21.1"
-  resolved "https://registry.yarnpkg.com/@thegrizzlylabs/react-native-genius-scan/-/react-native-genius-scan-4.21.1.tgz#44a9e7bb3a95d07bffc02f69d2be9bfe68441e37"
-  integrity sha512-v1juqg5LlIJQ1RUNVGzYt+VGZX9+KqiXNBwwfi1RbLRrLjLIGRYSPoIBQAvBAvMAgbHwJyGTl6htCRVOcLemug==
+"@thegrizzlylabs/react-native-genius-scan@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@thegrizzlylabs/react-native-genius-scan/-/react-native-genius-scan-5.2.0.tgz#cd6d8b9081e2ae8294f9b74082a7cd5825ea6fb5"
+  integrity sha512-AoU9N3lrsFW7abydKYkeyzX6OVw9lCKngrD1cw+nx/OXOzfVVYsfX+Cj9jTYCCn0dTkZKnHhh+bGGqKrIoDSMg==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
