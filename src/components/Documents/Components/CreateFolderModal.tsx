@@ -1,8 +1,8 @@
-import React, { AriaAttributes } from 'react';
+import React from 'react';
 import CustomModal from '../../UI/CustomModal';
 import t from '../../../services/translation';
 import ItemModal from '../Components/ItemModal';
-import { UseBoolean, useInput } from 'react-hanger';
+import { UseBoolean } from 'react-hanger';
 import TextField from '../../UI/TextField';
 import Text from '../../UI/Text';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -12,6 +12,7 @@ import { backendUrl } from '../../../appConstants';
 import FolderContext from '../../../context/FolderContext';
 import { colors } from '../../../style';
 import Icon from '../../UI/Icon';
+import { SvgCssUri } from 'react-native-svg/css';
 
 const styles = StyleSheet.create({
   iconsContainer: {
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   selectedIconText: { color: colors.white },
-  icon: { width: 50, height: 50 },
+  icon: { width: 40, height: 40, marginHorizontal: 8 },
   clearIcon: { fontSize: 25, color: colors.black },
 });
 
@@ -50,7 +51,7 @@ const FolderIconPicker: React.FC<{ icons: Array<FolderIconInterface>, selectedIc
         onPress={() => pickIcon(icon === selectedIcon ? null : icon)}
         >
           <Text style={[selectedIcon === icon && styles.selectedIconText]}>{icon.name}</Text>
-          <Image source={{ uri: `${backendUrl}/${icon.url}` }} style={styles.icon}/>
+          <SvgCssUri style={styles.icon} uri={`${backendUrl}/${icon.url}`} />
         </TouchableOpacity>
       )}
       <TouchableOpacity style={styles.iconContainer} onPress={() => pickIcon(null)} >
