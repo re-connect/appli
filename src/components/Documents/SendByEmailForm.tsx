@@ -1,6 +1,6 @@
 import { Formik, FormikProps } from 'formik';
 import * as React from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import emailShape from '../../helpers/forms/emailShape';
 import { useSendDocumentByEmail } from '../../hooks/DocumentsHooks';
 import { colors } from '../../style';
@@ -10,6 +10,7 @@ import TextField from '../UI/TextField';
 import Icon from '../UI/Icon';
 import ContactContext from '../../context/ContactContext';
 import IconButton from '../UI/IconButton';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   document: DocumentInterface;
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 32,
   },
+  contactsTitle: {fontWeight: 'bold', textDecorationLine: 'underline', marginBottom: 16},
   contactRow: {
     display: 'flex',
     flexDirection: 'row',
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
 const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
   const { isSending, triggerSendDocumentByEmail, isSent } = useSendDocumentByEmail(document);
   const { list } = React.useContext(ContactContext);
+  const { navigate } = useNavigation<any>();
   isSent && close();
 
   return (
@@ -87,6 +90,12 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
               {({ handleBlur, handleChange, handleSubmit, setFieldValue, values, errors, touched }: FormikProps<Record<'email', string>>) => {
                 return (
                   <View>
+                  <TouchableOpacity onPress={() => {
+                    navigate('Contacts');
+                    close();
+                  }}>
+                    <Text style={styles.contactsTitle}>contacts</Text>
+                  </TouchableOpacity>
                     {list.map((contact) =>
                       <View style={styles.contactRow}>
                         <View>
