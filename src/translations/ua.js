@@ -109,6 +109,7 @@ export default {
   new_note: 'Новий запис',
   new_password: 'Новий пароль',
   no_beneficiary_found: 'Знайдено жодного одержувача',
+  no_email: "Немає електронної пошти",
   no: 'Ні',
   note: 'Запис',
   notes: 'Записи',

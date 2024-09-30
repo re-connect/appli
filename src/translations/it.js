@@ -120,6 +120,7 @@ export default {
   new_note: 'Nuova nota',
   new_password: 'Nuova password',
   no_beneficiary_found: 'Nessun beneficiario trovato',
+  no_email: "Nessuna email",
   no: 'No',
   note: 'Nota',
   notes: 'Note',

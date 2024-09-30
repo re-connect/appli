@@ -108,6 +108,7 @@ export default {
   new_note: 'ዝተረኸበ ተጠቓማይ የለን ',
   new_password: 'የለን ',
   no_beneficiary_found: 'መዘኻኸሪ ',
+  no_email: "ኢሜይል የለም",
   no: 'መዘኻኸሪታት ',
   note: 'ክፍቲ ',
   notes: 'ፓስወርድ *',

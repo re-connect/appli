@@ -110,6 +110,7 @@ export default {
   new_note: 'Neue Notiz',
   new_password: 'Neues Passwort',
   no_beneficiary_found: 'Kein/keine Klient*in gefunden',
+  no_email: "Keine E-Mail",
   no: 'Nein',
   note: 'Notiz',
   notes: 'Notizen',

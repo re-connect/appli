@@ -112,6 +112,7 @@ export default {
   new_note: 'Shënim i ri',
   new_password: 'Fjalëkalim i ri',
   no_beneficiary_found: 'Asnjë përfitues nuk u gjet',
+  no_email: "Pa email",
   no: 'Jo',
   note: 'Shënim',
   notes: 'Shënime',

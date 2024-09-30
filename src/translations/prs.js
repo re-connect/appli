@@ -108,6 +108,7 @@ export default {
   new_note: 'یادداشت جدید',
   new_password: 'رمز عبور جدید',
   no_beneficiary_found: 'هیچ شخص ذی نفع یافت نشد',
+  no_email: "ایمیل نیست",
   no: 'نه',
   note: 'یادداشت',
   notes: 'یادداشت ها',

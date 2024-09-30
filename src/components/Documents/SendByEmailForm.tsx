@@ -9,7 +9,6 @@ import Text from '../UI/Text';
 import TextField from '../UI/TextField';
 import Icon from '../UI/Icon';
 import ContactContext from '../../context/ContactContext';
-import { ContactInterface } from '../../types/Contact';
 import IconButton from '../UI/IconButton';
 
 interface Props {
@@ -19,10 +18,13 @@ interface Props {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  scrollView: {
     flex: 1,
     paddingVertical: 64,
     paddingHorizontal: 32,
+  },
+  container: {
+    flex: 1,
     backgroundColor: colors.darkGrayTransparent,
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,8 +69,8 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
   isSent && close();
 
   return (
-    <ScrollView style={styles.scrollView}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
         {isSending ? (
           <View style={styles.content}>
             <ActivityIndicator size='large' color={colors.primary} />
@@ -82,30 +84,25 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
               }}
               initialValues={{ email: '' }}
               validationSchema={emailShape}>
-              {({
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                setFieldValue,
-                values,
-                errors,
-                touched,
-              }: FormikProps<Record<'email', string>>) => {
+              {({ handleBlur, handleChange, handleSubmit, setFieldValue, values, errors, touched }: FormikProps<Record<'email', string>>) => {
                 return (
                   <View>
-                    { list.filter((contact: ContactInterface) => contact.email).map((contact) => 
-                    <View style={styles.contactRow}>
-                      <View>
-                        <Text style={{fontWeight: 'bold'}}>{`${contact.prenom} ${contact.nom} : `}</Text>
-                        <Text>{contact.email}</Text>
+                    {list.map((contact) =>
+                      <View style={styles.contactRow}>
+                        <View>
+                          <Text style={{fontWeight: 'bold'}}>{`${contact.prenom} ${contact.nom}`}</Text>
+                          {!contact.email
+                            ? <Text>no_email</Text>
+                            : <Text>{contact.email}</Text>
+                          }
+                        </View>
+                        {!contact.email ? null : <IconButton
+                          backgroundColor={colors.white}
+                          iconColor={colors.primary}
+                          iconName="copy"
+                          onPress={() => setFieldValue('email', contact.email)}
+                        />}
                       </View>
-                      <IconButton
-                        backgroundColor={colors.white}
-                        iconColor={colors.primary}
-                        iconName="copy"
-                        onPress={() => setFieldValue('email', contact.email)}
-                      />
-                    </View>
                     )}
                     <TextField
                       autocompleteType='email'
@@ -139,8 +136,8 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
             </Formik>
           </View>
         )}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

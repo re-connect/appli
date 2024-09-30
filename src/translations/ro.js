@@ -109,6 +109,7 @@ export default {
   new_note: 'Notă nouă',
   new_password: 'Parolă Nouă',
   no_beneficiary_found: 'Nu a fost găsit niciun beneficiar',
+  no_email: "Fără email",
   no: 'Nu',
   note: 'Notă',
   notes: 'Note',
