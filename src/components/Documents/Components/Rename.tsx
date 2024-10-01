@@ -58,7 +58,7 @@ interface Props {
 }
 
 const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => {
-  const [selectedIcon, setSelectedIcon] = React.useState<FolderIconInterface>(null);
+  const [selectedIcon, setSelectedIcon] = React.useState<FolderIconInterface>(document?.icon);
   const { icons } = React.useContext(FolderContext);
 
   return (

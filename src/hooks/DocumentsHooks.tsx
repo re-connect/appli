@@ -177,35 +177,27 @@ export const useRenameItem = (item: DocumentInterface | FolderInterface) => {
   const { list: foldersList, setList: setFoldersList } = React.useContext(FolderContext);
   const [showForm, showFormActions] = useBooleanArray(false);
   const [isUpdating, isUpdatingActions] = useBooleanArray(false);
-  const hasBeenRenamed = useBoolean(false);
 
   const triggerRename = async (name: string, icon?: FolderIconInterface): Promise<void> => {
     try {
       isUpdatingActions.setTrue();
-      const renamedItem = await renameItem(item, name);
+      const renamedItem = await renameItem(item, name, icon);
       if (renamedItem) {
         if (item.is_folder) {
-          setFoldersList(updateDatumInList(foldersList, item.id, { ...item, nom: name, icon_id: icon?.id }));
+          setFoldersList(updateDatumInList(foldersList, item.id, { ...item, nom: name, icon: renamedItem?.icon }));
         } else {
           setDocumentsList(updateDatumInList(documentsList, item.id, { ...item, nom: name }));
         }
       }
       isUpdatingActions.setFalse();
       showFormActions.setFalse();
-      hasBeenRenamed.setTrue();
     } catch {
       Alert.alert(t.t('error_renaming_document'));
       isUpdatingActions.setFalse();
     }
   };
 
-  return {
-    triggerRename,
-    showForm,
-    showFormActions,
-    isUpdating,
-    hasBeenRenamed: hasBeenRenamed.value,
-  };
+  return { triggerRename, showForm, showFormActions, isUpdating };
 };
 
 export const useMoveDocumentInFolder = () => {
@@ -239,7 +231,6 @@ export const useMoveDocumentOutOfFolder = (document: DocumentInterface) => {
   const { list, setList } = React.useContext(DocumentContext);
   const navigation = useNavigation<any>();
   const [isMovingOut, setIsMovingOut] = React.useState<boolean>(false);
-  const hasBeenMoved = useBoolean(false);
 
   const triggerMoveDocumentOutOfFolder = async () => {
     try {
@@ -253,7 +244,6 @@ export const useMoveDocumentOutOfFolder = (document: DocumentInterface) => {
           }),
         ]);
         setIsMovingOut(false);
-        hasBeenMoved.setTrue();
       }
       navigation.goBack();
     } catch {
@@ -262,7 +252,7 @@ export const useMoveDocumentOutOfFolder = (document: DocumentInterface) => {
     }
   };
 
-  return { isMovingOut, triggerMoveDocumentOutOfFolder, hasBeenMoved: hasBeenMoved.value };
+  return { isMovingOut, triggerMoveDocumentOutOfFolder };
 };
 
 export const useSendDocumentByEmail = (document: DocumentInterface) => {
