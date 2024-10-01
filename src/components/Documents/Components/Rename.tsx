@@ -7,6 +7,10 @@ import { DocumentInterface } from '../../../types/Documents';
 import Text from '../../UI/Text';
 import TextField from '../../UI/TextField';
 import Icon from '../../UI/Icon';
+import FolderIconPicker from './FolderIconPicker';
+import FolderContext from '../../../context/FolderContext';
+import { FolderIconInterface } from '../../../types/Folder';
+import ItemModal from './ItemModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,9 +33,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 32,
   },
-  menuIcon: {
-    fontSize: 20,
-  },
+  menuIcon: { fontSize: 20 },
   menuIconContainer: {
     marginRight: 8,
     width: 30,
@@ -52,58 +54,44 @@ interface Props {
   document: DocumentInterface;
   closeModal: () => void;
   close: () => void;
-  onSubmit: (name: string) => void;
+  onSubmit: (name: string, selectedIcon?: FolderIconInterface) => void;
 }
 
-const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => (
-  <TouchableOpacity style={styles.container} activeOpacity={1} onPress={closeModal}>
-    <Formik.Formik
-      onSubmit={(values: Record<'name', string>) => {
-        onSubmit(values.name);
-        close();
-      }}
-      initialValues={{ name: document.nom.split('.')[0] }}
-      validationSchema={renameShape}>
-      {({
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        values,
-        errors,
-        touched,
-      }: Formik.FormikProps<Record<'name', string>>) => {
-        return (
-          <View style={styles.wrapper}>
-            <TextField
-              fieldLabel='new_name'
-              handleChange={handleChange('name')}
-              handleBlur={handleBlur('name')}
-              iconName='user-large'
-              iconSyle={{ color: colors.darkGray }}
-              style={{ color: colors.darkGray }}
-              touched={touched.name}
-              error={errors.name}
-              value={values.name}
-            />
-            <View style={styles.buttonsWrapper}>
-              <TouchableOpacity onPress={close}>
-                <View style={styles.menuIconContainer}>
-                  <Icon style={styles.menuIcon} color={colors.darkGray} name='xmark' />
-                </View>
-                <Text>cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleSubmit()}>
-                <View style={styles.menuIconContainer}>
-                  <Icon style={styles.menuIcon} color={colors.green} name='check' />
-                </View>
-                <Text>validate</Text>
-              </TouchableOpacity>
+const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => {
+  const [selectedIcon, setSelectedIcon] = React.useState<FolderIconInterface>(null);
+  const { icons } = React.useContext(FolderContext);
+
+  return (
+    <TouchableOpacity style={styles.container} activeOpacity={1} onPress={closeModal}>
+      <Formik.Formik
+        onSubmit={(values: Record<'name', string>) => {
+          onSubmit(values.name, selectedIcon);
+          close();
+        }}
+        initialValues={{ name: document.nom.split('.')[0] }}
+        validationSchema={renameShape}>
+        {({ handleBlur, handleChange, handleSubmit, values, errors, touched }: Formik.FormikProps<Record<'name', string>>) => {
+          return (
+            <View style={styles.wrapper}>
+              <TextField
+                fieldLabel='new_name'
+                handleChange={handleChange('name')}
+                handleBlur={handleBlur('name')}
+                iconName='user-large'
+                iconSyle={{ color: colors.darkGray }}
+                style={{ color: colors.darkGray }}
+                touched={touched.name}
+                error={errors.name}
+                value={values.name}
+              />
+              {!document.is_folder ? null : <FolderIconPicker icons={icons} selectedIcon={selectedIcon} pickIcon={setSelectedIcon} />}
+              <ItemModal iconName='save' label='validate' onPress={() => handleSubmit()} />
             </View>
-          </View>
-        );
-      }}
-    </Formik.Formik>
-  </TouchableOpacity>
-);
+          );
+        }}
+      </Formik.Formik>
+    </TouchableOpacity>
+  );
+}
 
 export default Rename;

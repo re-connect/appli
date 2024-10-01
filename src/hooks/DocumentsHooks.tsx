@@ -9,11 +9,11 @@ import { geniusSdkLicense } from '../appConstants';
 import DocumentContext from '../context/DocumentContext';
 import FolderContext from '../context/FolderContext';
 import { updateDatumInList } from '../helpers/dataHelper';
-import { createEmpty, createLoadingDocument, renameItem, showDocument, uploadDocuments } from '../services/documents';
+import { createLoadingDocument, renameItem, showDocument, uploadDocuments } from '../services/documents';
 import { makeRequestv2 } from '../services/requests';
 import t from '../services/translation';
 import { DocumentInterface, ScannedGeniusDocumentInterface } from '../types/Documents';
-import { FolderInterface } from '../types/Folder';
+import { FolderIconInterface, FolderInterface } from '../types/Folder';
 import { ImageInterface } from '../types/Image';
 import { alert } from '../helpers/alertHelper';
 
@@ -179,13 +179,13 @@ export const useRenameItem = (item: DocumentInterface | FolderInterface) => {
   const [isUpdating, isUpdatingActions] = useBooleanArray(false);
   const hasBeenRenamed = useBoolean(false);
 
-  const triggerRenameDocument = async (name: string): Promise<void> => {
+  const triggerRename = async (name: string, icon?: FolderIconInterface): Promise<void> => {
     try {
       isUpdatingActions.setTrue();
       const renamedItem = await renameItem(item, name);
       if (renamedItem) {
         if (item.is_folder) {
-          setFoldersList(updateDatumInList(foldersList, item.id, { ...item, nom: name }));
+          setFoldersList(updateDatumInList(foldersList, item.id, { ...item, nom: name, icon_id: icon?.id }));
         } else {
           setDocumentsList(updateDatumInList(documentsList, item.id, { ...item, nom: name }));
         }
@@ -200,7 +200,7 @@ export const useRenameItem = (item: DocumentInterface | FolderInterface) => {
   };
 
   return {
-    triggerRenameDocument,
+    triggerRename,
     showForm,
     showFormActions,
     isUpdating,

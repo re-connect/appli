@@ -42,6 +42,7 @@ export interface AnyDataInterface extends DataInterface {
   dossier_parent?: {
     id?: number;
   };
+  icon_id?: number;
   icon?: FolderIconInterface;
 }
 

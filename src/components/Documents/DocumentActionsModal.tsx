@@ -21,7 +21,7 @@ const DocumentActionsModal: React.FC<Props> = ({ document, close }) => {
   const { documentUrl } = useShowDocument(document.id);
   const [pickingFolder, pickingFolderActions] = useBoolean(false);
   const [showSendEmailForm, showSendEmailFormActions] = useBoolean(false);
-  const { triggerRenameDocument, showForm, showFormActions, isUpdating, hasBeenRenamed } = useRenameItem(document);
+  const { triggerRename, showForm, showFormActions, isUpdating, hasBeenRenamed } = useRenameItem(document);
   const itemEndpoint = document.is_folder ? `folders/${document.id}` : `documents/${document.id}`;
   const itemContext = document.is_folder ? FolderContext : DocumentContext;
   const { deleteItem, isDeleting, hasBeenDeleted } = useDeleteData(itemContext, itemEndpoint, document.id);
@@ -50,14 +50,7 @@ const DocumentActionsModal: React.FC<Props> = ({ document, close }) => {
   }
 
   if (showForm) {
-    return (
-      <Rename
-        close={showFormActions.setFalse}
-        closeModal={close}
-        onSubmit={triggerRenameDocument}
-        document={document}
-      />
-    );
+    return <Rename close={showFormActions.setFalse} closeModal={close} onSubmit={triggerRename} document={document} />;
   }
 
   if (pickingFolder) {
