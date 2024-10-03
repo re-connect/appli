@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, StyleSheet, TouchableHighlight, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { colors } from '../../style';
 import Text from '../UI/Text';
 import Thumbnail from './Thumbnail';
@@ -7,6 +7,7 @@ import { useBoolean } from 'react-hanger/array';
 import { AnyDataInterface } from '../../types/Data';
 import Icon from './Icon';
 import { backendUrl } from '../../appConstants';
+import { SvgCssUri } from 'react-native-svg/css';
 
 const styles = StyleSheet.create({
   container: {
@@ -87,7 +88,7 @@ const Card: React.FC<Props> = ({
         <>
           {
             item?.icon 
-            ? <Image source={{ uri: `${backendUrl}/${item?.icon?.public_file_path}` }} style={styles.icon_image}/>
+            ? <SvgCssUri style={styles.icon_image} uri={`${backendUrl}/${item?.icon?.public_file_path}`} />
             : !hasThumbnail
               ? <Icon style={styles.icon} color={colors.darkGray} name={iconName} />
               : <Thumbnail documentId={item.id} />

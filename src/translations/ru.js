@@ -109,6 +109,7 @@ export default {
   new_note: 'Новая заметка',
   new_password: 'новый пароль',
   no_beneficiary_found: 'Получатель не найден',
+  no_email: "Нет электронной почты",
   no: 'нет',
   note: 'заметка',
   notes: 'заметки',

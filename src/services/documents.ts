@@ -8,6 +8,7 @@ import { handleError } from './errors';
 import { checkNetworkConnection } from './networking';
 import { buildAuthenticatedUrlv2, makeRequestv2 } from './requests';
 import t from './translation';
+import { FolderIconInterface } from '../types/Folder';
 
 export const addDocumentsToFormData = (data: any, documents: Partial<ImageInterface & File>[]): FormData => {
   documents.forEach(document => {
@@ -119,10 +120,15 @@ export const findFolderDocuments = (documents: DocumentInterface[], folderId: nu
   return folder.documents;
 };
 
-export const renameItem = async (document: DocumentInterface, name: string) => {
+export const renameItem = async (document: DocumentInterface, name: string, icon?: FolderIconInterface) => {
   try {
-    const url = `/${document.is_folder ? 'folders' : 'documents'}/${document.id}/name`;
-    const response = await makeRequestv2(url, 'PATCH', { name });
+    const url = `/${document.is_folder ? 'folders' : 'documents'}/${document.id}`;
+    const body:Record<string, any> = { name };
+    if (icon && icon.id) {
+      body.icon_id = icon.id;
+    }
+
+    const response = await makeRequestv2(url, 'PATCH', body);
 
     return response;
   } catch (error: any) {

@@ -120,7 +120,6 @@ export const useUpdateData = (
 interface DeleteDataInformation {
   isDeleting: boolean;
   deleteItem: (goBackAfter?: boolean) => Promise<void>;
-  hasBeenDeleted: boolean;
 }
 
 export const useDeleteData = (
@@ -131,7 +130,6 @@ export const useDeleteData = (
   const [isDeleting, actions] = useBoolean(false);
   const { list, setList } = React.useContext(context);
   const navigation = useNavigation<any>();
-  const [hasBeenDeleted, actionDelete] = useBoolean(false);
 
   const deleteItem = React.useCallback(
     async (goBackAfter?: boolean) => {
@@ -149,7 +147,6 @@ export const useDeleteData = (
                 setList(list.filter((item: DataInterface) => item.id !== itemId));
               }
               actions.setFalse();
-              actionDelete.setTrue();
               if (goBackAfter && goBackAfter === true) {
                 navigation.goBack();
               }
@@ -164,7 +161,7 @@ export const useDeleteData = (
     },
     [setList, actions, endpoint, list, itemId, navigation],
   );
-  return { isDeleting, deleteItem, hasBeenDeleted };
+  return { isDeleting, deleteItem };
 };
 
 interface PatchDataInformation {

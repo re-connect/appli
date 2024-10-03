@@ -112,6 +112,7 @@ export default {
   new_note: 'Nova nota',
   new_password: 'Nova senha',
   no_beneficiary_found: 'Nao foi encontrado nenhum beneficiário',
+  no_email: "Sem e-mail",
   no: 'Não',
   note: 'Nota',
   notes: 'Notas',

@@ -111,6 +111,7 @@ export default {
   new_note: 'نوې یادونه',
   new_password: 'نوئ پټ نوم',
   no_beneficiary_found: 'ګټه اخیستونکی ونه موندل شو',
+  no_email: "بریښنالیک نشته",
   no: 'نه',
   note: 'یادونه',
   notes: 'یادونې',

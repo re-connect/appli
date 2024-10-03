@@ -108,6 +108,7 @@ export default {
   new_note: 'ملاحظة جديدة',
   new_password: 'كلمة سر جديدة',
   no_beneficiary_found: 'لم يتم العثورعلى مستفيد',
+  no_email: "لا يوجد بريد إلكتروني",
   no: 'لا',
   note: 'ملاحظة',
   notes: 'ملاحظات',

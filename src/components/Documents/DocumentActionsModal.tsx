@@ -10,7 +10,6 @@ import ActionsModalContent from './Components/ActionsModalContent';
 import PickFolder from './Components/PickFolder';
 import Rename from './Components/Rename';
 import SendByEmailForm from './SendByEmailForm';
-// import ReactNativeBlobUtil from 'react-native-blob-util';
 
 interface Props {
   document: DocumentInterface;
@@ -21,16 +20,13 @@ const DocumentActionsModal: React.FC<Props> = ({ document, close }) => {
   const { documentUrl } = useShowDocument(document.id);
   const [pickingFolder, pickingFolderActions] = useBoolean(false);
   const [showSendEmailForm, showSendEmailFormActions] = useBoolean(false);
-  const { triggerRenameDocument, showForm, showFormActions, isUpdating, hasBeenRenamed } = useRenameItem(document);
+  const { triggerRename, showForm, showFormActions, isUpdating } = useRenameItem(document);
   const itemEndpoint = document.is_folder ? `folders/${document.id}` : `documents/${document.id}`;
   const itemContext = document.is_folder ? FolderContext : DocumentContext;
-  const { deleteItem, isDeleting, hasBeenDeleted } = useDeleteData(itemContext, itemEndpoint, document.id);
-  const { isMovingOut, triggerMoveDocumentOutOfFolder, hasBeenMoved } = useMoveDocumentOutOfFolder(document);
+  const { deleteItem, isDeleting } = useDeleteData(itemContext, itemEndpoint, document.id);
+  const { isMovingOut, triggerMoveDocumentOutOfFolder } = useMoveDocumentOutOfFolder(document);
+
   const isLoading = isMovingOut || isUpdating || isDeleting;
-
-  const needToCloseModal = hasBeenDeleted || hasBeenMoved || hasBeenRenamed;
-
-  needToCloseModal && close();
 
   const actions = {
     delete: deleteItem,
@@ -50,14 +46,7 @@ const DocumentActionsModal: React.FC<Props> = ({ document, close }) => {
   }
 
   if (showForm) {
-    return (
-      <Rename
-        close={showFormActions.setFalse}
-        closeModal={close}
-        onSubmit={triggerRenameDocument}
-        document={document}
-      />
-    );
+    return <Rename close={showFormActions.setFalse} closeModal={close} onSubmit={triggerRename} document={document} />;
   }
 
   if (pickingFolder) {

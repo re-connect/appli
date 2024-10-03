@@ -114,6 +114,7 @@ export default {
   new_password: 'Nouveau mot de passe',
   no_beneficiary_found: 'Aucun bénéficiaire trouvé',
   no: 'Non',
+  no_email: "Pas d'email",
   note: 'Note',
   notes: 'Notes',
   open: 'Ouvrir',
