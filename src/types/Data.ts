@@ -43,6 +43,7 @@ export interface AnyDataInterface extends DataInterface {
     id?: number;
   };
   icon_id?: number;
+  icon_file_path?: string;
   icon?: FolderIconInterface;
 }
 

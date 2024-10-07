@@ -2,6 +2,7 @@ export default {
   'user.email': 'ኢሜይል ',
   'user.telephone': 'ስልኪ ',
   accept: 'ተቐበል ',
+  actions: 'እተወትሉ',
   answer_required: 'መልስ ',
   arabic: 'ዓረብ',
   association: 'ማሕበር ',

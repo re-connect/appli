@@ -87,8 +87,11 @@ const Card: React.FC<Props> = ({
       ) : (
         <>
           {
-            item?.icon 
-            ? <SvgCssUri style={styles.icon_image} uri={`${backendUrl}/${item?.icon?.public_file_path}`} />
+            item?.icon_file_path 
+            ? <SvgCssUri
+              style={styles.icon_image}
+              uri={`${backendUrl}/${item?.icon_file_path}`}
+            />
             : !hasThumbnail
               ? <Icon style={styles.icon} color={colors.darkGray} name={iconName} />
               : <Thumbnail documentId={item.id} />

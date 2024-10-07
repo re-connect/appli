@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   container: { justifyContent: 'flex-start', alignItems: 'stretch', flex: 1 },
   dateText: { fontSize: 14 },
   icon: { fontSize: 20, marginHorizontal: 16 },
+  addIcon: { position: 'absolute', right: 5, bottom: 5, zIndex: 1 },
 });
 
 type Props = {
@@ -64,7 +65,7 @@ const EventsScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Screen>
       <View style={styles.container}>
-        <View style={{ position: 'absolute', right: 5, bottom: 5, zIndex: 1 }}>
+        <View style={styles.addIcon}>
           <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateEvent')} />
         </View>
         <List

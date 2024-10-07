@@ -10,6 +10,7 @@ import { DocumentInterface } from '../../types/Documents';
 import List from '../UI/List';
 import DocumentCardActions from './DocumentCardActions';
 import { UseBooleanActions, useBoolean } from 'react-hanger/array';
+import DocumentActionsModal from './DocumentActionsModal';
 
 export interface DocumentsListWrapperProps {
   folderId?: number;
@@ -54,23 +55,21 @@ const DocumentsListWrapper: React.FC<DocumentsListWrapperProps> = ({ folderId })
 
   const onPress = (item: AnyDataInterface) => openItem(item);
 
-  return (
-    <List
-      currentDocument={currentDocument}
-      isModalOpen={isModalOpen}
-      openModalActions={openModalActions}
-      data={list}
-      onItemPress={onPress}
-      isFetchingData={isFetching}
-      triggerFetchData={fetchDocumentsAndFolders}
-      hasThumbnail
-      getName={getDocumentName}
-      getItemRightComponent={(item: AnyDataInterface) => getRightComponent(item, setCurrentDocument, openModalActions)}
-      getDataContext={getDataContext}
-      getLeftActionEndpoint={getEndpoint}
-      getRightActionEndpoint={getEndpoint}
-    />
-  );
+  return <>
+      <DocumentActionsModal visible={isModalOpen} setVisible={openModalActions.setValue} document={currentDocument} />
+      <List
+        data={list}
+        onItemPress={onPress}
+        isFetchingData={isFetching}
+        triggerFetchData={fetchDocumentsAndFolders}
+        hasThumbnail
+        getName={getDocumentName}
+        getItemRightComponent={(item: AnyDataInterface) => getRightComponent(item, setCurrentDocument, openModalActions)}
+        getDataContext={getDataContext}
+        getLeftActionEndpoint={getEndpoint}
+        getRightActionEndpoint={getEndpoint}
+      />
+    </>
 };
 
 export default DocumentsListWrapper;

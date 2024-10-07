@@ -2,6 +2,7 @@ export default {
   'user.email': 'آدرس ایمیل',
   'user.telephone': 'شماره تیلفون',
   accept: 'قبول کردن',
+  actions: 'اقدامات',
   answer_required: 'جواب *',
   arabic: 'عربی',
   association: 'انجمن',

@@ -2,6 +2,7 @@ export default {
   'user.email': 'Email',
   'user.telephone': 'Téléphone',
   accept: 'Accepter',
+  actions: 'Actions',
   answer_required: 'Réponse *',
   arabic: 'Arabe',
   association: 'Association',

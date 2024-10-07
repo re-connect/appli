@@ -5,14 +5,13 @@ export type FolderScreenProps = {
   route: RouteProp<{ Folder: FolderScreenParams }, 'Folder'>;
 };
 
-type DocumentScreenParams = { id: number };
-export type DocumentScreenProps = {
-  route: RouteProp<{ Document: DocumentScreenParams }, 'Document'>;
+type FullScreenImageScreenParams = { id: number };
+export type FullScreenImageScreenProps = {
+  route: RouteProp<{ Document: FullScreenImageScreenParams }, 'Document'>;
   navigation: NavigationProp<any>;
 };
 
 export type DocumentStackParamList = {
   DocumentsList: {};
-  Document: DocumentScreenParams;
   Folder: FolderScreenParams;
 };

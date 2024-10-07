@@ -29,24 +29,23 @@ const styles = StyleSheet.create({
 });
 
 
-const FolderIconPicker: React.FC<{ icons: Array<FolderIconInterface>, selectedIcon: FolderIconInterface, pickIcon: (icon?: FolderIconInterface) => void }> = ({ icons, selectedIcon, pickIcon }) => {
+const FolderIconPicker: React.FC<{ icons: Array<FolderIconInterface>, selectedIcon?: FolderIconInterface, pickIcon: (icon?: FolderIconInterface) => void }> = ({ icons, selectedIcon, pickIcon }) => {
   if (icons.length === 0) return null;
 
   return (
     <View style={styles.iconsContainer}>
       {icons.map((icon: FolderIconInterface) => {
-        const isSelected = selectedIcon.id === icon.id;
+        const isSelected = selectedIcon && selectedIcon.id === icon.id;
 
-        return ( <TouchableOpacity
+        return <TouchableOpacity
           style={[styles.iconContainer, isSelected && styles.selectedIconContainer]}
           key={icon.name}
           onPress={() => pickIcon(isSelected ? null : icon)}
           >
             <Text style={[isSelected && styles.selectedIconText]}>{icon.name}</Text>
             <SvgCssUri style={styles.icon} uri={`${backendUrl}/${icon.url}`} />
-          </TouchableOpacity>
-        )}
-      )}
+        </TouchableOpacity>
+      })}
       <TouchableOpacity style={styles.iconContainer} onPress={() => pickIcon(null)} >
         <Icon name='xmark' style={styles.clearIcon} />
       </TouchableOpacity>
