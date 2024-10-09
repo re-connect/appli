@@ -140,7 +140,7 @@ export const useEnableBeneficiary = () => {
 
         const updatedBeneficiary = await makeRequestv2('/beneficiary/enable', 'PATCH', data);
         if (updatedBeneficiary) {
-          navigation.navigate('Home');
+          navigation.reset({ routes: [{ name: 'Home' }] });
         }
         isCreatingActions.setFalse();
       } catch (error) {

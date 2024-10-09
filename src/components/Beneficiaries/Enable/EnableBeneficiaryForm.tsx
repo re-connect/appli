@@ -79,9 +79,7 @@ const EnableBeneficiaryForm: React.FC = () => {
                   autocompleteType="off"
                 />
               )}
-              <Separator height={6} />
-              <RoundedButton text='confirm' onPress={() => props.handleSubmit()} isLoading={isCreating} />
-              <Separator height={6} />
+              <RoundedButton text='confirm' onPress={() => props.handleSubmit()} isLoading={isCreating} disabled={!props.isValid} />
             </View>
           );
         }}
