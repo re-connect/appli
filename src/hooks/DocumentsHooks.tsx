@@ -155,15 +155,14 @@ export const useOpenItem = () => {
       if (!item) {
         return;
       }
+
       if (item.is_folder && item.beneficiaire) {
         navigation.push('Folder', {
           folderId: item.id,
           beneficiaryId: item.beneficiaire.id,
         });
       } else {
-        navigation.push('Document', {
-          id: item.id,
-        });
+        navigation.push('Image', {id: item.id});
       }
     },
     [navigation],
@@ -176,28 +175,24 @@ export const useRenameItem = (item: DocumentInterface | FolderInterface) => {
   const { list: documentsList, setList: setDocumentsList } = React.useContext(DocumentContext);
   const { list: foldersList, setList: setFoldersList } = React.useContext(FolderContext);
   const [showForm, showFormActions] = useBooleanArray(false);
-  const [isUpdating, isUpdatingActions] = useBooleanArray(false);
 
   const triggerRename = async (name: string, icon?: FolderIconInterface): Promise<void> => {
     try {
-      isUpdatingActions.setTrue();
       const renamedItem = await renameItem(item, name, icon);
       if (renamedItem) {
         if (item.is_folder) {
-          setFoldersList(updateDatumInList(foldersList, item.id, { ...item, nom: name, icon: renamedItem?.icon }));
+          setFoldersList(updateDatumInList(foldersList, item.id, { ...item, nom: name, icon_file_path: renamedItem?.icon_file_path }));
         } else {
           setDocumentsList(updateDatumInList(documentsList, item.id, { ...item, nom: name }));
         }
       }
-      isUpdatingActions.setFalse();
       showFormActions.setFalse();
     } catch {
       Alert.alert(t.t('error_renaming_document'));
-      isUpdatingActions.setFalse();
     }
   };
 
-  return { triggerRename, showForm, showFormActions, isUpdating };
+  return { triggerRename, showForm, showFormActions};
 };
 
 export const useMoveDocumentInFolder = () => {
@@ -230,11 +225,9 @@ export const useMoveDocumentInFolder = () => {
 export const useMoveDocumentOutOfFolder = (document: DocumentInterface) => {
   const { list, setList } = React.useContext(DocumentContext);
   const navigation = useNavigation<any>();
-  const [isMovingOut, setIsMovingOut] = React.useState<boolean>(false);
 
   const triggerMoveDocumentOutOfFolder = async () => {
     try {
-      setIsMovingOut(true);
       const folderId = document.folder_id;
       if (folderId) {
         const newDocument = await makeRequestv2(`/documents/${document.id}/get-out-from-folder`, 'PATCH');
@@ -243,16 +236,14 @@ export const useMoveDocumentOutOfFolder = (document: DocumentInterface) => {
             return document.id === newDocument.id ? newDocument : document;
           }),
         ]);
-        setIsMovingOut(false);
       }
       navigation.goBack();
     } catch {
-      setIsMovingOut(false);
       alert('error_generic');
     }
   };
 
-  return { isMovingOut, triggerMoveDocumentOutOfFolder };
+  return { triggerMoveDocumentOutOfFolder };
 };
 
 export const useSendDocumentByEmail = (document: DocumentInterface) => {

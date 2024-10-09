@@ -124,10 +124,12 @@ export const renameItem = async (document: DocumentInterface, name: string, icon
   try {
     const url = `/${document.is_folder ? 'folders' : 'documents'}/${document.id}`;
     const body:Record<string, any> = { name };
-    if (icon && icon.id) {
-      body.icon_id = icon.id;
+    if (icon !== undefined) {
+      body.icon_id = icon?.id ?? null;
     }
-
+    if (body.name && !body.nom) {
+      body.nom = body.name;
+    }
     const response = await makeRequestv2(url, 'PATCH', body);
 
     return response;

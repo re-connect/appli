@@ -13,14 +13,6 @@ import { FolderIconInterface } from '../../../types/Folder';
 import ItemModal from './ItemModal';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-    backgroundColor: colors.darkGrayTransparent,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-  },
   wrapper: {
     backgroundColor: 'white',
     padding: 15,
@@ -62,7 +54,6 @@ const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => {
   const { icons } = React.useContext(FolderContext);
 
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={1} onPress={closeModal}>
       <Formik.Formik
         onSubmit={(values: Record<'name', string>) => {
           onSubmit(values.name, selectedIcon);
@@ -90,7 +81,6 @@ const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => {
           );
         }}
       </Formik.Formik>
-    </TouchableOpacity>
   );
 }
 

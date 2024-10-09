@@ -2,6 +2,7 @@ export default {
   'user.email': 'електрона пошта',
   'user.telephone': 'Телефон',
   accept: 'Підтвердити',
+  actions: 'Дії',
   answer_required: 'Відповідь',
   arabic: 'Арабська',
   association: 'Організвція',

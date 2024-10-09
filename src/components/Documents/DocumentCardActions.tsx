@@ -6,12 +6,7 @@ import { UseBooleanActions } from 'react-hanger/array';
 import Icon from '../UI/Icon';
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 60,
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  icon: {width: 60, height: 80, justifyContent: 'center', alignItems: 'center' },
 });
 
 interface DocumentCardActionsProps {

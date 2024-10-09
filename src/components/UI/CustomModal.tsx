@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Modal, StyleSheet, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import { colors } from '../../style';
 import Icon from './Icon';
 
@@ -9,12 +9,17 @@ const CustomModal: React.FC<{
   title: string;
   content: React.ReactNode;
 }> = ({ title, content, visible, setVisible }) => {
-  const closeModal = () => setVisible(false);
+  const closeModal = () => {
+    if (setVisible) {
+      setVisible(false);
+    }
+  }
+
   return (
     <>
-      {visible && <View style={styles.opacityWrapper} />}
+      {visible && <TouchableOpacity style={styles.opacityWrapper}/>}
       <Modal visible={visible} onRequestClose={closeModal} animationType='slide' transparent>
-        <ModalContainer header={<ModalHeaderTitle title={title} closeModal={closeModal} />}>{content}</ModalContainer>
+        <ModalContainer close={closeModal} header={<ModalHeaderTitle title={title} closeModal={closeModal} />}>{content}</ModalContainer>
       </Modal>
     </>
   );
@@ -28,14 +33,15 @@ export interface TitleModalProps {
 type ModalContainerProps = {
   header?: React.ReactNode;
   children?: React.ReactNode;
+  close: () => void;
 };
 
-export const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({ header, children }) => {
+export const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({ header, children, close }) => {
   const marginInPx = 10;
   return (
-    <View style={{ flex: 1 }}>
+    <TouchableOpacity style={{ flex: 1 }} onPress={() => close()} activeOpacity={1}>
       <View style={[styles.centeredView]}>
-        <View style={styles.modalView}>
+        <TouchableOpacity style={styles.modalView} onPress={() => {}} activeOpacity={1}>
           {header}
           <ScrollView
             style={{
@@ -46,9 +52,9 @@ export const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({ h
             }}>
             {children}
           </ScrollView>
-        </View>
+        </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

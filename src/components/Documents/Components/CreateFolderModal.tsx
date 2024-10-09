@@ -30,7 +30,7 @@ const CreateFolderModal: React.FC<{ show: UseBoolean, folderId?: number }> = ({ 
         <>
           <TextField fieldLabel='name' handleChange={setInput} iconName='tag' okIcon value={input} />
           <FolderIconPicker icons={icons} selectedIcon={selectedIcon} pickIcon={setSelectedIcon} />
-          <ItemModal iconName='plus' label='create' onPress={() => createFolder()} />
+          <ItemModal iconName='plus' label='create' onPress={() => createFolder()} disabled={!input} />
         </>
       }
     />

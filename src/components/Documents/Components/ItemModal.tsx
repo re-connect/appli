@@ -3,10 +3,17 @@ import { StyleSheet, View } from 'react-native';
 import RoundedButton from '../../UI/RoundedButton';
 import t from '../../../services/translation';
 
-const ItemModal: React.FC<{ label: string; onPress: () => void; iconName: string }> = ({
+const styles = StyleSheet.create({
+  wrapper: { marginTop: 10 },
+  button: { paddingHorizontal: 30, alignContent: 'center' },
+  text: { textAlign: 'center' },
+});
+
+const ItemModal: React.FC<{ label: string; onPress: () => void; iconName: string; disabled?: boolean }> = ({
   label,
   onPress,
   iconName,
+  disabled,
 }) => {
   return (
     <View style={styles.wrapper}>
@@ -14,6 +21,7 @@ const ItemModal: React.FC<{ label: string; onPress: () => void; iconName: string
         text={t.t(label)}
         onPress={onPress}
         iconName={iconName}
+        disabled={disabled ?? false}
         fontSize={16}
         wrapperStyle={styles.button}
         textStyle={styles.text}
@@ -21,18 +29,5 @@ const ItemModal: React.FC<{ label: string; onPress: () => void; iconName: string
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    marginTop: 10,
-  },
-  button: {
-    paddingHorizontal: 30,
-    alignContent: 'center',
-  },
-  text: {
-    textAlign: 'center',
-  },
-});
 
 export default ItemModal;

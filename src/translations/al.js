@@ -2,6 +2,7 @@ export default {
   'user.email': 'E-mail',
   'user.telephone': 'Numri i telefonit',
   accept: 'Pranoj',
+  actions: 'Veprime',
   answer_required: 'Përgjigje',
   arabic: 'Arabisht',
   association: 'Shoqatë',

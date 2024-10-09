@@ -2,6 +2,7 @@ export default {
   'user.email': 'بریښنالیک',
   'user.telephone': 'تلیفون',
   accept: 'منل',
+  actions: 'کړنې',
   answer_required: 'ځواب *',
   arabic: 'عرب',
   association: 'انجمن',

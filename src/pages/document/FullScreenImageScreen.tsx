@@ -1,42 +1,38 @@
-import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { Animated, Dimensions, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { PanGestureHandler, PinchGestureHandler } from 'react-native-gesture-handler';
-import Icon from '../../components/UI/Icon';
-import { colors } from '../../style';
-const { height } = Dimensions.get('window');
+import { Animated, View } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { FullScreenImageScreenProps } from '../../routing/routes/types/Document';
+import DocumentContext from '../../context/DocumentContext';
+import { findNestedDocument } from '../../helpers/documentsHelper';
+import FullScreenImage from '../../components/Documents/FullScreenImage';
+import PdfComponent from '../../components/UI/Pdf';
+import FullScreenImageActions from '../../components/Documents/Components/FullScreenImageActions';
 
-const styles = StyleSheet.create({
-  closeButton: {
-    position: 'absolute',
-    top: 40,
-    right: 20,
-    zIndex: 1,
-    borderColor: colors.black,
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 0,
-  },
-});
+const FullScreenImageScreen: React.FC<FullScreenImageScreenProps> = ({ route }) => {
+  const { id } = route.params;
+  const { list } = React.useContext(DocumentContext);
+  const document = findNestedDocument(!list ? [] : list, id);
 
-const FullScreenImageScreen = ({ route }: any) => {
-  const { uri } = route.params;
-  const { goBack } = useNavigation();
-
-  const scale = React.useRef(new Animated.Value(1)).current;
-  const translateX = React.useRef(new Animated.Value(0)).current;
-  const translateY = React.useRef(new Animated.Value(0)).current;
+  const xValue = new Animated.Value(0);
+  xValue.addListener(() => {return});
+  const yValue = new Animated.Value(0);
+  yValue.addListener(() => {return});
+  const translateX = React.useRef(xValue).current;
+  const translateY = React.useRef(yValue).current;
   const panref = React.useRef(null);
   const pinchref = React.useRef(null);
+  const onPanEvent = Animated.event([{ nativeEvent: { translationX: translateX, translationY: translateY } }], { useNativeDriver: true });
 
-  const onPanEvent = Animated.event([{ 
-    nativeEvent: { translationX: translateX, translationY: translateY } }],
-    { useNativeDriver: true }
-  );
-  const onPinchEvent = Animated.event([{ nativeEvent: { scale } }],
-    { useNativeDriver: true }
-  );
+  if (!document) {
+    return null;
+  }
+
+  if (document.extension === 'pdf') {
+    return <View style={{ flex: 1 }}>
+      <FullScreenImageActions document={document} />
+      {document.url && <PdfComponent uri={document.url} />}
+    </View>
+  }
 
   return (
     <PanGestureHandler
@@ -47,24 +43,8 @@ const FullScreenImageScreen = ({ route }: any) => {
       shouldCancelWhenOutside      
     >
       <Animated.View>
-        <TouchableOpacity style={styles.closeButton} onPress={() => goBack()}>
-          <Icon color={colors.black} name='x' />
-        </TouchableOpacity>
-        <PinchGestureHandler
-          ref={pinchref}
-          onGestureEvent={onPinchEvent}
-          simultaneousHandlers={[panref]}
-          onHandlerStateChange={onPinchEvent}
-        >
-          <Animated.Image
-            style={{
-              height: height,
-              resizeMode: 'contain',
-              transform: [{ scale }, { translateX }, { translateY }]
-            }}
-            source={{ uri }} 
-            />
-        </PinchGestureHandler>
+        <FullScreenImageActions document={document} />
+        <FullScreenImage document={document} pinchref={pinchref} panref={panref} translateX={translateX} translateY={translateY} />
       </Animated.View>
     </PanGestureHandler>
 
