@@ -8,10 +8,15 @@ import ListHiddenItem from './ListHiddenItem';
 import SearchBar from './SearchBar';
 import Separator from './Separator';
 import { UseBooleanActions } from 'react-hanger/array';
+import UserContext from '../../context/UserContext';
+import { isPro } from '../../helpers/userHelpers';
+import FolderContext from '../../context/FolderContext';
+import { hasPrivateParent } from '../../helpers/documentsHelper';
 
 type DataCardInterface = { item: AnyDataInterface };
 
 interface Props {
+  currentFolderId: number;
   data: AnyDataInterface[];
   getDataContext: (item?: AnyDataInterface) => React.Context<ListContextInterface<any>>;
   getItemRightComponent?: (item: AnyDataInterface) => React.FC;
@@ -30,6 +35,7 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({
+  currentFolderId,
   data,
   getDataContext,
   getItemRightComponent,
@@ -43,10 +49,18 @@ const List: React.FC<Props> = ({
   getRightActionEndpoint,
   triggerFetchData,
 }) => {
+  const { user } = React.useContext(UserContext);
   const [search, setSearch] = React.useState<string>('');
+  const { list: folders } = React.useContext(FolderContext);
   const filteredData = data.filter((datum: AnyDataInterface) =>
     JSON.stringify(datum).toLowerCase().includes(search.toLowerCase()),
   );
+
+  const firstDatum = data.length > 0 ? data[0] : null;
+  const isDocumentsList = firstDatum && ['documents', 'folders'].includes(getLeftActionEndpoint(firstDatum));
+  
+  const disableLeftSwipe = isDocumentsList && isPro(user);
+  const disableRightSwipe = isDocumentsList && (hasPrivateParent(folders, currentFolderId));
 
   return (
     <>
@@ -79,6 +93,8 @@ const List: React.FC<Props> = ({
             getDataContext={getDataContext}
           />
         )}
+        disableRightSwipe={disableRightSwipe}
+        disableLeftSwipe={disableLeftSwipe}
         leftOpenValue={75}
         rightOpenValue={-75}
         ListFooterComponent={() => <Separator height={6} />}

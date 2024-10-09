@@ -68,14 +68,24 @@ export const updateDocumentInList = (list: DocumentInterface[], document: Docume
 export const findFolder = (list: FolderInterface[], id: number) =>
   list.find((document: FolderInterface) => !!document.is_folder && document.id === id);
 
-export const hasPrivateParent = (list: FolderInterface[], itemId: number): boolean => {
+export const isParentFolderPrivate = (list: FolderInterface[], itemId: number): boolean => {
   const parent = findFolder(list, itemId);
-  if (!parent) {
+
+  return parent && parent.b_prive;
+}
+
+export const hasPrivateParent = (list: FolderInterface[], folderId?: number): boolean => {
+  if (!folderId) {
     return false;
   }
 
-  return parent.b_prive || (parent?.dossier_parent?.id && hasPrivateParent(list, parent?.dossier_parent?.id));
+  const folder = findFolder(list, folderId);
+  if (!folder) {
+    return false;
+  }
 
+  return isParentFolderPrivate(list, folderId)
+    || (folder?.dossier_parent?.id && isParentFolderPrivate(list, folder?.dossier_parent?.id));
 }
 
 export const isPrivate = (list: DocumentInterface[], document: DocumentInterface): boolean =>

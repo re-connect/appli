@@ -12,16 +12,10 @@ const styles = StyleSheet.create({
 
 interface Props {
   document: DocumentInterface;
-  actions: {
-    pickFolder: () => void;
-    delete: () => void;
-    view: () => void;
-    moveOut: () => void;
-    showRenameForm: () => void;
-    showSendEmailForm: () => void;
-  };
+  actions: ActionItemProps[]
 }
-interface ActionItemProps {
+
+export interface ActionItemProps {
   action: () => void;
   color?: string;
   label: string;
@@ -39,24 +33,12 @@ const ActionItem: React.FC<ActionItemProps> = ({ action, label, icon, color = co
     </TouchableOpacity>
   );
 
-const ActionsModalContent: React.FC<Props> = ({ document, actions }) => {
-  const items: ActionItemProps[] = [
-    { action: actions.showSendEmailForm, label: 'send_by_email', icon: 'paper-plane', condition: !document.is_folder },
-    { action: actions.pickFolder, label: 'move_to_folder', icon: 'folder', condition: !document.is_folder },
-    { action: actions.moveOut, label: 'move_out_of_folder', icon: 'folder', condition: !!document.folder_id },
-    { action: actions.showRenameForm, color: colors.green, label: 'rename', icon: 'pen' },
-    { action: actions.delete, color: colors.red, label: 'delete', icon: 'trash' },
-  ];
-
-  if (!document.is_folder) {
-    items.push({ action: actions.view, color: colors.yellow, label: 'Download', icon: 'download' });
-  }
-
-  return <View>
-    {items.map(({ action, color, label, icon, condition }) => (
+const ActionsModalContent: React.FC<Props> = ({ document, actions }) => (
+  <View>
+    {actions.map(({ action, color, label, icon, condition }) => (
       <ActionItem action={action} color={color} label={label} icon={icon} condition={condition} key={label} />
     ))}
-  </View>;
-};
+  </View>
+);
 
 export default ActionsModalContent;
