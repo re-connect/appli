@@ -59,6 +59,7 @@ const DocumentsListWrapper: React.FC<DocumentsListWrapperProps> = ({ folderId })
       <DocumentActionsModal visible={isModalOpen} setVisible={openModalActions.setValue} document={currentDocument} />
       <List
         data={list}
+        currentFolderId={folderId}
         onItemPress={onPress}
         isFetchingData={isFetching}
         triggerFetchData={fetchDocumentsAndFolders}

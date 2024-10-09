@@ -6,11 +6,14 @@ import FolderContext from '../../context/FolderContext';
 import { useDeleteData } from '../../hooks/DataHooks';
 import { useMoveDocumentOutOfFolder, useRenameItem, useShowDocument } from '../../hooks/DocumentsHooks';
 import { DocumentInterface } from '../../types/Documents';
-import ActionsModalContent from './Components/ActionsModalContent';
+import ActionsModalContent, { ActionItemProps } from './Components/ActionsModalContent';
 import PickFolder from './Components/PickFolder';
 import Rename from './Components/Rename';
 import SendByEmailForm from './SendByEmailForm';
 import { FolderIconInterface } from '../../types/Folder';
+import UserContext from '../../context/UserContext';
+import { isPro } from '../../helpers/userHelpers';
+import { colors } from '../../style';
 
 interface Props {
   document: DocumentInterface;
@@ -19,6 +22,7 @@ interface Props {
 
 const DocumentActionsModalContent: React.FC<Props> = ({ document, close }) => {
   const { documentUrl } = useShowDocument(document.id);
+  const { user } = React.useContext(UserContext);
   const [pickingFolder, pickingFolderActions] = useBoolean(false);
   const [showSendEmailForm, showSendEmailFormActions] = useBoolean(false);
   const { triggerRename, showForm, showFormActions } = useRenameItem(document);
@@ -33,26 +37,33 @@ const DocumentActionsModalContent: React.FC<Props> = ({ document, close }) => {
     }
   }
 
-  const actions = {
-    delete: () => {deleteItem(true); cloesModal();},
-    view: () => {},
-    moveOut: triggerMoveDocumentOutOfFolder,
-    pickFolder: pickingFolderActions.setTrue,
-    showRenameForm: showFormActions.setTrue,
-    showSendEmailForm: showSendEmailFormActions.setTrue,
-  };
-
   const renameItem = async (name: string, selectedIcon?: FolderIconInterface) => {
     await triggerRename(name, selectedIcon);
     cloesModal();
   };
 
-  if (showSendEmailForm) {
-    return <SendByEmailForm document={document} close={cloesModal} onSubmit={showSendEmailFormActions.setFalse} />;
-  }
+  const actions: ActionItemProps[] = [
+    { action: showSendEmailFormActions.setTrue, label: 'send_by_email', icon: 'paper-plane', condition: !document.is_folder },
+    { action: pickingFolderActions.setTrue, label: 'move_to_folder', icon: 'folder', condition: !document.is_folder },
+    { action: triggerMoveDocumentOutOfFolder, label: 'move_out_of_folder', icon: 'folder', condition: !!document.folder_id },
+    { action: showFormActions.setTrue, color: colors.green, label: 'rename', icon: 'pen' },
+  ];
 
   if (!document.is_folder) {
-    actions.view = () => Linking.openURL(documentUrl).then(() => cloesModal());
+    actions.push({
+      action: () => Linking.openURL(documentUrl).then(() => cloesModal()),
+      color: colors.yellow,
+      label: 'Download',
+      icon: 'download'
+    });
+  }
+
+  if (!isPro(user)) {
+    actions.push({ action: () => {deleteItem(true); cloesModal()}, color: colors.red, label: 'delete', icon: 'trash' });
+  }
+
+  if (showSendEmailForm) {
+    return <SendByEmailForm document={document} close={cloesModal} onSubmit={showSendEmailFormActions.setFalse} />;
   }
 
   if (showForm) {
