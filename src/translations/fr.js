@@ -103,6 +103,7 @@ export default {
   make_private: 'Passer \n privé',
   make_shared: 'Passer \n partagé',
   mm: 'mm',
+  modify: 'Modifier',
   move_out_of_folder: 'Sortir du dossier',
   move_to_folder: 'Déplacer dans un dossier',
   my_centers: 'Mes centres',

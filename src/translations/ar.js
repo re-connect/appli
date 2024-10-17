@@ -98,6 +98,7 @@ export default {
   make_private: 'جعل \n خاص',
   make_shared: 'جعل \n مشاركة',
   mm: 'mm',
+  modify: 'تعديل',
   move_out_of_folder: 'اخرج من المجلد',
   move_to_folder: 'انتقل إلى المجلد',
   my_centers: 'مراكزي',
