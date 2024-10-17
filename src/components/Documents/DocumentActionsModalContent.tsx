@@ -46,7 +46,7 @@ const DocumentActionsModalContent: React.FC<Props> = ({ document, close }) => {
     { action: showSendEmailFormActions.setTrue, label: 'send_by_email', icon: 'paper-plane', condition: !document.is_folder },
     { action: pickingFolderActions.setTrue, label: 'move_to_folder', icon: 'folder', condition: !document.is_folder },
     { action: triggerMoveDocumentOutOfFolder, label: 'move_out_of_folder', icon: 'folder', condition: !!document.folder_id },
-    { action: showFormActions.setTrue, color: colors.green, label: 'rename', icon: 'pen' },
+    { action: showFormActions.setTrue, color: colors.green, label: document.is_folder ? 'modify' : 'rename', icon: 'pen' },
   ];
 
   if (!document.is_folder) {

@@ -102,6 +102,7 @@ export default {
   make_private: 'Kalo në dritare private',
   make_shared: 'Bëni dhe shpërndani',
   mm: 'mm',
+  modify: 'Modifiko',
   move_out_of_folder: 'Nxirr nga skedari (dosja)',
   move_to_folder: 'Zhvendos ne skedar (dosje)',
   my_centers: 'Qendrat e mia',

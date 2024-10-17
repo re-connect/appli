@@ -98,6 +98,7 @@ export default {
   make_private: 'ወርሒ',
   make_shared: 'ካብ ፎልደር ውፃእ ',
   mm: 'ናብ ፎልደር ኪድ',
+  modify: 'አስተካክል',
   move_out_of_folder: 'ማእኸላታይ',
   move_to_folder: 'መረዳእታይ ',
   my_centers: 'ሽም ',

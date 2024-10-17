@@ -99,6 +99,7 @@ export default {
   make_private: 'Перейти на личный доступ к данным',
   make_shared: 'Поделиться данными с вашей ассоциацией',
   mm: 'мм',
+  modify: 'Изменить',
   move_out_of_folder: 'забрать из папки',
   move_to_folder: 'Переместить в папку',
   my_centers: 'мой центр',

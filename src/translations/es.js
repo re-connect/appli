@@ -97,6 +97,7 @@ export default {
   log_out_confirm: '¿Desconexión?',
   log_out: 'Desconectar.',
   login: 'Login',
+  modify: 'Modificar',
   make_private: 'Hacer /n privado.',
   make_shared: 'Hacer que /n se comparta',
   mm: 'mm',

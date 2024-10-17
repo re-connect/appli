@@ -101,6 +101,7 @@ export default {
   make_private: 'شخصي تيريدل',
   make_shared: 'شريک تيريدل',
   mm: 'mm',
+  modify: 'سمول',
   move_out_of_folder: 'د فایل څخه وتل',
   move_to_folder: 'په فولډر کې ځای بدلول',
   my_centers: 'زما مرکزونه',

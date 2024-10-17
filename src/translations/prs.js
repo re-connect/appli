@@ -98,6 +98,7 @@ export default {
   make_private: 'تغییر به / n خصوصی',
   make_shared: 'تغییر به / n مشترک',
   mm: 'mm',
+  modify: 'ویرایش',
   move_out_of_folder: 'خارج شدن از دوسیه',
   move_to_folder: 'جابجا کردن دوسیه',
   my_centers: 'مراکز من',

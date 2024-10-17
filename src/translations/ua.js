@@ -99,6 +99,7 @@ export default {
   make_private: 'Перейти на приватний',
   make_shared: 'Перейти на загальний',
   mm: 'мм',
+  modify: 'Змінити',
   move_out_of_folder: 'Вийти з папки',
   move_to_folder: 'Перемістити до папки',
   my_centers: 'Мої відділення',

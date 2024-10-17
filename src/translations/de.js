@@ -100,6 +100,7 @@ export default {
   make_private: 'Dokument auf privat umstellen',
   make_shared: 'Dokument freigeben',
   mm: 'mm',
+  modify: 'Ändern',
   move_out_of_folder: 'Ordner schließen',
   move_to_folder: 'Ordner öffnen',
   my_centers: 'Meine Einrichtungen',

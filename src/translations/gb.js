@@ -98,6 +98,7 @@ export default {
   make_private: 'Make \n private',
   make_shared: 'Make \n shared',
   mm: 'mm',
+  modify: 'Modify',
   move_out_of_folder: 'Move out of folder',
   move_to_folder: 'Move to folder',
   my_centers: 'My centers',
