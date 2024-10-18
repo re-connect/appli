@@ -99,6 +99,7 @@ export default {
   make_private: 'Treceti \n privat',
   make_shared: 'Treceti \n partajat',
   mm: 'll',
+  modify: 'Modifica',
   move_out_of_folder: 'Iesiti din dosar',
   move_to_folder: 'Mutati intr-un dosar',
   my_centers: 'Centrele mele sociale',
