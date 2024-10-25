@@ -25,7 +25,7 @@ interface ContactRowProps {
 
 const styles = StyleSheet.create({
   contactsTitle: {fontWeight: 'bold', textDecorationLine: 'underline', marginBottom: 16},
-  contactRow: {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  contactRow: {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' },
   wrapper: { alignItems: 'center' },
   sendButtonRow: { flexDirection: 'row', justifyContent: 'flex-end', alignSelf: 'stretch', marginTop: 20 },    
 });
@@ -68,7 +68,7 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
       return (
         <View style={styles.wrapper}>
           <TouchableOpacity onPress={navigateToContacts}><Text style={styles.contactsTitle}>contacts</Text></TouchableOpacity>
-          {list.map((contact: ContactInterface) => <ContactRow contact={contact} updateEmailInput={() => setFieldValue('email', contact.email)} />)} 
+          <View>{list.map((contact: ContactInterface) => <ContactRow contact={contact} updateEmailInput={() => setFieldValue('email', contact.email)} />)}</View>
           <TextField
             autocompleteType='email'
             contentType='emailAddress'
