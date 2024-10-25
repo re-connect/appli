@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 // @ts-ignore
-import Flag from 'react-native-flags';
-import ArabLeagueFlag from '../../images/arab-league-flag.png';
 import IconButton from '../UI/IconButton';
 import Separator from '../UI/Separator';
 import Text from '../UI/Text';
+import Flag from '../UI/Flag';
 
 const styles = StyleSheet.create({
   item: { flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8, paddingHorizontal: 16 },
@@ -33,11 +32,7 @@ const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.sl
 const Pitch: React.FC<Props> = ({ track, play, pause, stop, isPlaying, isStarted }) => 
   <View style={styles.item}>
     <View style={styles.text}>
-      {track.flag === 'AR' ? (
-        <Image source={ArabLeagueFlag} style={{ top: 6, height: 20, width: 32 }} />
-      ) : (
-        <Flag type='flat' code={track.flag} size={32} />
-      )}
+      <Flag code={track.flag} />
       <Separator width={1} />
       <Text>{capitalize(track.name)}</Text>
     </View>
