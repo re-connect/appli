@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, Modal, StyleSheet, ScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { Dimensions, Keyboard, Modal, StyleSheet, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import { colors } from '../../style';
 import Icon from './Icon';
 
@@ -38,10 +38,22 @@ type ModalContainerProps = {
 
 export const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({ header, children, close }) => {
   const marginInPx = 10;
+  const [keyboardVisible, setKeyboardVisible] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', () => setKeyboardVisible(true));
+    const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardVisible(false));
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={() => close()} activeOpacity={1}>
       <View style={[styles.centeredView]}>
-        <TouchableOpacity style={styles.modalView} onPress={() => {}} activeOpacity={1}>
+        <TouchableOpacity style={{...styles.modalView, height: keyboardVisible ? '95%': 'auto'}} onPress={() => {}} activeOpacity={1}>
           {header}
           <ScrollView
             style={{

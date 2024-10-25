@@ -18,6 +18,10 @@ export default ({ config }) => ({
     },
     versionCode: 100000207,
     package: 'com.reconnect.CloudSolidaire' + process.env.EXPO_PUBLIC_ENV,
-    googleServicesFile: './android/google-services.json'
+    googleServicesFile: './android/google-services.json',
+  },
+  updates: {
+    url: "https://u.expo.dev/a689101c-73a8-4b5a-acf5-ab026524c88c",
+    channel: process.env.EXPO_PUBLIC_ENV,
   },
 });
