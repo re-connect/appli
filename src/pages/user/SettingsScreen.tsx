@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View, FlatList } from 'react-native';
 import Text from '../../components/UI/Text';
 import LanguageSwitch from '../../components/User/LanguageSwitch';
+import { config } from '../../config';
 import UserContext from '../../context/UserContext';
 import { getTruncatedFullName } from '../../helpers/userHelpers';
 import { useLogout } from '../../hooks/UserHooks';
@@ -43,9 +44,12 @@ const SettingsScreen: React.FC = () => {
     { onPress: navigate('PrivacyPolicy'), name: 'user-shield', label: 'privacy' },
     { onPress: navigate('LegalNotices'), name: 'scale-balanced', label: 'legal' },
     { onPress: navigate('Pitches'), name: 'bullhorn', color: colors.yellow, label: 'pitches' },
-    { onPress: navigate('Chat'), name: 'comment', color: colors.blue, label: 'support' },
     { onPress: startLogout, name: 'right-from-bracket', color: colors.red, label: 'log_out' },
   ];
+
+  if (config.env === 'prod') {
+    items.push({ onPress: navigate('Chat'), name: 'comment', color: colors.blue, label: 'support' });
+  }
 
   return (
     <View style={styles.container}>

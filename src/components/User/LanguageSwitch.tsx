@@ -1,20 +1,15 @@
 import * as React from 'react';
 import { useBoolean } from 'react-hanger/array';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // @ts-ignore
-import Flag from 'react-native-flags';
-import ArabLeagueFlag from '../../images/arab-league-flag.png';
 import { colors } from '../../style';
 import { Language, allLanguages } from '../../services/translation';
 import { useUserLocale } from '../../hooks/UserHooks';
 import Icon from '../UI/Icon';
+import Flag from '../UI/Flag';
+import Separator from '../UI/Separator';
 
 const styles = StyleSheet.create({
-  bitmapFlag: {
-    height: 20,
-    top: 6,
-    width: 32,
-  },
   container: {
     flexDirection: 'column',
     backgroundColor: colors.white,
@@ -27,11 +22,12 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     marginRight: 4,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   languageCodeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    marginLeft: 16,
     width: 100,
   },
   languageCode: {
@@ -48,11 +44,7 @@ const LanguageSwitch: React.FC = () => {
   return (
     <TouchableOpacity style={styles.container} onPress={openActions.toggle}>
       <TouchableOpacity style={styles.flag} onPress={openActions.toggle}>
-        {currentLanguageCode === 'ar' ? (
-          <Image source={ArabLeagueFlag} style={styles.bitmapFlag} />
-        ) : (
-          <Flag type='flat' code={currentLanguage?.flag} size={32} />
-        )}
+        <Flag code={currentLanguage?.flag ?? null} />
         <View style={styles.languageCodeContainer}>
           <Text style={styles.languageCode}>{currentLanguage?.name}</Text>
           <Icon name={`chevron-${open ? 'up' : 'down'}`} color={colors.darkGray} size={16} />
@@ -73,11 +65,7 @@ const LanguageSwitch: React.FC = () => {
                   updateLocale(code);
                   openActions.setFalse();
                 }}>
-                {code === 'ar' ? (
-                  <Image source={ArabLeagueFlag} style={styles.bitmapFlag} />
-                ) : (
-                  <Flag type='flat' code={flag} size={32} />
-                )}
+                <Flag code={flag} />
                 <View style={styles.languageCodeContainer}>
                   <Text style={styles.languageCode}>{name}</Text>
                 </View>

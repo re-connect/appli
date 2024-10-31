@@ -43,12 +43,14 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
       <View style={styles.languageSwitchContainer}>
         <LanguageSwitch />
       </View>
-      <ChatButton />
+      {config.env === 'prod' && <ChatButton />}
       <View style={styles.versionsContainer}>
         <Text>{DeviceInfo.getVersion()}</Text>
-        {/* <Text>{environments && config.env}</Text>
-        <Text>{backendUrl}</Text>
-        <Text>{DeviceInfo.getBundleId()}</Text> */}
+        {config.env !== 'prod' && <>
+          <Text>{environments && config.env}</Text>
+          <Text>{backendUrl}</Text>
+          <Text>{DeviceInfo.getBundleId()}</Text>
+        </>}
       </View>
     </Screen>
   );
