@@ -88,12 +88,12 @@ android {
         applicationId 'com.reconnect.CloudSolidaire.debug'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 100000207
-        versionName "1.0.207"
+        versionCode 100000208
+        versionName "1.0.208"
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore') 
+            storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
