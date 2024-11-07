@@ -5,11 +5,6 @@ dotenv.config();
 
 export default ({ config }) => ({
   ...config,
-  ios: {
-    infoPlist: { 
-      UIBackgroundModes: ['audio']
-    }
-  },
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',

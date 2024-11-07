@@ -60,10 +60,6 @@
     <string>Cloud Solidaire a besoin d'accéder à votre microphone si vous désirez utiliser la dictée pour écrire</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Cloud Solidaire a besoin d'accéder à votre photos si vous désirez ajouter des photos existantes dans le Cloud Solidaire</string>
-    <key>UIBackgroundModes</key>
-    <array>
-      <string>audio</string>
-    </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
