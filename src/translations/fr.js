@@ -153,6 +153,7 @@ export default {
   send: 'Envoyer',
   settings: 'Paramètres',
   shared: 'Partagé',
+  soliguide: 'Soliguide',
   success: 'Succès',
   support: 'Support',
   switch_to_english: 'Passer en anglais',
