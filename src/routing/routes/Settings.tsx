@@ -10,6 +10,7 @@ import ProfileScreen from '../../pages/user/ProfileScreen';
 import ResetPasswordScreen from '../../pages/user/ResetPasswordScreen';
 import SettingsScreen from '../../pages/user/SettingsScreen';
 import TermsOfUseScreen from '../../pages/user/TermsOfUseScreen';
+import SoliguideScreen from '../../pages/user/SoliguideScreen';
 import { getHeader } from '../helpers';
 
 const SettingsStack = createStackNavigator();
@@ -28,6 +29,7 @@ export const Settings = () => {
       <SettingsStack.Screen name='Pitches' component={PitchesScreen} options={getHeader(t('pitches'))} />
       <SettingsStack.Screen name='Centers' component={CentersScreen} options={getHeader(t('centers'))} />
       <SettingsStack.Screen name='Chat' component={ChatScreen} options={getHeader(t('support'))} />
+      <SettingsStack.Screen name='Soliguide' component={SoliguideScreen} options={getHeader(t('soliguide'))} />
     </SettingsStack.Navigator>
   );
 };

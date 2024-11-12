@@ -22,4 +22,5 @@ export const colors = {
   black: '#2f3640',
   red: '#e74c3c',
   chat: '#23baf6',
+  soliguideBlue: '#353160',
 };
