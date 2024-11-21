@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   item: { padding: 16, borderBottomWidth: 1, borderColor: colors.darkGrayMoreTransparent },
   itemContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   itemText: { marginLeft: 16, textAlign: 'left', flex: 1 },
-  itemIcon: { width: 20, height: 20, marginHorizontal: 14 },
+  itemImage: { width: 20, height: 20, marginHorizontal: 14 },
   container: { padding: 8 },
   title: { fontSize: 20, textAlign: 'center', marginVertical: 16 },
   langageSwitchContainer: { flexDirection: 'row', justifyContent: 'flex-end' },
@@ -43,7 +43,7 @@ const SettingsScreen: React.FC = () => {
   const items = [
     { onPress: navigate('Profile'), name: 'user-large', label: 'my_information' },
     { onPress: navigate('Centers'), name: 'hotel', label: 'my_centers' },
-    { onPress: navigate('Soliguide'), icon: LogoSoliguide, label: 'soliguide', labelStyle: styles.soliguideStyle },
+    { onPress: navigate('Soliguide'), image: LogoSoliguide, label: 'soliguide', labelStyle: styles.soliguideStyle },
     { onPress: navigate('TermsOfUse'), name: 'scroll', label: 'terms_of_use' },
     { onPress: navigate('PrivacyPolicy'), name: 'user-shield', label: 'privacy' },
     { onPress: navigate('LegalNotices'), name: 'scale-balanced', label: 'legal' },
@@ -63,11 +63,11 @@ const SettingsScreen: React.FC = () => {
       </View>
       <FlatList
         data={items}
-        renderItem={({ item: { onPress, name, icon, color = colors.black, label, labelStyle } }) => (
+        renderItem={({ item: { onPress, name, image, color = colors.black, label, labelStyle } }) => (
           <TouchableOpacity onPress={onPress}>
             <View style={styles.item}>
               <View style={styles.itemContent}>
-                {icon && <Image source={icon} style={styles.itemIcon} />}
+                {image && <Image source={image} style={styles.itemImage} />}
                 {name && <Icon name={name} color={color} />}
                 <Text style={{...styles.itemText, color, ...labelStyle}}>{label}</Text>
                 <Icon name='chevron-right' color={color} />
