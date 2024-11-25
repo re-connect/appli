@@ -5,7 +5,7 @@ import { SettingsButton, TabBarButton } from './Components';
 import { getTabStackIcon } from '../services/navigation';
 import { isMember } from '../helpers/userHelpers';
 
-const settingsScreens = ['Chat', 'Profile', 'SettingsIndex', 'Centers', 'TermsOfUse', 'LegalNotices', 'PrivacyPolicy', 'Pitches'];
+const settingsScreens = ['Chat', 'Profile', 'SettingsIndex', 'Centers', 'TermsOfUse', 'LegalNotices', 'PrivacyPolicy', 'Pitches', 'Soliguide'];
 
 export const getTabScreenOptions =
   (t: any) =>

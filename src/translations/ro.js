@@ -146,6 +146,7 @@ export default {
   send: 'Trimite',
   settings: 'Setări',
   shared: 'Partajat',
+  soliguide: 'Soliguide',
   success: 'Succes',
   support: 'Centru de ajutor',
   switch_to_english: 'Schimbati in limba engleză',

@@ -149,6 +149,7 @@ export default {
   send: 'Dërgo',
   settings: 'Parametrat',
   shared: 'Te përbashkëta',
+  soliguide: 'Soliguide',
   success: 'Sukses',
   support: 'Support',
   switch_to_english: 'Kalo në anglisht',

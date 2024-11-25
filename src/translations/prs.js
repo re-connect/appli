@@ -145,6 +145,7 @@ export default {
   send: 'ارسال کردن',
   settings: 'تنظیمات',
   shared: 'مشترک',
+  soliguide: 'Soliguide',
   success: 'موفقیت',
   support: 'حمایت',
   switch_to_english: 'تغییر به انگلیسی',

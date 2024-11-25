@@ -144,6 +144,7 @@ export default {
   send_by_email: 'ሚሽጥራዊ ሕቶ',
   send: 'ብኢሜይል ለኣኸ',
   settings: 'ለኣኸ',
+  soliguide: 'Soliguide',
   shared: 'አቐማምጣ ',
   success: 'ሼሪንግ ',
   support: 'ዕውት',

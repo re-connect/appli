@@ -147,6 +147,7 @@ export default {
   send: 'Enviar',
   settings: 'Ajustes',
   shared: 'Compartido',
+  soliguide: 'Soliguide',
   success: 'Éxito',
   support: 'Apoyo',
   switch_to_english: 'Cambiar a inglés',

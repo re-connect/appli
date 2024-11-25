@@ -146,6 +146,7 @@ export default {
   send: 'Відіслати',
   settings: 'Налаштування',
   shared: 'Поділитися',
+  soliguide: 'Soliguide',
   success: 'Успіх',
   support: 'Підтримка',
   switch_to_english: 'Перейти до англійскої мови',

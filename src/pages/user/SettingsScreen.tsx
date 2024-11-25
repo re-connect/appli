@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import * as React from 'react';
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View, FlatList } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View, FlatList, Image } from 'react-native';
 import Text from '../../components/UI/Text';
 import LanguageSwitch from '../../components/User/LanguageSwitch';
 import { config } from '../../config';
@@ -9,15 +9,18 @@ import { getTruncatedFullName } from '../../helpers/userHelpers';
 import { useLogout } from '../../hooks/UserHooks';
 import { colors } from '../../style';
 import Icon from '../../components/UI/Icon';
+import LogoSoliguide from '../../images/logo-soliguide.png'
 import { geniusSdkLicense } from '../../appConstants';
 
 const styles = StyleSheet.create({
   item: { padding: 16, borderBottomWidth: 1, borderColor: colors.darkGrayMoreTransparent },
   itemContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   itemText: { marginLeft: 16, textAlign: 'left', flex: 1 },
+  itemImage: { width: 20, height: 20, marginHorizontal: 14 },
   container: { padding: 8 },
   title: { fontSize: 20, textAlign: 'center', marginVertical: 16 },
   langageSwitchContainer: { flexDirection: 'row', justifyContent: 'flex-end' },
+  soliguideStyle: { color: colors.soliguideBlue },
 });
 
 const SettingsScreen: React.FC = () => {
@@ -40,6 +43,7 @@ const SettingsScreen: React.FC = () => {
   const items = [
     { onPress: navigate('Profile'), name: 'user-large', label: 'my_information' },
     { onPress: navigate('Centers'), name: 'hotel', label: 'my_centers' },
+    { onPress: navigate('Soliguide'), image: LogoSoliguide, label: 'soliguide', labelStyle: styles.soliguideStyle },
     { onPress: navigate('TermsOfUse'), name: 'scroll', label: 'terms_of_use' },
     { onPress: navigate('PrivacyPolicy'), name: 'user-shield', label: 'privacy' },
     { onPress: navigate('LegalNotices'), name: 'scale-balanced', label: 'legal' },
@@ -59,12 +63,13 @@ const SettingsScreen: React.FC = () => {
       </View>
       <FlatList
         data={items}
-        renderItem={({ item: { onPress, name, color = colors.black, label } }) => (
+        renderItem={({ item: { onPress, name, image, color = colors.black, label, labelStyle } }) => (
           <TouchableOpacity onPress={onPress}>
             <View style={styles.item}>
               <View style={styles.itemContent}>
-                <Icon name={name} color={color} />
-                <Text style={{...styles.itemText, color}}>{label}</Text>
+                {image && <Image source={image} style={styles.itemImage} />}
+                {name && <Icon name={name} color={color} />}
+                <Text style={{...styles.itemText, color, ...labelStyle}}>{label}</Text>
                 <Icon name='chevron-right' color={color} />
               </View>
             </View>

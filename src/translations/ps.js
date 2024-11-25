@@ -148,6 +148,7 @@ export default {
   send: 'استول',
   settings: 'عوامل',
   shared: 'شریک شوی',
+  soliguide: 'Soliguide',
   success: 'بریا',
   support: 'ملاتړ',
   switch_to_english: 'انګلیسي ته اړول',
