@@ -97,6 +97,7 @@ export default {
   log_out_confirm: 'Willst Du Dich abmelden?',
   log_out: 'Abmelden',
   login: 'Anmelden',
+  maintenance: 'Anwendung in Wartung, bitte versuchen Sie es später erneut',
   make_private: 'Dokument auf privat umstellen',
   make_shared: 'Dokument freigeben',
   mm: 'mm',

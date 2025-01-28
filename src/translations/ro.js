@@ -96,6 +96,7 @@ export default {
   log_out_confirm: 'Vreti să va deconectati?',
   log_out: 'Deconectare',
   login: 'Conectare',
+  maintenance: 'Aplicația este în întreținere, încercați din nou mai târziu',
   make_private: 'Treceti \n privat',
   make_shared: 'Treceti \n partajat',
   mm: 'll',

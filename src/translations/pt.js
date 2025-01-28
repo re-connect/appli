@@ -99,6 +99,7 @@ export default {
   log_out_confirm: 'Deseja-se desconectar?',
   log_out: 'Desconectar-se',
   login: 'Conectar-se',
+  maintenance: 'Aplicativo em manutenção, tente novamente mais tarde',
   make_private: 'Passar \n no privado',
   make_shared: 'Passar \n no compartilhado',
   mm: 'mm',

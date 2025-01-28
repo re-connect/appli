@@ -95,6 +95,7 @@ export default {
   log_out_confirm: 'هل تريد تسجيل الخروج؟',
   log_out: 'تسجيل خروج',
   login: 'تسجيل دخول',
+  maintenance: 'التطبيق تحت الصيانة، يرجى المحاولة لاحقًا',
   make_private: 'جعل \n خاص',
   make_shared: 'جعل \n مشاركة',
   mm: 'mm',

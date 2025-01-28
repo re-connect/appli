@@ -95,6 +95,7 @@ export default {
   log_out_confirm: 'ንምእታው ',
   log_out: 'ናብ ናይ ብሕቲ ምድህሳስ ቀይር',
   login: 'ናብ ናይ ሓባር ምድህሳስ ቀይር',
+  maintenance: 'ኣፕሊኬሽን ኣብ ጥገና ኣሎ፣ ኣብ ድሕሪትኻ ምርጋሕ ምፍታሕ።',
   make_private: 'ወርሒ',
   make_shared: 'ካብ ፎልደር ውፃእ ',
   mm: 'ናብ ፎልደር ኪድ',
