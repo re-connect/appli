@@ -8,7 +8,7 @@ const config = {
   },
   geniusSdkLicense: process.env.EXPO_PUBLIC_GENIUS_KEY,
   env: process.env.EXPO_PUBLIC_ENV,
-  backendUrl: `https://${process.env.EXPO_PUBLIC_ENV === 'prod' ? '' : 'preprod.'}reconnect.fr`,
+  backendUrl: `https://${process.env.EXPO_PUBLIC_ENV === 'prod' ? '' : 'migration.'}reconnect.fr`,
 };
 
 export { config };
