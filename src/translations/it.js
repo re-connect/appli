@@ -107,6 +107,7 @@ export default {
   log_out_confirm: 'Si vuole disconnettere ? ',
   log_out: 'Disconnettersi',
   login: 'Login',
+  maintenance: 'Applicazione in manutenzione, riprova più tardi',
   make_private: 'Passare \n privato',
   make_shared: 'Passare \n condiviso',
   mm: 'mm',

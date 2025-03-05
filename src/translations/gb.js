@@ -95,6 +95,7 @@ export default {
   log_out_confirm: 'Logout ?',
   log_out: 'Log out',
   login: 'Login',
+  maintenance: 'Application under maintenance, please try again later',
   make_private: 'Make \n private',
   make_shared: 'Make \n shared',
   mm: 'mm',

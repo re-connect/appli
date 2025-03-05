@@ -99,6 +99,7 @@ export default {
   log_out_confirm: 'Doni të dilni nga llogaria?',
   log_out: 'Dalje nga llogaria',
   login: 'Hyrje në llogari',
+  maintenance: 'Aplikacioni është në mirëmbajtje, ju lutemi provoni përsëri më vonë',
   make_private: 'Kalo në dritare private',
   make_shared: 'Bëni dhe shpërndani',
   mm: 'mm',

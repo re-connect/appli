@@ -98,6 +98,7 @@ export default {
   log_out: 'Desconectar.',
   login: 'Login',
   modify: 'Modificar',
+  maintenance: 'Aplicación en mantenimiento, intente nuevamente más tarde',
   make_private: 'Hacer /n privado.',
   make_shared: 'Hacer que /n se comparta',
   mm: 'mm',

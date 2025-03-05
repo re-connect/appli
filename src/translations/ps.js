@@ -98,6 +98,7 @@ export default {
   log_out_confirm: 'ایا تاسو غواړئ چې ووځئ ؟',
   log_out: 'وتون يا ډيسکنيټ کيدل',
   login: 'ننوتل يا کنيکټ کيدل',
+  maintenance: 'د غوښتنلیک په ساتنه کې دی، مهرباني وکړئ وروسته بیا هڅه وکړئ',
   make_private: 'شخصي تيريدل',
   make_shared: 'شريک تيريدل',
   mm: 'mm',

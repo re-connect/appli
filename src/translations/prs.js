@@ -95,6 +95,7 @@ export default {
   log_out_confirm: 'می خواهید از سیستم خارج شوید؟',
   log_out: 'خارج شدن از سیستم',
   login: 'وصل شدن',
+  maintenance: 'برنامه در حال نگهداری است، لطفاً بعداً دوباره امتحان کنید',
   make_private: 'تغییر به / n خصوصی',
   make_shared: 'تغییر به / n مشترک',
   mm: 'mm',

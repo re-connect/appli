@@ -77,13 +77,23 @@ const handlePartialAuth = async (params: LoginParams, response: PartialAuthBody)
   });
 
 const retryLogin = async (params: LoginParams): Promise<void> => {
-  const response = await axios.get(loginApiEndpoint, { params, timeout: 15000 });
-  const token = response.data?.access_token;
+  try {
+    const response = await axios.get(loginApiEndpoint, { params, timeout: 15000 });
+    const token = response.data?.access_token;
 
-  if (token) {
-    await setTokenInStorage(token);
-  } else {
-    await handlePartialAuth(params, response.data);
+    if (token) {
+      await setTokenInStorage(token);
+    } else {
+      await handlePartialAuth(params, response.data);
+    }
+  } catch (e) {
+    if (503 === e.response.status) {
+      Alert.alert(t.t('maintenance'));
+
+      return;
+    }
+
+    throw e;
   }
 };
 

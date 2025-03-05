@@ -100,6 +100,7 @@ export default {
   log_out_confirm: 'Voulez-vous vous déconnecter ?',
   log_out: 'Se déconnecter',
   login: 'Se connecter',
+  maintenance: 'Application en maintenance, réessayez plus tard',
   make_private: 'Passer \n privé',
   make_shared: 'Passer \n partagé',
   mm: 'mm',
