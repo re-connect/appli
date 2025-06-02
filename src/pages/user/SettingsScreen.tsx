@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   itemContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   itemText: { marginLeft: 16, textAlign: 'left', flex: 1 },
   itemImage: { width: 20, height: 20, marginHorizontal: 14 },
-  container: { padding: 8 },
+  container: { padding: 8, paddingBottom: 120 },
   title: { fontSize: 20, textAlign: 'center', marginVertical: 16 },
   langageSwitchContainer: { flexDirection: 'row', justifyContent: 'flex-end' },
   soliguideStyle: { color: colors.soliguideBlue },
