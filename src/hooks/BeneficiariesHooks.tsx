@@ -207,7 +207,7 @@ export const useRequestDataForBeneficiary = () => {
           {
             text: t('yes'),
             onPress: async () => {
-              await makeRequestv3('/users/request-personal-account-data/', 'POST');
+              await makeRequestv3('/users/request-personal-account-data/', 'GET');
               isGetingDataActions.setFalse();
             },
             style: 'cancel',
