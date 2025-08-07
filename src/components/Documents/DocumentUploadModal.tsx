@@ -2,7 +2,7 @@ import React from 'react';
 import CustomModal from '../UI/CustomModal';
 import t from '../../services/translation';
 import ItemModal from './Components/ItemModal';
-import DocumentPicker from 'react-native-document-picker';
+import { pick, types } from '@react-native-documents/picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { ImageInterface } from '../../types/Image';
 import { geniusSdkLicense } from '../../appConstants';
@@ -17,25 +17,22 @@ const DocumentUploadModal: React.FC<{
   triggerDocumentUpload: (files: Partial<ImageInterface & File>[]) => void;
 }> = ({ visible, setVisible, handleScanDocument, triggerDocumentUpload }) => {
   const handleChooseFile = async () => {
-    await DocumentPicker.pickSingle({ type: [DocumentPicker.types.allFiles] })
-      .then(res => {
-        if (res) {
-          const file: Partial<ImageInterface & File> = {
-            filename: res.name,
-            path: res.uri,
-            size: res.size ?? 0,
-            type: res.type ?? '', // mime type
-          };
-          triggerDocumentUpload([file]);
-        }
-      })
-      .catch(err => {
-        // Do nothing
-      })
-      .finally(() => {
-        //prevent autoclosing the modal before user has selected a file
-        setVisible(false);
-      });
+    try {
+      const result = await pick({ type: [types.allFiles] });
+      if (result && result.length > 0) {
+        const res = result[0];
+        const file: Partial<ImageInterface & File> = {
+          filename: res.name,
+          path: res.uri,
+          size: res.size ?? 0,
+          type: res.type ?? '', // mime type
+        };
+        triggerDocumentUpload([file]);
+      }
+    } finally {
+      //prevent autoclosing the modal before user has selected a file
+      setVisible(false);
+    }
   };
 
   const handleScanPicture = async () => {
