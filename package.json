@@ -58,7 +58,6 @@
     "expo-notifications": "~0.31.4",
     "expo-status-bar": "~2.2.3",
     "expo-updates": "~0.28.17",
-    "fbjs": "^3.0.4",
     "formik": "^2.2.9",
     "i18next": "^23.8.2",
     "jetifier": "^2.0.0",
