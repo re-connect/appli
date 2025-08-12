@@ -16,7 +16,7 @@ const Root = createStackNavigator();
 const Router = ({ user }: { user: UserInterface | null }) => {
   setIsMember(isPro(user));
   const initialRoute = useUserInitialRoute(user);
-  console.log('initialRoute', initialRoute);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Root.Navigator initialRouteName='AuthLoadingRoot' screenOptions={{ headerShown: false }}>

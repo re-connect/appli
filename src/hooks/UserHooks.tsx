@@ -283,14 +283,12 @@ export const useUserInitialRoute = (user: UserInterface | null):'auth' | 'home' 
   const [initialRoute, setInitialRoute] = React.useState<'auth' | 'home' | 'activation'>('auth');
 
   React.useEffect(() => {
-    console.log('user', user === null);
     const getInitialRoute = async () => {
       if (user === null) {
         setInitialRoute('auth');
       }
       else {
         const token = await AsyncStorage.getItem('accessToken');
-        console.log('token', token);
         if(token) {
           setInitialRoute(user.question_secrete ? 'home' : 'activation');
         }
