@@ -2405,16 +2405,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-11.4.1.tgz#a3c247aceab35f75dd0aa4bfa85d2be5a4508688"
   integrity sha512-B0BYAkghz3Q2V09BF88RA601XursIEA111tnc2JOaN7axJWmNefmfjZqw/KdSxKZp7CZUuPpjBmz/WCR9uaHYg==
 
-"@react-native-community/progress-bar-android@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@react-native-community/progress-bar-android/-/progress-bar-android-1.0.5.tgz#77c03389312ecaf73be55e21d4b7ff6fa4b2b8db"
-  integrity sha512-/IYLHdoqeDqqGQMh9/qYgIReISBIu09lLNbrn70r98+IqQe9WFLuhAr/sdrDKxCUZDQyLqUc0p3rJ50VV0tR3g==
-
-"@react-native-community/progress-view@^1.3.1":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/progress-view/-/progress-view-1.5.0.tgz#45b84d7dd6094cdf4b5143ee1b02aa612575ba12"
-  integrity sha512-ZUvByohzwJ45+ROzVwWx39OZC+2V1Fo+gX06NfmmKD1Ha2Fu320pIjXhG1/9amcW00ZDeY36wvSBpZKkobmeCg==
-
 "@react-native-documents/picker@^10.1.5":
   version "10.1.5"
   resolved "https://registry.yarnpkg.com/@react-native-documents/picker/-/picker-10.1.5.tgz#3b9cd338210e70602a30d739f2c3ee919177c6a9"
