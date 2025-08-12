@@ -18,7 +18,7 @@ import { login } from '../services/authentication';
 import { LoginFormValues } from '../services/forms';
 import { makeRequestv2, makeRequestv3 } from '../services/requests';
 import t from '../services/translation';
-import { ResetPasswordData, UserField, UserUpdate } from '../types/Users';
+import { ResetPasswordData, UserField, UserInterface, UserUpdate } from '../types/Users';
 import { useFetchInvitations } from './CentersHooks';
 import { useTranslation } from 'react-i18next';
 import { resetPassword } from '../services/passwordResetter';
@@ -46,28 +46,15 @@ export const useTriggerGetUser = () => {
   const { setCurrent } = React.useContext(BeneficiaryContext);
   const theme = React.useContext(ThemeContext);
   const triggerGetUser = React.useCallback(async () => {
-    try {
       const lastLanguage = await AsyncStorage.getItem('lastLanguage');
       if (!lastLanguage) {
         await AsyncStorage.setItem('lastLanguage', 'fr');
       } else {
         t.changeLanguage(lastLanguage);
       }
-      const token = await AsyncStorage.getItem('accessToken');
-      if (!token) {
-        if (route.name !== 'Login') {
-          navigation.reset({ routes: [{ name: 'Auth' }] });
-        }
-        return;
-      }
       const newUser = await makeRequestv2('/user');
       if (JSON.stringify(user) !== JSON.stringify(newUser)) {
         setUser(newUser);
-      }
-      if ((!newUser || !newUser.type_user) && route && route.name !== 'Login') {
-        navigation.navigate('Auth');
-        navigation.reset({ routes: [{ name: 'Auth' }] });
-        return;
       }
       if (!newUser) {
         return;
@@ -75,16 +62,7 @@ export const useTriggerGetUser = () => {
       if (isBeneficiary(newUser)) {
         setCurrent(newUser);
         theme.actions.setFalse();
-        navigation.reset({ routes: [{ name: !newUser.question_secrete ? 'Activation' : 'Home' }] });
-      } else {
-        theme.actions.setTrue();
-        navigation.reset({ routes: [{ name: 'Home' }] });
       }
-    } catch (error) {
-      if (route.name !== 'Login') {
-        navigation.reset({ routes: [{ name: 'Auth' }] });
-      }
-    }
   }, [navigation, setUser, theme.actions, user, setCurrent, route]);
 
   return triggerGetUser;
@@ -226,7 +204,6 @@ export const useLogout = () => {
             noteContext.setList([]);
             await AsyncStorage.removeItem('accessToken');
             isoLggingOutActions.setFalse();
-            navigation.navigate('Auth');
           },
         },
         { text: t.t('no'), onPress: isoLggingOutActions.setFalse },
@@ -300,4 +277,30 @@ export const useUserLocale = (): {
   };
 
   return { updateLocale, currentLanguageCode };
+};
+
+export const useUserInitialRoute = (user: UserInterface | null):'auth' | 'home' | 'activation' => {
+  const [initialRoute, setInitialRoute] = React.useState<'auth' | 'home' | 'activation'>('auth');
+
+  React.useEffect(() => {
+    console.log('user', user === null);
+    const getInitialRoute = async () => {
+      if (user === null) {
+        setInitialRoute('auth');
+      }
+      else {
+        const token = await AsyncStorage.getItem('accessToken');
+        console.log('token', token);
+        if(token) {
+          setInitialRoute(user.question_secrete ? 'home' : 'activation');
+        }
+        else {
+          setInitialRoute('auth');
+        }
+      }
+    };
+    getInitialRoute();
+  }, [user]);
+
+  return initialRoute;
 };

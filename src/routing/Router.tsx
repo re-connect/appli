@@ -9,23 +9,29 @@ import { Auth, AuthLoading } from './routes/Auth';
 import { Activation } from './routes/Activation';
 import { isPro, setIsMember } from '../helpers/userHelpers';
 import FullScreenImageScreen from '../pages/document/FullScreenImageScreen';
+import { useUserInitialRoute } from '../hooks/UserHooks';
 
 const Root = createStackNavigator();
 
 const Router = ({ user }: { user: UserInterface | null }) => {
   setIsMember(isPro(user));
-
+  const initialRoute = useUserInitialRoute(user);
+  console.log('initialRoute', initialRoute);
   return (
     <NavigationContainer ref={navigationRef}>
       <Root.Navigator initialRouteName='AuthLoadingRoot' screenOptions={{ headerShown: false }}>
-        <Root.Screen name='AuthLoadingRoot' component={AuthLoading} />
-        <Root.Screen name='Auth' component={Auth} />
-        {user === null ? null : <>
-          <Root.Screen name='Home' component={getHome()} />
-          <Root.Screen name='Activation' component={Activation} />
-          <Root.Screen name='Settings' component={Settings} />
-          <Root.Screen name='Image' component={FullScreenImageScreen}/>
-        </>}
+        {initialRoute === 'auth' ? (<>
+          <Root.Screen name='AuthLoadingRoot' component={AuthLoading} />
+          <Root.Screen name='Auth' component={Auth} />
+        </>)
+        : (<>
+          {initialRoute === 'home' && <Root.Screen name='Home' component={getHome()} />}
+        {initialRoute === 'activation' && <Root.Screen name='Activation' component={Activation} />}
+        <Root.Screen name='Settings' component={Settings} />
+        <Root.Screen name='Image' component={FullScreenImageScreen}/>
+        </>)}
+
+
       </Root.Navigator>
     </NavigationContainer>
   );

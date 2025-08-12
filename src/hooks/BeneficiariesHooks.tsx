@@ -19,6 +19,7 @@ import {
   EnableBeneficiaryErrorsInterface,
 } from '../types/Beneficiaries';
 import { alert } from '../helpers/alertHelper';
+import UserContext from '../context/UserContext';
 
 export const useFetchBeneficiaries = () => {
   const [isFetchingBeneficiaries, setIsFetchingBeneficiaries] = useState<boolean>(false);
@@ -161,6 +162,7 @@ export const useEnableBeneficiary = () => {
 export const useDeleteBeneficiary = () => {
   const { t } = useTranslation();
   const [isDeleting, isDeletingActions] = useBoolean(false);
+  const { setUser } = useContext(UserContext);
   const navigation = useNavigation<any>();
 
   const triggerDeleteBeneficiary = useCallback(
@@ -171,9 +173,9 @@ export const useDeleteBeneficiary = () => {
           {
             text: t('yes'),
             onPress: async () => {
+              setUser(null);
               await makeRequestv2(`/beneficiaries/${id}`, 'DELETE');
               await AsyncStorage.removeItem('accessToken');
-              navigation.navigate('Auth');
               isDeletingActions.setFalse();
             },
             style: 'cancel',
