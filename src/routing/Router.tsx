@@ -24,14 +24,13 @@ const Router = ({ user }: { user: UserInterface | null }) => {
           <Root.Screen name='AuthLoadingRoot' component={AuthLoading} />
           <Root.Screen name='Auth' component={Auth} />
         </>)
-        : (<>
+        : (
+        <>
           {initialRoute === 'home' && <Root.Screen name='Home' component={getHome()} />}
-        {initialRoute === 'activation' && <Root.Screen name='Activation' component={Activation} />}
-        <Root.Screen name='Settings' component={Settings} />
-        <Root.Screen name='Image' component={FullScreenImageScreen}/>
+          {initialRoute === 'activation' && <Root.Screen name='Activation' component={Activation} />}
+          <Root.Screen name='Settings' component={Settings} />
+          <Root.Screen name='Image' component={FullScreenImageScreen}/>
         </>)}
-
-
       </Root.Navigator>
     </NavigationContainer>
   );
