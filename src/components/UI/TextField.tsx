@@ -8,7 +8,7 @@ import { colors } from '../../style';
 import Icon from './Icon';
 
 const styles = StyleSheet.create({
-  icon: { marginHorizontal: 16 },
+  icon: { marginHorizontal: 4 },
   error: { color: colors.red },
   inputContainer: {
     flexDirection: 'row',
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   input: {
-    paddingLeft: 24,
+    paddingLeft: 16,
     width: '100%',
     height: 48,
     fontSize: 18,
@@ -84,7 +84,7 @@ const TextField: React.FC<TextFieldProps> = ({
     rightIconName = 'eye';
     showRightIcon = true;
   }
-  const rightIconStyle = { ...styles.icon, color: rightIconColor };
+  const rightIconStyle = { color: rightIconColor, right: 60 };
   return (
     <View>
       <View style={[styles.inputContainer, style]}>
