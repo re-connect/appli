@@ -18,7 +18,7 @@ import { login } from '../services/authentication';
 import { LoginFormValues } from '../services/forms';
 import { makeRequestv2, makeRequestv3 } from '../services/requests';
 import t from '../services/translation';
-import { ResetPasswordData, UserField, UserInterface, UserUpdate } from '../types/Users';
+import { ResetPasswordData, UserField } from '../types/Users';
 import { useFetchInvitations } from './CentersHooks';
 import { useTranslation } from 'react-i18next';
 import { resetPassword } from '../services/passwordResetter';
@@ -46,15 +46,28 @@ export const useTriggerGetUser = () => {
   const { setCurrent } = React.useContext(BeneficiaryContext);
   const theme = React.useContext(ThemeContext);
   const triggerGetUser = React.useCallback(async () => {
+    try {
       const lastLanguage = await AsyncStorage.getItem('lastLanguage');
       if (!lastLanguage) {
         await AsyncStorage.setItem('lastLanguage', 'fr');
       } else {
         t.changeLanguage(lastLanguage);
       }
+      const token = await AsyncStorage.getItem('accessToken');
+      if (!token) {
+        if (route.name !== 'Login') {
+          navigation.reset({ routes: [{ name: 'Auth' }] });
+        }
+        return;
+      }
       const newUser = await makeRequestv2('/user');
       if (JSON.stringify(user) !== JSON.stringify(newUser)) {
         setUser(newUser);
+      }
+      if ((!newUser || !newUser.type_user) && route && route.name !== 'Login') {
+        navigation.navigate('Auth');
+        navigation.reset({ routes: [{ name: 'Auth' }] });
+        return;
       }
       if (!newUser) {
         return;
@@ -62,7 +75,16 @@ export const useTriggerGetUser = () => {
       if (isBeneficiary(newUser)) {
         setCurrent(newUser);
         theme.actions.setFalse();
+        navigation.reset({ routes: [{ name: !newUser.question_secrete ? 'Activation' : 'Home' }] });
+      } else {
+        theme.actions.setTrue();
+        navigation.reset({ routes: [{ name: 'Home' }] });
       }
+    } catch (error) {
+      if (route.name !== 'Login') {
+        navigation.reset({ routes: [{ name: 'Auth' }] });
+      }
+    }
   }, [navigation, setUser, theme.actions, user, setCurrent, route]);
 
   return triggerGetUser;
@@ -129,7 +151,8 @@ export const useUpdateUser = () => {
   const [isUpdating, actions] = useBoolean(false);
   const { user, setUser } = React.useContext(UserContext);
   const { setCurrent } = React.useContext(BeneficiaryContext);
-  const { logout } = useLogout();
+  const navigation = useNavigation<any>();
+
   const updateUserField = async (newValues: UserUpdate) => {
     actions.setTrue();
       const updatedUser = { ...user, ...newValues };
@@ -156,7 +179,7 @@ export const useUpdateUser = () => {
           Alert.alert(t.t('warning'), t.t('update_username_field_warning'), [
             { text: t.t('confirm'), onPress: async () => {
               await updateUserField(newValues);
-              logout(true);
+              navigation.navigate('Auth');
             }},
             { text: t.t('cancel'), onPress: () => {}, style: 'cancel' },
           ], {});
@@ -185,36 +208,31 @@ export const useLogout = () => {
   const navigation = useNavigation<any>();
   const noteContext = React.useContext(NoteContext);
 
-  const logout = React.useCallback(async (skipConfirmation = false) => {
-    const performLogout = async () => {
-      await AsyncStorage.removeItem('accessToken');
-      userContext.setUser(null);
-      beneficiaryContext.setCurrent(null);
-      beneficiaryContext.setList([]);
-      centerContext.setList([]);
-      contactContext.setList([]);
-      documentContext.setList([]);
-      eventContext.setList([]);
-      noteContext.setList([]);
-      isoLggingOutActions.setFalse();
-    };
-
-    if (skipConfirmation) {
-      await performLogout();
-    } else {
-      Alert.alert(
-        t.t('log_out_confirm'),
-        '',
-        [
-          {
-            text: t.t('yes'),
-            onPress: performLogout,
+  const logout = React.useCallback(async () => {
+    Alert.alert(
+      t.t('log_out_confirm'),
+      '',
+      [
+        {
+          text: t.t('yes'),
+          onPress: async () => {
+            userContext.setUser(null);
+            beneficiaryContext.setCurrent(null);
+            beneficiaryContext.setList([]);
+            centerContext.setList([]);
+            contactContext.setList([]);
+            documentContext.setList([]);
+            eventContext.setList([]);
+            noteContext.setList([]);
+            await AsyncStorage.removeItem('accessToken');
+            isoLggingOutActions.setFalse();
+            navigation.navigate('Auth');
           },
-          { text: t.t('no'), onPress: isoLggingOutActions.setFalse },
-        ],
-        { cancelable: true },
-      );
-    }
+        },
+        { text: t.t('no'), onPress: isoLggingOutActions.setFalse },
+      ],
+      { cancelable: true },
+    );
   }, [
     navigation,
     userContext,
@@ -282,25 +300,4 @@ export const useUserLocale = (): {
   };
 
   return { updateLocale, currentLanguageCode };
-};
-
-export const useUserInitialRoute = (user: UserInterface | null):'auth' | 'home' | 'activation' | 'loading' => {
-  const [initialRoute, setInitialRoute] = React.useState<'auth' | 'home' | 'activation' | 'loading'>('loading');
-  console.log('useUserInitialRoute', 'user', user);
-  React.useEffect(() => {
-    const getInitialRoute = async () => {
-
-        const token = await AsyncStorage.getItem('accessToken');
-        if (token) {
-          if (user !== null) {
-            setInitialRoute(!user.question_secrete && !isPro(user) ? 'activation' : 'home');
-          }
-        }
-        else {
-          setInitialRoute('auth');
-        }
-      }
-    getInitialRoute();
-  }, [user]);
-  return initialRoute;
 };
