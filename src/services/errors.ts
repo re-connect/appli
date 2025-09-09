@@ -1,12 +1,10 @@
 import { AxiosError } from 'axios';
 import { Alert } from 'react-native';
-import t from './translation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as RootNavigation from '../RootNavigation';
+import t from './translation';
 
 export const handle401 = (): void => {
   RootNavigation.navigate('Auth');
-  AsyncStorage.removeItem('accessToken');
 };
 
 export const handleError = (error: AxiosError): void => {
