@@ -81,7 +81,6 @@
 				6269584A6602A735389C0C2F /* Pods-Reconnect.release.xcconfig */,
 				583FB299C9127ADC14D9FA50 /* Pods-Reconnect.preprod.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -440,7 +439,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Reconnect/Reconnect.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8BKBA8SNQV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",

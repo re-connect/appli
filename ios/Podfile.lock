@@ -1842,8 +1842,6 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-progress-bar-android (1.0.5):
-    - React
   - react-native-render-html (6.3.4):
     - React-Core
   - react-native-safe-area-context (5.4.0):
@@ -2623,7 +2621,6 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-pdf (from `../node_modules/react-native-pdf`)
-  - "react-native-progress-bar-android (from `../node_modules/@react-native-community/progress-bar-android`)"
   - react-native-render-html (from `../node_modules/react-native-render-html`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -2822,8 +2819,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-pdf:
     :path: "../node_modules/react-native-pdf"
-  react-native-progress-bar-android:
-    :path: "../node_modules/@react-native-community/progress-bar-android"
   react-native-render-html:
     :path: "../node_modules/react-native-render-html"
   react-native-safe-area-context:
@@ -3000,7 +2995,6 @@ SPEC CHECKSUMS:
   react-native-image-picker: 6aa0d05a8997fbf2fedc1285be226becde1e44c7
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
   react-native-pdf: 627c954988c313c3b72a642611ae9160669e2f32
-  react-native-progress-bar-android: 092e6a794f158642692f25c8839d9aa8eb779afb
   react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-safe-area-context: 6cec90ce53951d3b52dc73e873323a4a7662fc0c
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
