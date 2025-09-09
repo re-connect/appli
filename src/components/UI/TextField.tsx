@@ -1,11 +1,12 @@
 import { FormikErrors, FormikTouched } from 'formik';
 import * as React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Dimensions, KeyboardType, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useBoolean } from 'react-hanger/array';
 import { useTranslation } from 'react-i18next';
-import { KeyboardType, StyleSheet } from 'react-native';
 import { colors } from '../../style';
 import Icon from './Icon';
+const DEVICE_WIDTH = Dimensions.get('window').width;
+const IS_LITTLE_DEVICE = DEVICE_WIDTH <= 375;
 
 const styles = StyleSheet.create({
   icon: { marginHorizontal: 4 },
@@ -25,7 +26,11 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     width: '100%',
     height: 48,
-    fontSize: 18,
+    paddingRight: IS_LITTLE_DEVICE && Platform.OS === 'android' ? 32 : 16,
+    fontSize: IS_LITTLE_DEVICE ? 16 : 18,
+  },
+  inputWithRightIcon: {
+    paddingRight: 50,
   },
 });
 
@@ -90,7 +95,7 @@ const TextField: React.FC<TextFieldProps> = ({
       <View style={[styles.inputContainer, style]}>
         {leftElement ? leftElement : !iconName ? null : <Icon style={leftIconStyle} name={iconName} />}
         <TextInput
-          style={[styles.input, style]}
+          style={[styles.input,showRightIcon && styles.inputWithRightIcon, style]}
           autoCapitalize="none"
           autoComplete={!autocompleteType ? 'off' : autocompleteType}
           editable={!disabled}

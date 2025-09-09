@@ -20,6 +20,7 @@ const CreateFolderModal: React.FC<{ show: UseBoolean, folderId?: number }> = ({ 
     triggerCreateFolder(input, selectedIcon?.id);
     show.setFalse();
   }
+  const filteredIcons = icons.filter((icon) => icon.name !== 'TEST');
 
   return (
     <CustomModal
@@ -29,7 +30,7 @@ const CreateFolderModal: React.FC<{ show: UseBoolean, folderId?: number }> = ({ 
       content={
         <>
           <TextField fieldLabel='name' handleChange={setInput} iconName='tag' okIcon value={input} />
-          <FolderIconPicker icons={icons} selectedIcon={selectedIcon} pickIcon={setSelectedIcon} />
+          <FolderIconPicker icons={filteredIcons} selectedIcon={selectedIcon} pickIcon={setSelectedIcon} />
           <ItemModal iconName='plus' label='create' onPress={() => createFolder()} disabled={!input} />
         </>
       }

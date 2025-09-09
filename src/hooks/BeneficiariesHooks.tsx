@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useBoolean } from 'react-hanger/array';
@@ -20,6 +19,7 @@ import {
 } from '../types/Beneficiaries';
 import { alert } from '../helpers/alertHelper';
 import UserContext from '../context/UserContext';
+import { useLogout } from './UserHooks';
 
 export const useFetchBeneficiaries = () => {
   const [isFetchingBeneficiaries, setIsFetchingBeneficiaries] = useState<boolean>(false);
@@ -133,15 +133,17 @@ export const useEnableBeneficiary = () => {
   const [isCreating, isCreatingActions] = useBoolean(false);
   const [errors, setErrors] = useState<EnableBeneficiaryErrorsInterface>({});
   const navigation = useNavigation<any>();
+  const { setUser } = useContext(UserContext);
 
   const triggerEnableBeneficiary = useCallback(
     async (data: EnableBeneficiaryDataInterface) => {
       try {
         isCreatingActions.setTrue();
 
-        const updatedBeneficiary = await makeRequestv2('/beneficiary/enable', 'PATCH', data);
-        if (updatedBeneficiary) {
-          navigation.reset({ routes: [{ name: 'Home' }] });
+       const updatedData= await makeRequestv2('/beneficiary/enable', 'PATCH', data);
+        if (updatedData) {
+          const newUser = await makeRequestv2('/user');
+          setUser(newUser);
         }
         isCreatingActions.setFalse();
       } catch (error) {
@@ -164,6 +166,7 @@ export const useDeleteBeneficiary = () => {
   const [isDeleting, isDeletingActions] = useBoolean(false);
   const { setUser } = useContext(UserContext);
   const navigation = useNavigation<any>();
+  const { logout } = useLogout();
 
   const triggerDeleteBeneficiary = useCallback(
     async (id: number) => {
@@ -173,9 +176,8 @@ export const useDeleteBeneficiary = () => {
           {
             text: t('yes'),
             onPress: async () => {
-              setUser(null);
               await makeRequestv2(`/beneficiaries/${id}`, 'DELETE');
-              await AsyncStorage.removeItem('accessToken');
+              logout(true);
               isDeletingActions.setFalse();
             },
             style: 'cancel',

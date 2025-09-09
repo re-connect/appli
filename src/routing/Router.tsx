@@ -20,10 +20,9 @@ const Router = ({ user }: { user: UserInterface | null }) => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Root.Navigator initialRouteName='AuthLoadingRoot' screenOptions={{ headerShown: false }}>
-        {initialRoute === 'auth' ? (<>
-          <Root.Screen name='AuthLoadingRoot' component={AuthLoading} />
+        {initialRoute === 'loading' && <Root.Screen name='AuthLoadingRoot' component={AuthLoading} />}
+        {initialRoute === 'auth' ?
           <Root.Screen name='Auth' component={Auth} />
-        </>)
         : (
         <>
           {initialRoute === 'home' && <Root.Screen name='Home' component={getHome()} />}

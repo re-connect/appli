@@ -1,12 +1,10 @@
 import * as Formik from 'formik';
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import renameShape from '../../../helpers/forms/renameShape';
 import { colors } from '../../../style';
 import { DocumentInterface } from '../../../types/Documents';
-import Text from '../../UI/Text';
 import TextField from '../../UI/TextField';
-import Icon from '../../UI/Icon';
 import FolderIconPicker from './FolderIconPicker';
 import FolderContext from '../../../context/FolderContext';
 import { FolderIconInterface } from '../../../types/Folder';
@@ -52,7 +50,7 @@ interface Props {
 const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => {
   const [selectedIcon, setSelectedIcon] = React.useState<FolderIconInterface>(document?.icon);
   const { icons } = React.useContext(FolderContext);
-
+  const filteredIcons = icons.filter((icon) => icon.name !== 'TEST');
   return (
       <Formik.Formik
         onSubmit={(values: Record<'name', string>) => {
@@ -75,7 +73,7 @@ const Rename: React.FC<Props> = ({ document, close, closeModal, onSubmit }) => {
                 error={errors.name}
                 value={values.name}
               />
-              {!document.is_folder ? null : <FolderIconPicker icons={icons} selectedIcon={selectedIcon} pickIcon={setSelectedIcon} />}
+              {!document.is_folder ? null : <FolderIconPicker icons={filteredIcons} selectedIcon={selectedIcon} pickIcon={setSelectedIcon} />}
               <ItemModal iconName='save' label='validate' onPress={() => handleSubmit()} />
             </View>
           );
