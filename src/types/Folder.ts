@@ -14,6 +14,7 @@ export interface FolderInterface extends AnyDataInterface {
     id?: number;
   };
   sous_dossiers?: FolderInterface[];
+  dossier_parent_id?: number;
 }
 
 export interface FolderCardInterface {
