@@ -44,7 +44,13 @@ const DocumentsListWrapper: React.FC<DocumentsListWrapperProps> = ({ folderId })
   let isFetching = fetchFolders.isFetching || fetchDocuments.isFetching;
   const documents = findBy(documentContext.list, { folder_id: folderId });
   const [currentDocument, setCurrentDocument] = React.useState<AnyDataInterface | null>(null);
-  const folders = folderContext.list.filter(item => item.is_folder && item?.dossier_parent?.id === folderId);
+  const folders = folderContext.list.filter(item => {
+    if (!item.is_folder) return false;
+    if (!folderId) {
+      return !item.dossier_parent?.id && !item.dossier_parent_id;
+    }
+    return item.dossier_parent?.id === folderId || item.dossier_parent_id === folderId;
+  });
   const list = [...folders, ...documents];
 
   const fetchDocumentsAndFolders = async () => {

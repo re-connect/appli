@@ -8,6 +8,7 @@ import { dateToString, isoToDate } from '../../helpers/dateHelpers';
 import { colors } from '../../style';
 import FakeTextField from './FakeTextField';
 import Text from './Text';
+import { useUserLocale } from '../../hooks/UserHooks';
 
 export interface Props {
   value: string;
@@ -25,8 +26,8 @@ const styles = StyleSheet.create({
   },
   datePickerIos: {
     width: isLittleDevice ? 135 : 150,
-    marginLeft: isLittleDevice ? 0 : -25,
     marginRight: isLittleDevice ? 10 : 15,
+    marginVertical: 5,
   },
   fakeTestFieldsContainer: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 },
   wrapperGlobalDatePickerIos: {
@@ -39,6 +40,7 @@ const DateTimePicker: React.FC<Props> = ({ value, handleChange }) => {
   const [showAndroidDatePicker, showAndroidDatePickerActions] = useBoolean(false);
   const [showAndroidTimePicker, showAndroidTimePickerActions] = useBoolean(false);
   const [date, setDate] = useState<Date>(isoToDate(value));
+  const { currentLanguageCode } = useUserLocale();
   const changeDate = (newDate: Date) => {
     setDate(newDate);
     handleChange(newDate);
@@ -64,6 +66,7 @@ const DateTimePicker: React.FC<Props> = ({ value, handleChange }) => {
         <RNDateTimePicker
           value={date}
           mode='date'
+          locale={currentLanguageCode}
           onChange={(_event: DateTimePickerEvent, newDate?: Date) => newDate && changeDate(newDate)}
           minimumDate={new Date()}
           themeVariant='light'
@@ -71,6 +74,7 @@ const DateTimePicker: React.FC<Props> = ({ value, handleChange }) => {
         />
         <RNDateTimePicker
           value={date}
+          locale={currentLanguageCode}
           mode='time'
           onChange={(_event: DateTimePickerEvent, newDate?: Date) => newDate && changeDate(newDate)}
           minimumDate={new Date()}

@@ -18,7 +18,7 @@ import { login } from '../services/authentication';
 import { LoginFormValues } from '../services/forms';
 import { makeRequestv2, makeRequestv3 } from '../services/requests';
 import t from '../services/translation';
-import { ResetPasswordData, UserField, UserUpdate } from '../types/Users';
+import { ResetPasswordData, UserField } from '../types/Users';
 import { useFetchInvitations } from './CentersHooks';
 import { useTranslation } from 'react-i18next';
 import { resetPassword } from '../services/passwordResetter';
