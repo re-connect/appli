@@ -10,6 +10,10 @@ import { backendUrl } from '../../appConstants';
 import { SvgCssUri } from 'react-native-svg/css';
 
 const styles = StyleSheet.create({
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -52,6 +56,10 @@ interface Props {
   Subtitle: React.FC | null;
 }
 
+const CardIcon: React.FC<{ iconName: string }> = ({ iconName }) => {
+  return <Icon style={styles.icon} color={colors.darkGray} name={iconName} />;
+};
+
 const Card: React.FC<Props> = ({
   item,
   disabled,
@@ -76,6 +84,8 @@ const Card: React.FC<Props> = ({
     return null;
   }
 
+  const IconComponent = hasThumbnail ?  <Thumbnail documentId={item.id} /> : <CardIcon iconName={iconName} />
+
   return (
     <TouchableHighlight
       disabled={isLoading}
@@ -85,23 +95,21 @@ const Card: React.FC<Props> = ({
       {isLoading ? (
         <ActivityIndicator size='large' color={colors.black} />
       ) : (
-        <>
+        <View style={styles.card}>
           {
-            item?.icon_file_path 
+            item?.icon_file_path
             ? <SvgCssUri
               style={styles.icon_image}
               uri={`${backendUrl}/${item?.icon_file_path}`}
             />
-            : !hasThumbnail
-              ? <Icon style={styles.icon} color={colors.darkGray} name={iconName} />
-              : <Thumbnail documentId={item.id} />
+            : IconComponent
           }
           <View style={styles.content}>
             <Text>{title}</Text>
             {Subtitle === null ? null : <Subtitle />}
           </View>
           {RightComponent === null ? null : <RightComponent />}
-        </>
+        </View>
       )}
     </TouchableHighlight>
   );
