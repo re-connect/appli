@@ -3070,10 +3070,10 @@
     pretty-format "^30.0.2"
     redent "^3.0.0"
 
-"@thegrizzlylabs/react-native-genius-scan@^5.2.0":
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/@thegrizzlylabs/react-native-genius-scan/-/react-native-genius-scan-5.12.0.tgz#545c5bca7005cfa7b9ae850fb5ffb43b2b047310"
-  integrity sha512-5vWlCpikR6gM2bpwo2rlxCC5aFa9VenmOqRITfalMWpS9wYuYsmdUclfjqyME12xnl36Juladyh0M+ojUprNMw==
+"@thegrizzlylabs/react-native-genius-scan@^5.16.0":
+  version "5.16.1"
+  resolved "https://registry.yarnpkg.com/@thegrizzlylabs/react-native-genius-scan/-/react-native-genius-scan-5.16.1.tgz#ab2cb0e283dd901ba666377538c37868666d3652"
+  integrity sha512-cSjoL4oBtTKMp/pIedM7bxLc7NQDZ5J+2Rbledps8jBcUzdesK1e6NboFr0Jb5Z/z+FMgDucrcziNlOlpV2Lmw==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -9207,10 +9207,10 @@ react-native-keyboard-aware-scroll-view@^0.9.5:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
-react-native-pdf@^6.6.2:
-  version "6.7.7"
-  resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-6.7.7.tgz#c9a9cffe3ab15a227de84fc1512942472a83ba0b"
-  integrity sha512-D0ga/eyPsVWSPEBm622sGVZLl3gibxPmfm2cxsLcUrZ4WDSGR5HyGmvvWaR/m9wXEyIbD4J6q9qzuG6yObcSXw==
+react-native-pdf@^7.0.0:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-7.0.3.tgz#f72691ac84014f2886e79ebbaf1b28a03ba8b8e9"
+  integrity sha512-zDtF6CGXPAfGptQZqX7LQK3CVQrIGsD+rYuBnMK0sVmd8mrq7ciwmWXINT+d92emMtZ7+PLnx1IQZIdsh0fphA==
   dependencies:
     crypto-js "4.2.0"
     deprecated-react-native-prop-types "^2.3.0"
