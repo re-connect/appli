@@ -45,6 +45,20 @@ export const useTriggerGetUser = () => {
   const { user, setUser } = React.useContext(UserContext);
   const { setCurrent } = React.useContext(BeneficiaryContext);
   const theme = React.useContext(ThemeContext);
+  const [pendingResetRoute, setPendingResetRoute] = React.useState<string | null>(null);
+
+  // Defer navigation.reset until after React has committed the state updates
+  // done by triggerGetUser (setUser, setCurrent, theme). The root Navigator
+  // conditionally mounts screens based on `user`, so firing the reset in the
+  // same synchronous flow as setUser would target a tree that does not yet
+  // contain the destination screen. This effect runs post-commit, once the
+  // Navigator has been rebuilt with all authenticated screens registered.
+  React.useEffect(() => {
+    if (pendingResetRoute === null) return;
+    navigation.reset({ routes: [{ name: pendingResetRoute }] });
+    setPendingResetRoute(null);
+  }, [pendingResetRoute, navigation]);
+
   const triggerGetUser = React.useCallback(async () => {
     try {
       const lastLanguage = await AsyncStorage.getItem('lastLanguage');
@@ -56,7 +70,7 @@ export const useTriggerGetUser = () => {
       const token = await AsyncStorage.getItem('accessToken');
       if (!token) {
         if (route.name !== 'Login') {
-          navigation.reset({ routes: [{ name: 'Auth' }] });
+          setPendingResetRoute('Auth');
         }
         return;
       }
@@ -65,8 +79,7 @@ export const useTriggerGetUser = () => {
         setUser(newUser);
       }
       if ((!newUser || !newUser.type_user) && route && route.name !== 'Login') {
-        navigation.navigate('Auth');
-        navigation.reset({ routes: [{ name: 'Auth' }] });
+        setPendingResetRoute('Auth');
         return;
       }
       if (!newUser) {
@@ -75,17 +88,17 @@ export const useTriggerGetUser = () => {
       if (isBeneficiary(newUser)) {
         setCurrent(newUser);
         theme.actions.setFalse();
-        navigation.reset({ routes: [{ name: !newUser.question_secrete ? 'Activation' : 'Home' }] });
+        setPendingResetRoute(!newUser.question_secrete ? 'Activation' : 'Home');
       } else {
         theme.actions.setTrue();
-        navigation.reset({ routes: [{ name: 'Home' }] });
+        setPendingResetRoute('Home');
       }
     } catch (error) {
       if (route.name !== 'Login') {
-        navigation.reset({ routes: [{ name: 'Auth' }] });
+        setPendingResetRoute('Auth');
       }
     }
-  }, [navigation, setUser, theme.actions, user, setCurrent, route]);
+  }, [setUser, theme.actions, user, setCurrent, route]);
 
   return triggerGetUser;
 };
