@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   topButton: { position: 'absolute', right: 20, top: 40 },
-  bottomButton: { position: 'absolute', right: 20, bottom: 20, paddingHorizontal: 4, },
+  bottomButton: { position: 'absolute', right: 20, bottom: 50, paddingHorizontal: 4, },
   bottomCenteredActionsContainer: {
     position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    bottom: 20,
+    bottom: 50,
     zIndex: 1,
   },
 });

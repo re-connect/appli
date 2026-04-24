@@ -18,6 +18,7 @@ export default ({ config }) => ({
   plugins: [
     '@react-native-community/datetimepicker',
     '@sentry/react-native/expo',
+    'expo-asset',
     'expo-audio',
     'expo-font',
   ],

@@ -5,7 +5,7 @@ import { AudioPlayer, createAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import Screen from '../../components/Screen';
 import Pitch, { Track } from '../../components/User/Pitch';
 
-const styles = StyleSheet.create({ container: { flex: 1, alignItems: 'center' } });
+const styles = StyleSheet.create({ container: { flex: 1, alignItems: 'center' }, scrollView: { marginBottom: 40 } });
 
 const imports: Record<string, number> = {
   english: require('../../../assets/audio/english.mp3'),
@@ -100,7 +100,7 @@ const PitchesScreen: React.FC = () => {
 
   return (
     <Screen>
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           {tracks.map((track: Track) => (
             <Pitch
