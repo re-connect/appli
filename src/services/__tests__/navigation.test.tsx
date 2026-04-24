@@ -1,31 +1,35 @@
+import { RouteProp } from '@react-navigation/native';
 import { getTabStackIcon } from '../navigation';
+
+const makeRoute = (name: string): RouteProp<any, any> =>
+  ({ key: name, name } as RouteProp<any, any>);
 
 describe('getTabStackIcon', () => {
   it.skip('Should get the documents Icon', () => {
     const results = {
       documents: {
-        inactive: getTabStackIcon({ name: 'Documents' })({ color: 'blue' }),
-        focused: getTabStackIcon({ name: 'Documents' })({ color: 'blue' }),
+        inactive: getTabStackIcon(makeRoute('Documents'))({ color: 'blue' }),
+        focused: getTabStackIcon(makeRoute('Documents'))({ color: 'blue' }),
       },
       chat: {
-        inactive: getTabStackIcon({ name: 'Chat' })({ color: 'blue' }),
-        focused: getTabStackIcon({ name: 'Chat' })({ color: 'blue' }),
+        inactive: getTabStackIcon(makeRoute('Chat'))({ color: 'blue' }),
+        focused: getTabStackIcon(makeRoute('Chat'))({ color: 'blue' }),
       },
       contacts: {
-        inactive: getTabStackIcon({ name: 'Contacts' })({ color: 'blue' }),
-        focused: getTabStackIcon({ name: 'Contacts' })({ color: 'blue' }),
+        inactive: getTabStackIcon(makeRoute('Contacts'))({ color: 'blue' }),
+        focused: getTabStackIcon(makeRoute('Contacts'))({ color: 'blue' }),
       },
       notes: {
-        inactive: getTabStackIcon({ name: 'Notes' })({ color: 'blue' }),
-        focused: getTabStackIcon({ name: 'Notes' })({ color: 'blue' }),
+        inactive: getTabStackIcon(makeRoute('Notes'))({ color: 'blue' }),
+        focused: getTabStackIcon(makeRoute('Notes'))({ color: 'blue' }),
       },
       events: {
-        inactive: getTabStackIcon({ name: 'Events' })({ color: 'blue' }),
-        focused: getTabStackIcon({ name: 'Events' })({ color: 'blue' }),
+        inactive: getTabStackIcon(makeRoute('Events'))({ color: 'blue' }),
+        focused: getTabStackIcon(makeRoute('Events'))({ color: 'blue' }),
       },
       unknown: {
-        inactive: getTabStackIcon({ name: 'UnknownTab' })({ color: 'blue' }),
-        focused: getTabStackIcon({ name: 'UnknownTab' })({ color: 'blue' }),
+        inactive: getTabStackIcon(makeRoute('UnknownTab'))({ color: 'blue' }),
+        focused: getTabStackIcon(makeRoute('UnknownTab'))({ color: 'blue' }),
       },
     };
     Object.keys(results).forEach((screenKey: string) => {

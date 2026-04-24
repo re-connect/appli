@@ -5,10 +5,7 @@ import { colors } from '../../style';
 
 const TranslatedText: React.FC<TextProps> = props => {
   const { t } = useTranslation();
-  if (!props.style) {
-    props.style = { color: colors.darkGray };
-  }
-  if (!props || !props.children) {
+  if (!props.children) {
     return null;
   }
   const text = props.children;
@@ -16,7 +13,12 @@ const TranslatedText: React.FC<TextProps> = props => {
     return null;
   }
   const stringText = text as string;
-  return <Text {...props}>{stringText.includes(':') ? stringText : t(stringText)}</Text>;
+  const style = props.style ?? { color: colors.darkGray };
+  return (
+    <Text {...props} style={style}>
+      {stringText.includes(':') ? stringText : t(stringText)}
+    </Text>
+  );
 };
 
 export default TranslatedText;

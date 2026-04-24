@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react-native';
 import * as React from 'react';
 import { useBoolean } from 'react-hanger/array';
 import { StatusBar } from 'expo-status-bar';
-import SplashScreen from 'react-native-splash-screen';
+import * as SplashScreen from 'expo-splash-screen';
 import BeneficiaryContext from './src/context/BeneficiaryContext';
 import CenterContext from './src/context/CenterContext';
 import ContactContext from './src/context/ContactContext';
@@ -28,7 +28,8 @@ import { config } from './src/config';
 import { MAX_LOGIN_ATTEMPTS } from './src/appConstants';
 import { useNumber } from 'react-hanger';
 import { useCheckAndUpdateApp } from './src/hooks/UpdateHooks';
-SplashScreen.hide();
+
+SplashScreen.hideAsync();
 
 Sentry.init({ dsn: config.sentrySecret });
 

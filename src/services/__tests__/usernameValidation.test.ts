@@ -245,7 +245,7 @@ describe('checkUserNameValidity', () => {
     expect(validityNull.month).toBeFalsy();
     expect(validityNull.secondSlash).toBeFalsy();
     expect(validityNull.year).toBeFalsy();
-    const validityUndefined = checkUserNameValidity();
+    const validityUndefined = checkUserNameValidity(undefined as unknown as string);
     expect(validityUndefined.firstName).toBeFalsy();
     expect(validityUndefined.firstDot).toBeFalsy();
     expect(validityUndefined.lastName).toBeFalsy();

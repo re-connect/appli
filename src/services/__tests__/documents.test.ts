@@ -22,27 +22,31 @@ describe('findFolderDocuments', () => {
 
 describe('addDocumentsToFormData', () => {
   const images = [{ path: 'file://here.jpg' }, { path: 'file://here2.jpg', filename: 'fileName.jpg' }];
+  const partsOf = (fd: FormData) => (fd as unknown as { _parts: any[][] })._parts;
   it('should create a formData object', () => {
     const formData = addDocumentsToFormData(new FormData(), images);
-    expect(formData._parts).toBeDefined();
-    expect(formData._parts[0]).toBeDefined();
-    expect(formData._parts[0][1].uri).toBe('here.jpg');
+    const parts = partsOf(formData);
+    expect(parts).toBeDefined();
+    expect(parts[0]).toBeDefined();
+    expect(parts[0][1].uri).toBe('here.jpg');
   });
   it('should use the filename filename if defined', () => {
     const formData = addDocumentsToFormData(new FormData(), images);
-    expect(formData._parts).toBeDefined();
-    expect(formData._parts[1]).toBeDefined();
-    expect(formData._parts[1][1].name).toBe('fileName.jpg');
-    expect(formData._parts[1][1].uri).toBe('here2.jpg');
+    const parts = partsOf(formData);
+    expect(parts).toBeDefined();
+    expect(parts[1]).toBeDefined();
+    expect(parts[1][1].name).toBe('fileName.jpg');
+    expect(parts[1][1].uri).toBe('here2.jpg');
   });
   it('should not remove file:// part on Android', () => {
     jest.mock('react-native/Libraries/Utilities/Platform', () => ({
       OS: 'android',
     }));
     const formData = addDocumentsToFormData(new FormData(), images);
-    expect(formData._parts).toBeDefined();
-    expect(formData._parts[0]).toBeDefined();
-    expect(formData._parts[0][1].uri).toBe('file://here.jpg');
+    const parts = partsOf(formData);
+    expect(parts).toBeDefined();
+    expect(parts[0]).toBeDefined();
+    expect(parts[0][1].uri).toBe('file://here.jpg');
   });
 });
 
@@ -52,10 +56,10 @@ describe('uploadDocument', () => {
     await storage.setItem('accessToken', 'ThisIsMyTestAccessToken');
   });
   beforeEach(() => {
-    global.fetch.mockClear();
+    (global.fetch as unknown as jest.Mock).mockClear();
   });
   it('should throw', async () => {
-    global.fetch.mockRejectedValue('Error');
+    (global.fetch as unknown as jest.Mock).mockRejectedValue('Error');
     await uploadDocuments(images, 12);
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(mockHandleError).toHaveBeenCalled();
