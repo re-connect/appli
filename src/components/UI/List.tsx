@@ -16,7 +16,7 @@ import { hasPrivateParent } from '../../helpers/documentsHelper';
 type DataCardInterface = { item: AnyDataInterface };
 
 interface Props {
-  currentFolderId: number;
+  currentFolderId?: number;
   data: AnyDataInterface[];
   getDataContext: (item?: AnyDataInterface) => React.Context<ListContextInterface<any>>;
   getItemRightComponent?: (item: AnyDataInterface) => React.FC;

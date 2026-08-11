@@ -45,7 +45,7 @@ const ProfileItem: React.FC<Props> = ({ item }) => {
   const userColor = getUserColor(user);
   const [showForm, showFormActions] = useBoolean(false);
   const { update, isUpdating } = useUpdateUser();
-  const initialValues: Record<string, string> = { [field]: value ?? '' };
+  const initialValues = { [field]: value ?? '' } as Record<UserField, string>;
 
   if (isPro(user) && beneficiaryField) {
     return null;

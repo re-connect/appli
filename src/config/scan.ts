@@ -8,7 +8,7 @@ export const imageLibraryOptions: ImageLibraryOptions = {
 };
 
 const scanDefaultConfig = {
-    source: 'image',
+    source: 'image' as const,
     multiPage: false,
     defaultFilter: 'none',
 };

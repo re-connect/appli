@@ -18,18 +18,10 @@ target 'Reconnect' do
   $RNFirebaseAsStaticFramework = true
   use_expo_modules!
 
-  if ENV['EXPO_USE_COMMUNITY_AUTOLINKING'] == '1'
-    config_command = ['node', '-e', "process.argv=['', '', 'config'];require('@react-native-community/cli').run()"];
-  else
-    config_command = [
-      'npx',
-      'expo-modules-autolinking',
-      'react-native-config',
-      '--json',
-      '--platform',
-      'ios'
-    ]
-  end
+  # Use @react-native-community/cli for autolinking (more stable under CocoaPods
+  # than the expo-modules-autolinking alternative which intermittently fails when
+  # stderr/stdout are captured by Pod::Executable).
+  config_command = ['node', '-e', "process.argv=['', '', 'config'];require('@react-native-community/cli').run()"];
 
   config = use_native_modules!(config_command)
 
@@ -60,6 +52,24 @@ target 'Reconnect' do
         resource_bundle_target.build_configurations.each do |config|
           config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
         end
+      end
+    end
+
+    # Fix: Apple Clang 21 (Xcode 26+) rejects fmt's FMT_STRING consteval usage
+    # ("call to consteval function ... is not a constant expression").
+    # fmt/base.h unconditionally #define's FMT_USE_CONSTEVAL, so a -D flag
+    # can't override it. Patch the header so Apple Clang always disables
+    # consteval (it was already disabled for Apple Clang < 14).
+    fmt_base_header = File.join(__dir__, 'Pods', 'fmt', 'include', 'fmt', 'base.h')
+    if File.exist?(fmt_base_header)
+      contents = File.read(fmt_base_header)
+      patched = contents.sub(
+        'defined(__apple_build_version__) && __apple_build_version__ < 14000029L',
+        'defined(__apple_build_version__)'
+      )
+      if patched != contents
+        File.write(fmt_base_header, patched)
+        Pod::UI.puts "[Podfile] Patched fmt/base.h to disable consteval on Apple Clang"
       end
     end
   end
