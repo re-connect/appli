@@ -65,7 +65,7 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
               />
             </>
           )}
-          <Separator height={4} />
+          <Separator height={8} />
         </View>
       </KeyboardAwareScrollView>
     </Screen>

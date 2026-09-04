@@ -21,14 +21,14 @@ export interface DocumentCardInterface {
 }
 
 export interface ScannedGeniusDocumentInterface {
-  multiPageDocumentUrl: string;
+  multiPageDocumentUrl?: string;
   scans: ScannedGeniusObjectInterface[];
 }
 
 export interface ScannedGeniusObjectInterface {
   originalUrl: string;
   enhancedUrl: string;
-  ocrResult: {
+  ocrResult?: {
     text: string;
   };
 }

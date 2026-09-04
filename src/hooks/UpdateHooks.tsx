@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
-import SpInAppUpdates, { IAUUpdateKind } from 'sp-react-native-in-app-updates';
+import SpInAppUpdates, { IAUUpdateKind, StartUpdateOptions } from 'sp-react-native-in-app-updates';
 
 export const useCheckAndUpdateApp = () => {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ export const useCheckAndUpdateApp = () => {
       .checkNeedsUpdate()
       .then(result => {
         if (result.shouldUpdate) {
-          const updateOptions = Platform.select({
+          const updateOptions = Platform.select<StartUpdateOptions>({
             ios: {
               title: t('ios_app_udpate_available_title'),
               message: t('ios_app_udpate_available_message'),
