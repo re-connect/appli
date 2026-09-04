@@ -5,6 +5,7 @@ dotenv.config();
 export default ({ config }) => ({
   ...config,
   android: {
+    versionCode:100000218,
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',
       backgroundColor: '#ffffff'
@@ -22,4 +23,5 @@ export default ({ config }) => ({
     'expo-audio',
     'expo-font',
   ],
+  ios: {buildNumber: "100000218"}
 });
