@@ -32,7 +32,7 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
     { field: 'username', value: username, label: 'username', iconName: 'user-large', readOnly: true },
     { field: 'nom', value: nom, label: 'last_name', iconName: 'users' },
     { field: 'prenom', value: prenom, label: 'first_name', iconName: 'user-large' },
-    { field: 'email', value: email, label: 'email', iconName: 'at' },
+    { field: 'email', value: email, label: 'email', iconName: 'at', readOnly: true },
     { field: 'telephone', value: telephone, label: 'phone', iconName: 'phone' },
     { field: 'question_secrete', value: question_secrete ?? '', label: 'secret_question', iconName: 'question', beneficiaryField: true },
     { field: 'reponse_secrete', value: reponse_secrete ?? '', label: 'secret_answer', iconName: 'circle-question', beneficiaryField: true },
