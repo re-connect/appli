@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useBoolean } from 'react-hanger/array';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 // @ts-ignore
 import { colors } from '../../style';
 import { Language, allLanguages } from '../../services/translation';
@@ -37,13 +38,19 @@ const styles = StyleSheet.create({
 });
 
 const LanguageSwitch: React.FC = () => {
+  const { t } = useTranslation();
   const [open, openActions] = useBoolean(false);
   const { updateLocale, currentLanguageCode } = useUserLocale();
   const currentLanguage = allLanguages.find((language: Language) => language.code === currentLanguageCode);
 
   return (
-    <TouchableOpacity style={styles.container} onPress={openActions.toggle}>
-      <TouchableOpacity style={styles.flag} onPress={openActions.toggle}>
+    <TouchableOpacity style={styles.container} onPress={openActions.toggle} accessible={false} importantForAccessibility='no'>
+      <TouchableOpacity
+        style={styles.flag}
+        onPress={openActions.toggle}
+        accessibilityRole='button'
+        accessibilityLabel={`${t('a11y_language')}, ${currentLanguage?.name ?? ''}`}
+        accessibilityState={{ expanded: open }}>
         <Flag code={currentLanguage?.flag ?? null} />
         <View style={styles.languageCodeContainer}>
           <Text style={styles.languageCode}>{currentLanguage?.name}</Text>
@@ -59,6 +66,8 @@ const LanguageSwitch: React.FC = () => {
 
             return (
               <TouchableOpacity
+                accessibilityRole='button'
+                accessibilityLanguage={code}
                 key={code}
                 style={styles.flag}
                 onPress={() => {

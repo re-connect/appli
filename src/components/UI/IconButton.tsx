@@ -4,6 +4,7 @@ import UserContext from '../../context/UserContext';
 import { colors } from '../../style';
 import { getUserColor } from '../../helpers/userHelpers';
 import Icon from './Icon';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   backgroundColor?: string;
@@ -14,6 +15,7 @@ interface Props {
   isLoading?: boolean;
   onPress: (event: GestureResponderEvent) => void;
   size?: number;
+  accessibilityLabel?: string;
 }
 const styles = StyleSheet.create({
   container: { backgroundColor: colors.blue, alignItems: 'center', justifyContent: 'center', position: 'relative' },
@@ -30,7 +32,9 @@ const IconButton: React.FC<Props> = ({
   backgroundColor,
   size,
   addPlusIcon,
+  accessibilityLabel,
 }) => {
+  const { t } = useTranslation();
   const { user } = React.useContext(UserContext);
   const userColor = getUserColor(user);
 
@@ -44,6 +48,9 @@ const IconButton: React.FC<Props> = ({
 
   return (
     <TouchableOpacity
+      accessibilityRole='button'
+      accessibilityLabel={accessibilityLabel ? t(accessibilityLabel) : undefined}
+      accessibilityState={{ disabled: !!(disabled || isLoading), busy: !!isLoading }}
       disabled={disabled || isLoading}
       style={{ ...styles.container, ...sizedStyle, backgroundColor: computedBackgroundColor }}
       onPress={onPress}>

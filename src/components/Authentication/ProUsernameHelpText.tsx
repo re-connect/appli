@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useBoolean } from 'react-hanger';
 import { StyleSheet, View } from 'react-native';
 import { emailValidator } from '../../helpers/validators';
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const UsernameHelpText: React.FC<Props> = ({ username }) => {
+  const { t } = useTranslation();
   const isEmailValid = useBoolean(false);
   const isUsernameValid = useBoolean(false);
 
@@ -30,8 +32,13 @@ const UsernameHelpText: React.FC<Props> = ({ username }) => {
     isUsernameValid.setValue(checkProUsernameValidity(username));
     isEmailValid.setValue(emailValidator(username));
   }, [isEmailValid, isUsernameValid, username]);
+  const isValid = isEmailValid.value || isUsernameValid.value;
   return (
-    <View style={styles.usernameHelp}>
+    <View
+      style={styles.usernameHelp}
+      accessible
+      accessibilityLabel={`${t('last_name_lower')}.${t('first_name_lower')} | ${t('email')}, ${t(isValid ? 'a11y_format_valid' : 'a11y_format_invalid')}`}
+    >
       <UsernameHelpTextPart text='last_name_lower' validity={isUsernameValid.value} />
       <UsernameHelpTextPart text='.' validity={isUsernameValid.value} />
       <UsernameHelpTextPart text='first_name_lower' validity={isUsernameValid.value} />
@@ -40,7 +47,7 @@ const UsernameHelpText: React.FC<Props> = ({ username }) => {
       <Separator width={1} />
       <UsernameHelpTextPart text='email' validity={isEmailValid.value} />
       <View style={styles.validIconContainer}>
-        {isEmailValid.value || isUsernameValid.value ? (
+        {isValid ? (
           <Icon name='check' style={styles.validIcon} />
         ) : (
           <Icon name='xmark' style={styles.invalidIcon} />

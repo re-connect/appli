@@ -253,6 +253,7 @@ const CreateBeneficiaryForm: React.FC = () => {
                         key={item.id}
                         value={centers.includes(item.id)}
                         onPress={() => toggleCheckbox(item.id)}
+                        accessibilityLabel={item.name}
                         inactiveColor='#ccc'
                         activeColor={colors.primaryPro}
                       />

@@ -39,6 +39,7 @@ const ContactRow: React.FC<ContactRowProps> = ({ contact, updateEmailInput }) =>
     backgroundColor={colors.white}
     iconColor={colors.primary}
     iconName="copy"
+    accessibilityLabel='a11y_copy_email'
     onPress={() => updateEmailInput()}
   />}
 </View> 
@@ -67,7 +68,7 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
     {({ handleBlur, handleChange, handleSubmit, setFieldValue, values, errors, touched }: FormikProps<Record<'email', string>>) => {
       return (
         <View style={styles.wrapper}>
-          <TouchableOpacity onPress={navigateToContacts}><Text style={styles.contactsTitle}>contacts</Text></TouchableOpacity>
+          <TouchableOpacity accessibilityRole='button' onPress={navigateToContacts}><Text style={styles.contactsTitle}>contacts</Text></TouchableOpacity>
           <View>{list.map((contact: ContactInterface) => <ContactRow contact={contact} updateEmailInput={() => setFieldValue('email', contact.email)} />)}</View>
           <TextField
             autocompleteType='email'
@@ -83,7 +84,7 @@ const SendByEmailForm: React.FC<Props> = ({ document, onSubmit, close }) => {
             value={values.email}
           />
           <View style={styles.sendButtonRow}>
-            <IconButton backgroundColor={colors.blue} iconName="paper-plane" onPress={() => handleSubmit()} />
+            <IconButton backgroundColor={colors.blue} iconName="paper-plane" onPress={() => handleSubmit()} accessibilityLabel="send" />
           </View>
         </View>
       );

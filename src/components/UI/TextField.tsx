@@ -95,6 +95,11 @@ const TextField: React.FC<TextFieldProps> = ({
       <View style={[styles.inputContainer, style]}>
         {leftElement ? leftElement : !iconName ? null : <Icon style={leftIconStyle} name={iconName} />}
         <TextInput
+          accessibilityLabel={
+            displayError && hasError && typeof error === 'string'
+              ? `${t(fieldLabel ?? '')}, ${error}`
+              : t(fieldLabel ?? '')
+          }
           style={[styles.input,showRightIcon && styles.inputWithRightIcon, style]}
           autoCapitalize="none"
           autoComplete={!autocompleteType ? 'off' : autocompleteType}
@@ -110,12 +115,21 @@ const TextField: React.FC<TextFieldProps> = ({
           value={!value ? '' : value}
         />
         {showRightIcon ? (
-          <Icon name={rightIconName} style={rightIconStyle} onPress={showPasswordActions.toggle} />
+          contentType === 'password' ? (
+            <Icon
+              name={rightIconName}
+              style={rightIconStyle}
+              onPress={showPasswordActions.toggle}
+              accessibilityLabel={t(showPassword ? 'a11y_hide_password' : 'a11y_show_password')}
+            />
+          ) : (
+            <Icon name={rightIconName} style={rightIconStyle} />
+          )
         ) : null}
       </View>
       {displayError && hasError && (
         <View style={{ marginTop: 16, paddingHorizontal: 16 }}>
-          <Text style={styles.error}>{error as string}</Text>
+          <Text style={styles.error} accessibilityLiveRegion='polite'>{error as string}</Text>
         </View>
       )}
     </View>

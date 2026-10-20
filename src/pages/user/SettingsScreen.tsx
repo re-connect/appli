@@ -64,7 +64,7 @@ const SettingsScreen: React.FC = () => {
       <FlatList
         data={items}
         renderItem={({ item: { onPress, name, image, color = colors.black, label, labelStyle } }) => (
-          <TouchableOpacity onPress={onPress}>
+          <TouchableOpacity onPress={onPress} accessibilityRole='button'>
             <View style={styles.item}>
               <View style={styles.itemContent}>
                 {image && <Image source={image} style={styles.itemImage} />}

@@ -34,6 +34,7 @@ const getContactDetails =
       <View style={styles.contactInfos}>
         {!contact.telephone ? null : (
         <TouchableOpacity
+          accessibilityRole='button'
           style={styles.contactInfo}
           onPress={() => {
             if (contact && contact.telephone) {
@@ -64,7 +65,7 @@ const ContactsScreen: React.FC<Props> = ({ navigation }) => {
     <Screen>
       <View style={styles.container}>
         <View style={{ position: 'absolute', right: 5, bottom: 5, zIndex: 1 }}>
-          <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateContact')} />
+          <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateContact')} accessibilityLabel='new_contact' />
         </View>
         <List
           data={list}

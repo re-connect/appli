@@ -25,7 +25,7 @@ export interface ActionItemProps {
 
 const ActionItem: React.FC<ActionItemProps> = ({ action, label, icon, color = colors.blue, condition = true }) =>
   !condition ? null : (
-    <TouchableOpacity onPress={action}>
+    <TouchableOpacity onPress={action} accessibilityRole='button'>
       <View style={{ flexDirection: 'row', padding: 10 }}>
         <Icon style={styles.menuIcon} color={color} name={icon} />
         <Text style={styles.text}>{label}</Text>

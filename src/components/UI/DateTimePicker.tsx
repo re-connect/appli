@@ -9,10 +9,12 @@ import { colors } from '../../style';
 import FakeTextField from './FakeTextField';
 import Text from './Text';
 import { useUserLocale } from '../../hooks/UserHooks';
+import { useTranslation } from 'react-i18next';
 
 export interface Props {
   value: string;
   handleChange: (value: Date) => void;
+  labelPrefix?: string;
 }
 
 const isLittleDevice = Dimensions.get('window').width <= 375;
@@ -36,11 +38,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const DateTimePicker: React.FC<Props> = ({ value, handleChange }) => {
+const DateTimePicker: React.FC<Props> = ({ value, handleChange, labelPrefix }) => {
   const [showAndroidDatePicker, showAndroidDatePickerActions] = useBoolean(false);
   const [showAndroidTimePicker, showAndroidTimePickerActions] = useBoolean(false);
   const [date, setDate] = useState<Date>(isoToDate(value));
   const { currentLanguageCode } = useUserLocale();
+  const { t } = useTranslation();
   const changeDate = (newDate: Date) => {
     setDate(newDate);
     handleChange(newDate);
@@ -88,12 +91,14 @@ const DateTimePicker: React.FC<Props> = ({ value, handleChange }) => {
       <View style={styles.fakeTestFieldsContainer}>
         <FakeTextField
           value={dateToString(date)}
+          accessibilityLabel={[labelPrefix, t('date')].filter(Boolean).join(', ')}
           onPress={() => showAndroidDatePickerActions.setTrue()}
           iconName='calendar-day'
         />
         <View style={{ flex: 0.1 }} />
         <FakeTextField
           value={format(date, 'HH:mm')}
+          accessibilityLabel={[labelPrefix, t('a11y_time')].filter(Boolean).join(', ')}
           onPress={() => showAndroidTimePickerActions.setTrue()}
           iconName='clock'
         />

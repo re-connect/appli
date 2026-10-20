@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ActivityIndicator, Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import Screen from '../../components/Screen';
 import Text from '../../components/UI/Text';
 import TogglePrivacySwitch from '../../components/UI/TogglePrivacySwitch';
@@ -36,7 +37,7 @@ const Field: React.FC<{ value?: string; action?: () => void; icon: string }> = (
       {!action ? (
         <FieldContent value={value} icon={icon} />
       ) : (
-        <TouchableOpacity style={styles.actions} onPress={action}>
+        <TouchableOpacity style={styles.actions} onPress={action} accessibilityRole='button'>
           <FieldContent value={value} icon={icon} />
         </TouchableOpacity>
       )}
@@ -45,6 +46,7 @@ const Field: React.FC<{ value?: string; action?: () => void; icon: string }> = (
 };
 
 const ContactScreen: React.FC<ContactScreenProps> = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const { list } = React.useContext(ContactContext);
   const { contactId } = route.params;
   const { isDeleting, deleteItem } = useDeleteData(ContactContext, `contacts/${contactId}`, contactId);
@@ -92,10 +94,10 @@ const ContactScreen: React.FC<ContactScreenProps> = ({ route, navigation }) => {
           <Field value={value} action={action} icon={icon} key={value} />
         ))}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 16 }}>
-          <TouchableOpacity onPress={() => navigation.navigate('EditContact', { contactId: contact.id })}>
+          <TouchableOpacity onPress={() => navigation.navigate('EditContact', { contactId: contact.id })} accessibilityRole='button' accessibilityLabel={t('a11y_edit')}>
             <Icon style={styles.icon} name='pen' color={colors.darkGray} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => deleteItem(true)} disabled={isDeleting}>
+          <TouchableOpacity onPress={() => deleteItem(true)} disabled={isDeleting} accessibilityRole='button' accessibilityLabel={t('delete')} accessibilityState={{ busy: isDeleting, disabled: isDeleting }}>
             {isDeleting ? (
               <ActivityIndicator size='small' color={colors.primary} />
             ) : (

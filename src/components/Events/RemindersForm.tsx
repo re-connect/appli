@@ -36,7 +36,7 @@ const RemindersForm: React.FC<Props> = ({ reminders, handleBlur }) => {
         <View>
           <View style={styles.reminders}>
             <Text style={styles.text}>reminders</Text>
-            <IconButton iconName='bell' onPress={() => arrayHelpers.push(dateToIso(new Date()))} />
+            <IconButton iconName='bell' onPress={() => arrayHelpers.push(dateToIso(new Date()))} accessibilityLabel='a11y_add_reminder' />
             <Icon name='plus' color={colors.white} style={styles.icon} />
           </View>
           <Separator height={1} />

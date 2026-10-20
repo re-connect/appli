@@ -6,6 +6,7 @@ import { colors } from '../../style';
 import { AnyDataInterface, ListContextInterface } from '../../types/Data';
 import HiddenItemButton from './HiddenItemButton';
 import { isPro } from '../../helpers/userHelpers';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +28,7 @@ interface Props {
 
 const ListHiddenItem: React.FC<Props> = ({ datum, getLeftActionEndpoint, getRightActionEndpoint, getDataContext }) => {
   const { user } = React.useContext(UserContext);
+  const { t } = useTranslation();
   const { item } = datum;
   const userLeftActionEndpoint = `${getLeftActionEndpoint(item)}/${item.id}/toggle-access`;
   const { patch, isPatching } = usePatchData(userLeftActionEndpoint, item.id, getDataContext(item));
@@ -37,12 +39,14 @@ const ListHiddenItem: React.FC<Props> = ({ datum, getLeftActionEndpoint, getRigh
   );
   const toggleItemText = isPro(user) ? 'make_private' : `make_${!item.b_prive ? 'private' : 'shared'}`;
   const toggleItemColor = !item.b_prive ? colors.red : colors.blue;
+  const itemName = [item.prenom, item.nom].filter(Boolean).join(' ');
+  const withItemName = (label: string) => [label.replace(/\s+/g, ' '), itemName].filter(Boolean).join(', ');
   ;
 
   return (
-    <TouchableOpacity style={styles.container} disabled>
-      <HiddenItemButton isLoading={isPatching} onPress={() => patch()} text={toggleItemText} color={toggleItemColor} />
-      <HiddenItemButton isLoading={isDeleting} onPress={() => deleteItem()} iconName="trash" />
+    <TouchableOpacity style={styles.container} disabled accessible={false}>
+      <HiddenItemButton isLoading={isPatching} onPress={() => patch()} text={toggleItemText} color={toggleItemColor} accessibilityLabel={withItemName(t(toggleItemText))} />
+      <HiddenItemButton isLoading={isDeleting} onPress={() => deleteItem()} iconName="trash" accessibilityLabel={withItemName(t('delete'))} />
     </TouchableOpacity>
   );
 };

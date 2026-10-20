@@ -4,6 +4,7 @@ import { colors } from '../style';
 import { SettingsButton, TabBarButton } from './Components';
 import { getTabStackIcon } from '../services/navigation';
 import { isMember } from '../helpers/userHelpers';
+import i18n from '../services/translation';
 
 const settingsScreens = ['Chat', 'Profile', 'SettingsIndex', 'Centers', 'TermsOfUse', 'LegalNotices', 'PrivacyPolicy', 'Pitches', 'Soliguide'];
 
@@ -24,5 +25,6 @@ export const getHeader =
       title,
       headerStyle: { backgroundColor: isMember ? colors.blue : colors.green },
       headerTintColor: colors.white,
+      headerBackAccessibilityLabel: i18n.t('a11y_back'),
       headerRight: settingsScreens.includes(route.name) ? undefined : () => <SettingsButton navigation={navigation} />,
     });

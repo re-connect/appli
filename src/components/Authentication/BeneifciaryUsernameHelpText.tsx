@@ -4,6 +4,7 @@ import { checkUserNameValidity, UsernameValidityInterface } from '../../services
 import { colors } from '../../style';
 import UsernameHelpTextPart from './UsernameHelpTextPart';
 import Icon from '../UI/Icon';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   usernameHelp: { marginTop: 5, flexDirection: 'row', justifyContent: 'center' },
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const BeneficiaryUsernameHelpText: React.FC<Props> = ({ username }) => {
+  const { t } = useTranslation();
   const [usernameValidity, setUsernameValidity] = React.useState<UsernameValidityInterface>({});
 
   let isEverythingValid = true;
@@ -33,7 +35,11 @@ const BeneficiaryUsernameHelpText: React.FC<Props> = ({ username }) => {
   }, [username]);
 
   return (
-    <View style={styles.usernameHelp}>
+    <View
+      style={styles.usernameHelp}
+      accessible
+      accessibilityLabel={`${t('first_name_lower')}.${t('last_name_lower')}.${t('dd')}/${t('mm')}/${t('yyyy')}, ${t(isEverythingValid ? 'a11y_format_valid' : 'a11y_format_invalid')}`}
+    >
       <UsernameHelpTextPart text='first_name_lower' validity={usernameValidity.firstName} />
       <UsernameHelpTextPart text='.' validity={usernameValidity.firstDot} />
       <UsernameHelpTextPart text='last_name_lower' validity={usernameValidity.lastName} />

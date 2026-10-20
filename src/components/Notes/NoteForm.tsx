@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import noteShape from '../../helpers/forms/noteShape';
 import { colors } from '../../style';
 import { CreateNoteData, NoteInterface } from '../../types/Note';
+import i18n from '../../services/translation';
 import RNSwitch from '../UI/RNSwitch';
 import RoundedButton from '../UI/RoundedButton';
 import Separator from '../UI/Separator';
@@ -33,7 +34,8 @@ const NoteForm: React.FC<Props> = ({ note, onSubmit, isSubmitting }) => (
       <KeyboardAwareScrollView keyboardShouldPersistTaps='handled'>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 8 }}>
           <Icon style={{ fontSize: 20, marginRight: 8 }} name='share' color={colors.blue} />
-          <RNSwitch value={values.b_prive} onPress={() => setFieldValue('b_prive', !values.b_prive)} />
+          <RNSwitch
+              accessibilityLabel={i18n.t('private')} value={values.b_prive} onPress={() => setFieldValue('b_prive', !values.b_prive)} />
           <Icon style={{ fontSize: 20, marginLeft: 8 }} name='lock' color={colors.red} />
         </View>
         <TextField

@@ -88,6 +88,8 @@ const Card: React.FC<Props> = ({
 
   return (
     <TouchableHighlight
+      accessibilityRole='button'
+      accessibilityState={{ busy: isLoading, disabled: isLoading }}
       disabled={isLoading}
       onPress={() => onItemPress()}
       underlayColor={colors.secondary}

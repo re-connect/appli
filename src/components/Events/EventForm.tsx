@@ -8,6 +8,7 @@ import { CreateEventData, ReminderInterface } from '../../types/Event';
 import { dateToIso } from '../../helpers/dateHelpers';
 import DateTimePicker from '../UI/DateTimePicker';
 import FormikTextField from '../UI/FormikTextField';
+import i18n from '../../services/translation';
 import RNSwitch from '../UI/RNSwitch';
 import RoundedButton from '../UI/RoundedButton';
 import RemindersForm from './RemindersForm';
@@ -41,6 +42,7 @@ const EventForm: React.FC<Props> = ({ event, onSubmit, isSubmitting }) => {
           <View style={styles.icons}>
             <Icon style={styles.iconLeft} name='share' color={colors.blue} />
             <RNSwitch
+              accessibilityLabel={i18n.t('private')}
               value={formikBag.values.b_prive}
               onPress={() => formikBag.setFieldValue('b_prive', !formikBag.values.b_prive)}
             />
