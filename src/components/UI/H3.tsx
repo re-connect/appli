@@ -14,7 +14,7 @@ const H3: React.FC<TextProps> = props => {
   }
   const stringText = text as string;
   return (
-    <Text style={[h3Styles.text, props.style]} {...props}>
+    <Text style={[h3Styles.text, props.style]} accessibilityRole='header' {...props}>
       {stringText.includes(':') ? stringText : t(stringText)}
     </Text>
   );

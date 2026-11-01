@@ -1,5 +1,6 @@
 import { ArrayHelpers } from 'formik';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, StyleSheet, View } from 'react-native';
 import { colors } from '../../style';
 import DateTimePicker from '../UI/DateTimePicker';
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const ReminderForm: React.FC<Props> = ({ reminder, arrayHelpers, index, handleBlur }) => {
+  const { t } = useTranslation();
   const onChange = (value: string) => {
     arrayHelpers.replace(index, value);
     handleBlur('rappels');
@@ -23,13 +25,14 @@ const ReminderForm: React.FC<Props> = ({ reminder, arrayHelpers, index, handleBl
   return (
     <View style={styles.wrapper}>
       <View style={styles.reminder}>
-        <DateTimePicker value={reminder} handleChange={(value: Date) => onChange(dateToIso(value))} />
+        <DateTimePicker labelPrefix={t('a11y_reminder')} value={reminder} handleChange={(value: Date) => onChange(dateToIso(value))} />
         <Separator width={1} />
       </View>
       <IconButton
         backgroundColor='transparent'
         size={40}
         iconName='trash-alt'
+        accessibilityLabel='a11y_delete_reminder'
         iconColor={colors.red}
         onPress={() => arrayHelpers.remove(index)}
       />
@@ -39,6 +42,7 @@ const ReminderForm: React.FC<Props> = ({ reminder, arrayHelpers, index, handleBl
 
 const styles = StyleSheet.create({
   reminder: {
+    ...Platform.select({ android: { flex: 1 } }),
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',

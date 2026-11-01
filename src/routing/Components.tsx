@@ -4,6 +4,7 @@ import Button from '../components/UI/Button';
 import { TouchableOpacity } from 'react-native';
 import { colors } from '../style';
 import UserContext from '../context/UserContext';
+import i18n from '../services/translation';
 
 export const SettingsButton = ({ navigation }: { navigation: NavigationProp<any, any> }) => {
   const { user } = React.useContext(UserContext);
@@ -16,6 +17,7 @@ export const SettingsButton = ({ navigation }: { navigation: NavigationProp<any,
       onPress={() => navigation.navigate('Settings')}
       iconColor={colors.white}
       text=''
+      accessibilityLabel={i18n.t('settings')}
       iconName='user-large'
       backgroundColor='transparent'
     />

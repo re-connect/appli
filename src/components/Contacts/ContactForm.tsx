@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import contactShape from '../../helpers/forms/contactShape';
 import { colors } from '../../style';
 import { ContactInterface, CreateContactData } from '../../types/Contact';
+import i18n from '../../services/translation';
 import RNSwitch from '../UI/RNSwitch';
 import RoundedButton from '../UI/RoundedButton';
 import Separator from '../UI/Separator';
@@ -34,7 +35,8 @@ const ContactForm: React.FC<Props> = ({ contact, onSubmit, isSubmitting }) => (
         <KeyboardAwareScrollView keyboardShouldPersistTaps='handled'>
           <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 8 }}>
             <Icon style={{ fontSize: 20, marginRight: 8 }} name='share' color={colors.blue} />
-            <RNSwitch value={values.b_prive} onPress={() => setFieldValue('b_prive', !values.b_prive)} />
+            <RNSwitch
+              accessibilityLabel={i18n.t('private')} value={values.b_prive} onPress={() => setFieldValue('b_prive', !values.b_prive)} />
             <Icon style={{ fontSize: 20, marginLeft: 8 }} name='lock' color={colors.red} />
           </View>
           <TextField

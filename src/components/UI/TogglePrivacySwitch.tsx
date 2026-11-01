@@ -4,6 +4,7 @@ import { usePatchData } from '../../hooks/DataHooks';
 import { colors } from '../../style';
 import RNSwitch from './RNSwitch';
 import Icon from './Icon';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   container: { flexDirection: 'row', alignItems: 'center' },
@@ -20,11 +21,12 @@ interface Props {
 
 const TogglePrivacySwitch: React.FC<Props> = ({ isPrivate, endpoint, Context, itemId }) => {
   const toggle = usePatchData(`${endpoint}/toggle-access`, itemId, Context);
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
       <Icon style={{ ...styles.icon, marginRight: 8 }} name='share' color={colors.blue} />
-      <RNSwitch value={isPrivate} onPress={() => toggle.patch(true)} />
+      <RNSwitch value={isPrivate} onPress={() => toggle.patch(true)} accessibilityLabel={t('private')} />
       <Icon style={{ ...styles.icon, marginLeft: 8 }} name='lock' color={colors.red} />
     </View>
   );

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Dimensions, Keyboard, Modal, StyleSheet, ScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors } from '../../style';
 import Icon from './Icon';
 
@@ -17,7 +18,7 @@ const CustomModal: React.FC<{
 
   return (
     <>
-      {visible && <TouchableOpacity style={styles.opacityWrapper}/>}
+      {visible && <TouchableOpacity style={styles.opacityWrapper} accessible={false} importantForAccessibility='no' />}
       <Modal visible={visible} onRequestClose={closeModal} animationType='slide' transparent>
         <ModalContainer close={closeModal} header={<ModalHeaderTitle title={title} closeModal={closeModal} />}>{content}</ModalContainer>
       </Modal>
@@ -51,9 +52,17 @@ export const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({ h
   }, []);
 
   return (
-    <TouchableOpacity style={{ flex: 1 }} onPress={() => close()} activeOpacity={1}>
+    // Both touchables only handle "tap outside to close": they must not group the modal
+    // content into a single element for screen readers.
+    <TouchableOpacity style={{ flex: 1 }} onPress={() => close()} activeOpacity={1} accessible={false} importantForAccessibility='no'>
       <View style={[styles.centeredView]}>
-        <TouchableOpacity style={{...styles.modalView, height: keyboardVisible ? '95%': 'auto'}} onPress={() => {}} activeOpacity={1}>
+        <TouchableOpacity
+          style={{...styles.modalView, height: keyboardVisible ? '95%': 'auto'}}
+          onPress={() => {}}
+          activeOpacity={1}
+          accessible={false}
+          importantForAccessibility='no'
+          accessibilityViewIsModal>
           {header}
           <ScrollView
             style={{
@@ -71,6 +80,7 @@ export const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({ h
 };
 
 export const ModalHeaderTitle: React.FunctionComponent<TitleModalProps> = ({ title, closeModal }) => {
+  const { t } = useTranslation();
   const userMarginInPx = 10;
   return (
     <>
@@ -83,9 +93,15 @@ export const ModalHeaderTitle: React.FunctionComponent<TitleModalProps> = ({ tit
             paddingBottom: userMarginInPx * 2,
           },
         ]}>
-        <Text style={styles.mainTitle}>{title}</Text>
+        <Text style={styles.mainTitle} accessibilityRole='header'>{title}</Text>
       </View>
-      <Icon name='xmark' color={colors.darkGrayTransparent} style={styles.closeButton} onPress={closeModal} />
+      <Icon
+        name='xmark'
+        color={colors.darkGrayTransparent}
+        style={styles.closeButton}
+        onPress={closeModal}
+        accessibilityLabel={t('a11y_close')}
+      />
     </>
   );
 };

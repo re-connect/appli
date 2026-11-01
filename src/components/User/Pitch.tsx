@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 // @ts-ignore
 import IconButton from '../UI/IconButton';
@@ -29,22 +30,27 @@ interface Props {
 
 const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
-const Pitch: React.FC<Props> = ({ track, play, pause, stop, isPlaying, isStarted }) => 
-  <View style={styles.item}>
-    <View style={styles.text}>
-      <Flag code={track.flag} />
-      <Separator width={1} />
-      <Text>{capitalize(track.name)}</Text>
+const Pitch: React.FC<Props> = ({ track, play, pause, stop, isPlaying, isStarted }) => {
+  const { t } = useTranslation();
+  const label = (key: string): string => `${t(key)} ${capitalize(track.name)}`;
+  return (
+    <View style={styles.item}>
+      <View style={styles.text}>
+        <Flag code={track.flag} />
+        <Separator width={1} />
+        <Text>{capitalize(track.name)}</Text>
+      </View>
+      <View style={styles.actions}>
+        {isStarted ?
+          <>
+            <IconButton iconName='stop' onPress={() => stop(track)} accessibilityLabel={label('a11y_stop')} />
+            <IconButton iconName={ isPlaying ? 'pause' : 'play'} onPress={() => pause(track)} accessibilityLabel={label(isPlaying ? 'a11y_pause' : 'a11y_play')} />
+          </>
+          : <IconButton iconName='play' onPress={() => play(track)} accessibilityLabel={label('a11y_play')} />
+        }
+      </View>
     </View>
-    <View style={styles.actions}>
-      {isStarted ?
-        <>
-          <IconButton iconName='stop' onPress={() => stop(track)} />
-          <IconButton iconName={ isPlaying ? 'pause' : 'play'} onPress={() => pause(track)} />
-        </>
-        : <IconButton iconName='play' onPress={() => play(track)} />
-      }
-    </View>
-  </View>
+  );
+};
 
 export default Pitch;

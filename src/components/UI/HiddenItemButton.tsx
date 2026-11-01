@@ -30,10 +30,14 @@ interface Props {
   text?: string;
   iconName?: string;
   position?: 'left' | 'right';
+  accessibilityLabel?: string;
 }
 
-const HiddenItemButton: React.FC<Props> = ({ isLoading, onPress, text, color, iconName }) => (
+const HiddenItemButton: React.FC<Props> = ({ isLoading, onPress, text, color, iconName, accessibilityLabel }) => (
   <TouchableOpacity
+    accessibilityRole='button'
+    accessibilityLabel={accessibilityLabel}
+    accessibilityState={{ busy: !!isLoading, disabled: !!isLoading }}
     style={{ ...styles.btn, backgroundColor: !color ? colors.red : color }}
     disabled={isLoading}
     onPress={onPress}>

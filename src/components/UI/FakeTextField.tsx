@@ -47,14 +47,17 @@ interface Props {
   iconName: string;
   touched?: boolean;
   error?: string | null;
+  accessibilityLabel?: string;
 }
 
-const FakeTextField: React.FC<Props> = ({ iconName, onPress, value, touched, error }) => {
+const FakeTextField: React.FC<Props> = ({ iconName, onPress, value, touched, error, accessibilityLabel }) => {
   const showErrors = touched && error;
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        accessibilityRole='button'
+        accessibilityLabel={accessibilityLabel ? `${accessibilityLabel}, ${value}` : undefined}
         onPress={onPress}
         style={{
           ...styles.fieldContainer,

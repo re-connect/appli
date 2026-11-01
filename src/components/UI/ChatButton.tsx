@@ -15,6 +15,7 @@ const ChatButton = () => {
     <View style={styles.container}>
       <IconButton
         iconName='comment-alt'
+        accessibilityLabel='support'
         onPress={() => navigation.navigate('Chat')}
         size={60}
         backgroundColor={colors.chat}

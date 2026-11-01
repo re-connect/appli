@@ -11,6 +11,7 @@ import { useGetLastUsername, useLogin } from '../../hooks/UserHooks';
 import Logo from '../../images/logo.png';
 import { LoginFormValues, validateLoginForm } from '../../services/forms';
 import { colors } from '../../style';
+import i18n from '../../services/translation';
 import RNSwitch from '../UI/RNSwitch';
 import RoundedButton from '../UI/RoundedButton';
 import Separator from '../UI/Separator';
@@ -70,6 +71,7 @@ const LoginForm: React.FC = () => {
               <Text style={styles.textStyle}>pros_area</Text>
               <Separator width={1} />
               <RNSwitch
+              accessibilityLabel={i18n.t('pros_area')}
                 value={theme.value}
                 onPress={theme.actions.toggle}
                 activeColor={colors.primaryPro}
@@ -105,6 +107,7 @@ const LoginForm: React.FC = () => {
             />
             <Separator height={4} />
             <TouchableOpacity
+              accessibilityRole='link'
               style={styles.resetPasswordButton}
               onPress={() => {
                 Linking.openURL(`${backendUrl}/public/reset-password/choose`);

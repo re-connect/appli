@@ -35,7 +35,7 @@ const NotesScreen: React.FC<Props> = ({ navigation }) => {
     <Screen>
       <View style={styles.container}>
         <View style={{ position: 'absolute', right: 5, bottom: 5, zIndex: 1 }}>
-          <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateNote')} />
+          <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateNote')} accessibilityLabel='new_note' />
         </View>
         <List
           data={list}

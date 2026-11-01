@@ -7,9 +7,10 @@ interface Props {
   value: boolean;
   activeColor?: string;
   inactiveColor?: string;
+  accessibilityLabel?: string;
 }
 
-const RNSwitch: React.FC<Props> = ({ onPress, value, activeColor, inactiveColor }) => {
+const RNSwitch: React.FC<Props> = ({ onPress, value, activeColor, inactiveColor, accessibilityLabel }) => {
   const isIos = Platform.OS === 'ios';
   const offColor = !inactiveColor ? colors.blue : inactiveColor;
   const onColor = !activeColor ? colors.red : activeColor;
@@ -19,6 +20,7 @@ const RNSwitch: React.FC<Props> = ({ onPress, value, activeColor, inactiveColor 
 
   return (
     <Switch
+      accessibilityLabel={accessibilityLabel}
       ios_backgroundColor={currentColor}
       thumbColor={thumbColor}
       value={value}
