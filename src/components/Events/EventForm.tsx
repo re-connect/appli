@@ -13,11 +13,13 @@ import RNSwitch from '../UI/RNSwitch';
 import RoundedButton from '../UI/RoundedButton';
 import RemindersForm from './RemindersForm';
 import Icon from '../UI/Icon';
+import Text from '../UI/Text';
 
 const styles = StyleSheet.create({
   icons: { flexDirection: 'row', justifyContent: 'flex-end', padding: 8 },
   iconRight: { fontSize: 20, marginRight: 8 },
   iconLeft: { fontSize: 20, marginLeft: 8 },
+  error: { color: colors.red, marginHorizontal: 16, marginBottom: 8 },
 });
 interface Props {
   event: CreateEventData;
@@ -57,6 +59,10 @@ const EventForm: React.FC<Props> = ({ event, onSubmit, isSubmitting }) => {
               }
             }}
           />
+          {/* The submit button stays disabled while the date is in the past: say why (RAAM 5.4). */}
+          {!formikBag.errors.date ? null : (
+            <Text style={styles.error} accessibilityLiveRegion='polite'>a11y_event_date_in_future</Text>
+          )}
           <FormikTextField formikBag={formikBag} name='lieu' icon='map-pin' label='place' />
           <FormikTextField formikBag={formikBag} name='commentaire' icon='comment-alt' label='comment' isTextArea />
           <RemindersForm reminders={formikBag.values.rappels} handleBlur={formikBag.handleBlur} />

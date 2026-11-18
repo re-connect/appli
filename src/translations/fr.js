@@ -225,4 +225,5 @@ export default {
   a11y_language: 'Langue',
   a11y_format_valid: 'Format valide',
   a11y_format_invalid: 'Format non valide',
+  a11y_event_date_in_future: 'Choisissez une date et une heure à venir pour créer l’évènement.',
 };

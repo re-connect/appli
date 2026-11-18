@@ -212,4 +212,5 @@ export default {
   a11y_language: 'Language',
   a11y_format_valid: 'Valid format',
   a11y_format_invalid: 'Invalid format',
+  a11y_event_date_in_future: 'Choose a future date and time to create the event.',
 };
