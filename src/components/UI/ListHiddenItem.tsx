@@ -6,7 +6,6 @@ import { colors } from '../../style';
 import { AnyDataInterface, ListContextInterface } from '../../types/Data';
 import HiddenItemButton from './HiddenItemButton';
 import { isPro } from '../../helpers/userHelpers';
-import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,16 +18,15 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Props {
+export interface ListItemActionsProps {
   datum: { item: AnyDataInterface };
   getLeftActionEndpoint: (item?: AnyDataInterface) => string;
   getRightActionEndpoint: (item?: AnyDataInterface) => string;
   getDataContext: (item?: AnyDataInterface) => React.Context<ListContextInterface<AnyDataInterface>>;
 }
 
-const ListHiddenItem: React.FC<Props> = ({ datum, getLeftActionEndpoint, getRightActionEndpoint, getDataContext }) => {
+export const useListItemActions = ({ datum, getLeftActionEndpoint, getRightActionEndpoint, getDataContext }: ListItemActionsProps) => {
   const { user } = React.useContext(UserContext);
-  const { t } = useTranslation();
   const { item } = datum;
   const userLeftActionEndpoint = `${getLeftActionEndpoint(item)}/${item.id}/toggle-access`;
   const { patch, isPatching } = usePatchData(userLeftActionEndpoint, item.id, getDataContext(item));
@@ -39,14 +37,25 @@ const ListHiddenItem: React.FC<Props> = ({ datum, getLeftActionEndpoint, getRigh
   );
   const toggleItemText = isPro(user) ? 'make_private' : `make_${!item.b_prive ? 'private' : 'shared'}`;
   const toggleItemColor = !item.b_prive ? colors.red : colors.blue;
-  const itemName = [item.prenom, item.nom].filter(Boolean).join(' ');
-  const withItemName = (label: string) => [label.replace(/\s+/g, ' '), itemName].filter(Boolean).join(', ');
-  ;
+
+  return { toggleItemText, toggleItemColor, patch, isPatching, deleteItem, isDeleting };
+};
+
+// The swipe buttons sit behind the row and screen readers met them before or after it
+// depending on the row. They are hidden from assistive technologies: the same actions
+// are offered on the row itself as accessibility actions (see List).
+const ListHiddenItem: React.FC<ListItemActionsProps> = (props) => {
+  const { toggleItemText, toggleItemColor, patch, isPatching, deleteItem, isDeleting } = useListItemActions(props);
 
   return (
-    <TouchableOpacity style={styles.container} disabled accessible={false}>
-      <HiddenItemButton isLoading={isPatching} onPress={() => patch()} text={toggleItemText} color={toggleItemColor} accessibilityLabel={withItemName(t(toggleItemText))} />
-      <HiddenItemButton isLoading={isDeleting} onPress={() => deleteItem()} iconName="trash" accessibilityLabel={withItemName(t('delete'))} />
+    <TouchableOpacity
+      style={styles.container}
+      disabled
+      accessible={false}
+      importantForAccessibility='no-hide-descendants'
+      accessibilityElementsHidden>
+      <HiddenItemButton isLoading={isPatching} onPress={() => patch()} text={toggleItemText} color={toggleItemColor} />
+      <HiddenItemButton isLoading={isDeleting} onPress={() => deleteItem()} iconName="trash" />
     </TouchableOpacity>
   );
 };

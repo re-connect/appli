@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityIndicator, StyleSheet, TouchableHighlight, View } from 'react-native';
+import { AccessibilityActionEvent, AccessibilityActionInfo, ActivityIndicator, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { colors } from '../../style';
 import Text from '../UI/Text';
 import Thumbnail from './Thumbnail';
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   icon_image: { width: 70, height: 70, marginRight: 8 },
 });
 
-interface Props {
+export interface CardProps {
   onPress: (item: AnyDataInterface) => void;
   title: string;
   item: AnyDataInterface;
@@ -54,13 +54,15 @@ interface Props {
   isPrivate: boolean;
   RightComponent: React.FC | null;
   Subtitle: React.FC | null;
+  accessibilityActions?: AccessibilityActionInfo[];
+  onAccessibilityAction?: (event: AccessibilityActionEvent) => void;
 }
 
 const CardIcon: React.FC<{ iconName: string }> = ({ iconName }) => {
   return <Icon style={styles.icon} color={colors.darkGray} name={iconName} />;
 };
 
-const Card: React.FC<Props> = ({
+const Card: React.FC<CardProps> = ({
   item,
   disabled,
   onPress,
@@ -70,6 +72,8 @@ const Card: React.FC<Props> = ({
   isPrivate,
   RightComponent,
   Subtitle,
+  accessibilityActions,
+  onAccessibilityAction,
 }) => {
   const [isLoading, isLoadingActions] = useBoolean(false);
   const onItemPress = () => {
@@ -90,6 +94,8 @@ const Card: React.FC<Props> = ({
     <TouchableHighlight
       accessibilityRole='button'
       accessibilityState={{ busy: isLoading, disabled: isLoading }}
+      accessibilityActions={accessibilityActions}
+      onAccessibilityAction={onAccessibilityAction}
       disabled={isLoading}
       onPress={() => onItemPress()}
       underlayColor={colors.secondary}
