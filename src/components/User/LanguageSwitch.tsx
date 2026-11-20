@@ -59,7 +59,7 @@ const LanguageSwitch: React.FC = () => {
       </TouchableOpacity>
       {!open ? null : (
         <View>
-          {allLanguages.map(({ code, flag, name }: Language) => {
+          {allLanguages.map(({ code, bcp47, flag, name }: Language) => {
             if (code === currentLanguageCode) {
               return null;
             }
@@ -67,7 +67,7 @@ const LanguageSwitch: React.FC = () => {
             return (
               <TouchableOpacity
                 accessibilityRole='button'
-                accessibilityLanguage={code}
+                accessibilityLanguage={bcp47}
                 key={code}
                 style={styles.flag}
                 onPress={() => {
