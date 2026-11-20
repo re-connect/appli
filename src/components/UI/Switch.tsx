@@ -4,6 +4,7 @@ import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-nat
 import { colors } from '../../style';
 import Text from './Text';
 import Icon from './Icon';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   container: {
@@ -52,9 +53,13 @@ interface Props {
 
 const Switch: React.FC<Props> = ({ disabled, isOn, onToggle, isToggling }) => {
   const [on, actions] = useBoolean(isOn);
+  const { t } = useTranslation();
 
   return (
     <TouchableOpacity
+      accessibilityRole='switch'
+      accessibilityLabel={t('private')}
+      accessibilityState={{ checked: on, disabled: !!(disabled || isToggling), busy: !!isToggling }}
       style={styles.container}
       disabled={disabled || isToggling}
       onPress={() => {

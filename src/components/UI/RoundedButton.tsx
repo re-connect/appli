@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import ThemeContext from '../../context/ThemeContext';
 import { colors } from '../../style';
@@ -44,11 +45,15 @@ const RoundedButton: React.FC<Props> = ({
   wrapperStyle,
   textStyle,
 }) => {
+  const { t } = useTranslation();
   const theme = React.useContext(ThemeContext);
   const userColor = theme.value ? colors.primaryPro : colors.primary;
   const fontSizeStyle = fontSize ? { fontSize } : {};
   return (
     <TouchableOpacity
+      accessibilityRole='button'
+      accessibilityLabel={text.includes(':') ? text : t(text)}
+      accessibilityState={isLoading ? { disabled: true, busy: true } : { disabled: !!disabled }}
       disabled={isLoading || disabled}
       style={[
         styles.container,

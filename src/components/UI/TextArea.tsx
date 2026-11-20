@@ -47,6 +47,7 @@ const TextArea: React.FC<TextFieldProps> = ({
   return (
     <View>
       <TextInput
+        accessibilityLabel={error ? `${t(fieldLabel ?? '')}, ${error}` : t(fieldLabel ?? '')}
         style={inputStyle}
         autoCapitalize='none'
         numberOfLines={100}

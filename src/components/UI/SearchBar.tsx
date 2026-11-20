@@ -28,6 +28,7 @@ const SearchBar: React.FC<Props> = ({ onChange }) => {
     <View style={styles.container}>
       <Icon style={styles.leftIcon} color={colors.darkGray} name='magnifying-glass' />
       <TextInput
+        accessibilityLabel={t('search')}
         style={styles.input}
         placeholder={t('search')}
         placeholderTextColor={colors.darkGray}

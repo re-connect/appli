@@ -66,7 +66,7 @@ const EventsScreen: React.FC<Props> = ({ navigation }) => {
     <Screen>
       <View style={styles.container}>
         <View style={styles.addIcon}>
-          <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateEvent')} />
+          <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateEvent')} accessibilityLabel='new_event' />
         </View>
         <List
           data={list}

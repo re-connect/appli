@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import Icon from '../../UI/Icon';
 import { colors } from '../../../style';
 import { useBoolean } from 'react-hanger/array';
@@ -40,16 +41,25 @@ interface Props {
 }
 
 const FullScreenImageActions: React.FC<Props> = ({ document }) => {
+  const { t } = useTranslation();
   const [isModalOpen, openModalActions] = useBoolean(false);
   const { goBack } = useNavigation();
   const { list: folders } = React.useContext(FolderContext);
 
   return <>
-    <TouchableOpacity style={{...styles.actionsButton, ...styles.topButton}} onPress={() => goBack()}>
+    <TouchableOpacity
+      style={{...styles.actionsButton, ...styles.topButton}}
+      onPress={() => goBack()}
+      accessibilityRole='button'
+      accessibilityLabel={t('a11y_close')}>
       <Icon color={colors.black} name='x' style={{ fontSize: 20 }} />
     </TouchableOpacity>
     <DocumentActionsModal document={document} visible={isModalOpen} setVisible={openModalActions.setValue} />
-    <TouchableOpacity style={{...styles.actionsButton, ...styles.bottomButton}} onPress={() => openModalActions.setTrue()}>
+    <TouchableOpacity
+      style={{...styles.actionsButton, ...styles.bottomButton}}
+      onPress={() => openModalActions.setTrue()}
+      accessibilityRole='button'
+      accessibilityLabel={t('actions')}>
       <Icon color={colors.black} name='ellipsis-vertical' style={{ fontSize: 20 }} />
     </TouchableOpacity>
     {hasPrivateParent(folders, document.folder_id) ? null :

@@ -19,7 +19,7 @@ const BeneficiariesScreen: React.FC = () => {
   return (
     <Screen>
       <View style={styles.container}>
-        <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateBeneficiary')} />
+        <IconButton size={60} iconName='plus' onPress={() => navigation.navigate('CreateBeneficiary')} accessibilityLabel='create_beneficiary' />
       </View>
       <BeneficiariesList
         list={list}

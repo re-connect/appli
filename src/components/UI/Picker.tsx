@@ -56,14 +56,14 @@ export const Picker: React.FC<{
     <View style={[styles.wrapperPicker, wrapperStyle]}>
       <View style={[styles.innerWrapperPicker, error ? { borderWidth: 1, borderColor: colors.red } : {}]}>
         {Platform.OS === 'android' ? (
-          <RNPicker selectedValue={selectedValue} onValueChange={onValueChange}>
+          <RNPicker selectedValue={selectedValue} onValueChange={onValueChange} accessibilityLabel={firstLabel}>
             <RNPicker.Item label={firstLabel} value={firstValue} />
             {data.map((channel, index) => {
               return <RNPicker.Item key={index} label={channel.title} value={channel.id} />;
             })}
           </RNPicker>
         ) : (
-          <TouchableOpacity style={styles.wrapperPickerItemIOS} onPress={showActionSheetIOS}>
+          <TouchableOpacity accessibilityRole='button' style={styles.wrapperPickerItemIOS} onPress={showActionSheetIOS}>
             <Text style={styles.textItemIOS}>{selectedValue === firstValue ? firstLabel : labelSelectedValueIOS}</Text>
           </TouchableOpacity>
         )}

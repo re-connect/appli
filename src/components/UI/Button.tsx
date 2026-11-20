@@ -13,6 +13,7 @@ interface Props {
   isLoading?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
   text: string;
+  accessibilityLabel?: string;
 }
 const styles = StyleSheet.create({
   container: {
@@ -38,8 +39,12 @@ const Button: React.FC<Props> = ({
   iconColor,
   fullWidth,
   backgroundColor,
+  accessibilityLabel,
 }) => (
   <TouchableOpacity
+    accessibilityRole='button'
+    accessibilityLabel={accessibilityLabel}
+    accessibilityState={{ disabled: !!(disabled || isLoading), busy: !!isLoading }}
     disabled={disabled || isLoading}
     style={[
       styles.container,

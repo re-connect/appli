@@ -35,6 +35,7 @@ const PickFolder: React.FC<Props> = ({ document, close, onPick }) => {
           <H3>move_to_folder</H3>
           {folders.map((folder: DocumentInterface) => (
             <TouchableOpacity
+              accessibilityRole='button'
               key={folder.id}
               onPress={() => triggerMoveDocumentIntoFolder(document, folder)}>
               <View style={styles.hstack}>
