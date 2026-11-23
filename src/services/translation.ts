@@ -44,7 +44,7 @@ i18n
     compatibilityJSON: 'v3',
     initImmediate: true,
     resources,
-    lng: 'gb',
+    lng: 'fr',
     keySeparator: false,
     fallbackLng: 'gb',
     interpolation: {
