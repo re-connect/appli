@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors } from '../../style';
 import { DocumentInterface } from '../../types/Documents';
 import { UseBooleanActions } from 'react-hanger/array';
@@ -20,6 +21,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({
   openModalActions,
   setCurrentDocument,
 }) => {
+  const { t } = useTranslation();
   const onPress = () => {
     if (setCurrentDocument) {
       setCurrentDocument(document);
@@ -31,7 +33,7 @@ const DocumentCardActions: React.FC<DocumentCardActionsProps> = ({
 
   return (
     <View style={{ position: 'relative' }}>
-      <TouchableOpacity onPress={onPress} style={styles.icon}>
+      <TouchableOpacity onPress={onPress} style={styles.icon} accessibilityRole='button' accessibilityLabel={`${t('actions')}, ${document.nom}`}>
         <Icon style={{ fontSize: 20 }} color={colors.black} name='ellipsis-vertical' />
       </TouchableOpacity>
     </View>

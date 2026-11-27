@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { useAcceptCenterInvitation, useLeaveCenter } from '../../hooks/CentersHooks';
 import { colors } from '../../style';
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
 });
 
 const CenterCard: React.FC<CenterCardProps> = ({ center }) => {
+  const { t } = useTranslation();
   const { isAcceptingInvitation, triggerAcceptInvitation } = useAcceptCenterInvitation();
   const { isLeaving, leave } = useLeaveCenter(center.centre.id);
 
@@ -55,6 +57,8 @@ const CenterCard: React.FC<CenterCardProps> = ({ center }) => {
       <Text style={styles.name}>{center.centre.nom}</Text>
       {!center.b_valid ? (
         <TouchableOpacity
+          accessibilityRole='button'
+          accessibilityState={{ busy: isAcceptingInvitation, disabled: isAcceptingInvitation }}
           style={styles.acceptInvitation}
           disabled={isAcceptingInvitation}
           onPress={() => triggerAcceptInvitation(center.centre)}>
@@ -65,7 +69,12 @@ const CenterCard: React.FC<CenterCardProps> = ({ center }) => {
           )}
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity disabled={isLeaving} onPress={leave}>
+        <TouchableOpacity
+          disabled={isLeaving}
+          onPress={leave}
+          accessibilityRole='button'
+          accessibilityLabel={`${t('a11y_leave_center')}, ${center.centre.nom}`}
+          accessibilityState={{ busy: isLeaving, disabled: isLeaving }}>
           {!isLeaving ? (
             <Icon style={styles.leaveIcon} name='right-from-bracket' color={colors.red} />
           ) : (

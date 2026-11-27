@@ -104,6 +104,7 @@ const CreateBeneficiaryForm: React.FC = () => {
             <>
               <TextField
                 contentType='name'
+                autocompleteType='off'
                 fieldLabel='first_name_required'
                 iconName='user-large'
                 error={allErrors.first_name}
@@ -117,7 +118,7 @@ const CreateBeneficiaryForm: React.FC = () => {
               <Separator height={1} />
               <TextField
                 contentType='familyName'
-                autocompleteType='name'
+                autocompleteType='off'
                 fieldLabel='last_name_required'
                 iconName='users'
                 error={allErrors.last_name}
@@ -149,6 +150,7 @@ const CreateBeneficiaryForm: React.FC = () => {
               <Separator height={1} />
               <TextField
                 contentType='password'
+                autocompleteType='off'
                 fieldLabel='password_required'
                 iconName='key'
                 error={allErrors.password}
@@ -165,6 +167,7 @@ const CreateBeneficiaryForm: React.FC = () => {
                   <Separator height={1} />
                   <TextField
                     contentType='password'
+                    autocompleteType='off'
                     fieldLabel='confirm_password_required'
                     iconName='key'
                     error={allErrors.confirmPassword}
@@ -253,6 +256,7 @@ const CreateBeneficiaryForm: React.FC = () => {
                         key={item.id}
                         value={centers.includes(item.id)}
                         onPress={() => toggleCheckbox(item.id)}
+                        accessibilityLabel={item.name}
                         inactiveColor='#ccc'
                         activeColor={colors.primaryPro}
                       />

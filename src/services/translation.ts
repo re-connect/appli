@@ -17,6 +17,8 @@ import et from '../translations/et';
 
 export interface Language {
   code: string;
+  // BCP 47 tag for screen readers (app codes are not all valid language tags)
+  bcp47: string;
   flag: string;
   name: string;
 }
@@ -53,20 +55,20 @@ i18n
   });
 
 export const allLanguages: Language[] = [
-  { code: 'fr', flag: 'FR', name: 'Français' },
-  { code: 'gb', flag: 'GB', name: 'English' },
-  { code: 'es', flag: 'ES', name: 'Español' },
-  { code: 'ar', flag: 'AR', name: 'عرب' },
-  { code: 'ro', flag: 'RO', name: 'Română' },
-  { code: 'ru', flag: 'RU', name: 'русский' },
-  { code: 'de', flag: 'DE', name: 'Deutsch' },
-  { code: 'ua', flag: 'UA', name: 'український' },
-  { code: 'pt', flag: 'PT', name: 'Português' },
-  { code: 'al', flag: 'AL', name: 'shqiptare' },
-  { code: 'it', flag: 'IT', name: 'Italiano' },
-  { code: 'ps', flag: 'AF', name: 'پښتو' },
-  { code: 'prs', flag: 'AF', name: 'دری' },
-  { code: 'et', flag: 'ET', name: 'ትግርኛ' },
+  { code: 'fr', bcp47: 'fr', flag: 'FR', name: 'Français' },
+  { code: 'gb', bcp47: 'en', flag: 'GB', name: 'English' },
+  { code: 'es', bcp47: 'es', flag: 'ES', name: 'Español' },
+  { code: 'ar', bcp47: 'ar', flag: 'AR', name: 'عرب' },
+  { code: 'ro', bcp47: 'ro', flag: 'RO', name: 'Română' },
+  { code: 'ru', bcp47: 'ru', flag: 'RU', name: 'русский' },
+  { code: 'de', bcp47: 'de', flag: 'DE', name: 'Deutsch' },
+  { code: 'ua', bcp47: 'uk', flag: 'UA', name: 'український' },
+  { code: 'pt', bcp47: 'pt', flag: 'PT', name: 'Português' },
+  { code: 'al', bcp47: 'sq', flag: 'AL', name: 'shqiptare' },
+  { code: 'it', bcp47: 'it', flag: 'IT', name: 'Italiano' },
+  { code: 'ps', bcp47: 'ps', flag: 'AF', name: 'پښتو' },
+  { code: 'prs', bcp47: 'prs', flag: 'AF', name: 'دری' },
+  { code: 'et', bcp47: 'ti', flag: 'ET', name: 'ትግርኛ' },
 ];
 
 export default i18n;

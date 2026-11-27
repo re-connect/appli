@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   input: {
     paddingLeft: 16,
     width: '100%',
-    height: 48,
+    minHeight: 48,
     paddingRight: IS_LITTLE_DEVICE && Platform.OS === 'android' ? 32 : 16,
     fontSize: IS_LITTLE_DEVICE ? 16 : 18,
   },
@@ -33,6 +33,19 @@ const styles = StyleSheet.create({
     paddingRight: 50,
   },
 });
+
+// Android reads autoComplete, iOS reads textContentType: derive the first from the second
+// so that fields about the user can be filled automatically on both platforms (RAAM 5.7).
+const autoCompleteFromContentType: Record<string, string> = {
+  username: 'username',
+  password: 'password',
+  newPassword: 'password-new',
+  emailAddress: 'email',
+  telephoneNumber: 'tel',
+  name: 'name',
+  givenName: 'name-given',
+  familyName: 'name-family',
+};
 
 export interface TextFieldProps {
   autocompleteType?: any;
@@ -95,9 +108,18 @@ const TextField: React.FC<TextFieldProps> = ({
       <View style={[styles.inputContainer, style]}>
         {leftElement ? leftElement : !iconName ? null : <Icon style={leftIconStyle} name={iconName} />}
         <TextInput
+          accessibilityLabel={
+            displayError && hasError && typeof error === 'string'
+              ? `${t(fieldLabel ?? '')}, ${error}`
+              : t(fieldLabel ?? '')
+          }
           style={[styles.input,showRightIcon && styles.inputWithRightIcon, style]}
           autoCapitalize="none"
-          autoComplete={!autocompleteType ? 'off' : autocompleteType}
+          autoComplete={
+            autocompleteType !== undefined
+              ? autocompleteType
+              : autoCompleteFromContentType[contentType] ?? 'off'
+          }
           editable={!disabled}
           keyboardType={keyboardType}
           onBlur={handleBlur}
@@ -110,12 +132,21 @@ const TextField: React.FC<TextFieldProps> = ({
           value={!value ? '' : value}
         />
         {showRightIcon ? (
-          <Icon name={rightIconName} style={rightIconStyle} onPress={showPasswordActions.toggle} />
+          contentType === 'password' ? (
+            <Icon
+              name={rightIconName}
+              style={rightIconStyle}
+              onPress={showPasswordActions.toggle}
+              accessibilityLabel={t(showPassword ? 'a11y_hide_password' : 'a11y_show_password')}
+            />
+          ) : (
+            <Icon name={rightIconName} style={rightIconStyle} />
+          )
         ) : null}
       </View>
       {displayError && hasError && (
         <View style={{ marginTop: 16, paddingHorizontal: 16 }}>
-          <Text style={styles.error}>{error as string}</Text>
+          <Text style={styles.error} accessibilityLiveRegion='polite'>{error as string}</Text>
         </View>
       )}
     </View>

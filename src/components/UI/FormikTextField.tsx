@@ -40,7 +40,7 @@ const FormikTextField: React.FC<Props & TextFieldProps> = props => {
     <>
       <TextField
         contentType={props.contentType ?? 'none'}
-        autocompleteType={props.autocompleteType ?? 'off'}
+        autocompleteType={props.autocompleteType}
         keyboardType={props.keyboardType ?? 'default'}
         error={props.formikBag.errors[props.name]}
         touched={props.formikBag.touched[props.name]}

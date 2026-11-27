@@ -62,6 +62,7 @@ const DocumentsBottomActions: React.FC<Props> = ({ folderId }) => {
         <IconButton
           size={40}
           iconName="folder-open"
+          accessibilityLabel='a11y_create_folder'
           onPress={() => showFolderModal.setTrue()}
           addPlusIcon
         />
@@ -70,6 +71,7 @@ const DocumentsBottomActions: React.FC<Props> = ({ folderId }) => {
         <IconButton
           size={60}
           iconName='file'
+          accessibilityLabel='a11y_add_document'
           onPress={() => showDocumentModal.setTrue()}
           addPlusIcon
         />

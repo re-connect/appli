@@ -7,6 +7,13 @@ import PhoneInputField from './PhoneInputField';
 import { ProfileItemInterface } from './ProfileItem';
 import TextField from './TextField';
 
+// Purpose of the user's own fields, for autofill (RAAM 5.7)
+const profileContentType: Partial<Record<UserField, string>> = {
+  nom: 'familyName',
+  prenom: 'givenName',
+  email: 'emailAddress',
+};
+
 interface Props {
   item: ProfileItemInterface;
   formikBag: FormikProps<Record<UserField, string>>;
@@ -44,6 +51,7 @@ const ProfileItemForm: React.FC<Props> = ({ item: { field, iconName, label }, fo
       handleChange={handleChange}
       handleBlur={handleBlur}
       iconName={iconName ?? 'question'}
+      contentType={profileContentType[field]}
       okIcon
       iconSyle={{ color: colors.darkGray }}
       value={value}

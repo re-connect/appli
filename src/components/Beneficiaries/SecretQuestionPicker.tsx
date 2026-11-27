@@ -72,7 +72,7 @@ const SecretQuestionPicker: React.FC<{ fieldName: string }> = ({ fieldName }) =>
     return (
       <View style={styles.wrapper}>
         <Icon name="question" size={16} color={colors.darkGray} style={styles.icon} />
-        <TouchableOpacity style={styles.touchableIOS} onPress={showActionSheetIOS}>
+        <TouchableOpacity accessibilityRole='button' style={styles.touchableIOS} onPress={showActionSheetIOS}>
           <Text style={styles.textIOS}>{selectedLabelIOS}</Text>
         </TouchableOpacity>
       </View>
@@ -86,6 +86,7 @@ const SecretQuestionPicker: React.FC<{ fieldName: string }> = ({ fieldName }) =>
         onValueChange={value => helpers.setValue(value)}
         items={secretQuestionsForPicker}
         placeholder={{ label: t('secret_question'), value: '' }}
+        pickerProps={{ accessibilityLabel: t('secret_question') }}
       />
     </View>
   );

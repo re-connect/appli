@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
 const Button: React.FC<Props> = ({ text, onPress, isLoading, iconName, iconColor }) => {
   return (
     <TouchableOpacity
+      accessibilityRole='button'
+      accessibilityState={{ busy: !!isLoading, disabled: !!isLoading }}
       disabled={isLoading}
       style={[styles.container, isLoading ? styles.loading : {}]}
       onPress={onPress}>

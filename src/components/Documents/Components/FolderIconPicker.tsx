@@ -1,6 +1,7 @@
 import React from 'react';
 import Text from '../../UI/Text';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { FolderIconInterface } from '../../../types/Folder';
 import { backendUrl } from '../../../appConstants';
 import { colors } from '../../../style';
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
 
 
 const FolderIconPicker: React.FC<{ icons: Array<FolderIconInterface>, selectedIcon?: FolderIconInterface, pickIcon: (icon?: FolderIconInterface) => void }> = ({ icons, selectedIcon, pickIcon }) => {
+  const { t } = useTranslation();
   if (icons.length === 0) return null;
 
   return (
@@ -38,6 +40,8 @@ const FolderIconPicker: React.FC<{ icons: Array<FolderIconInterface>, selectedIc
         const isSelected = selectedIcon && selectedIcon.id === icon.id;
 
         return <TouchableOpacity
+          accessibilityRole='radio'
+          accessibilityState={{ checked: isSelected }}
           style={[styles.iconContainer, isSelected && styles.selectedIconContainer]}
           key={icon.name}
           onPress={() => pickIcon(isSelected ? null : icon)}
@@ -46,7 +50,11 @@ const FolderIconPicker: React.FC<{ icons: Array<FolderIconInterface>, selectedIc
             <SvgCssUri style={styles.icon} uri={`${backendUrl}/${icon.url}`} />
         </TouchableOpacity>
       })}
-      <TouchableOpacity style={styles.iconContainer} onPress={() => pickIcon(null)} >
+      <TouchableOpacity
+        style={styles.iconContainer}
+        onPress={() => pickIcon(null)}
+        accessibilityRole='button'
+        accessibilityLabel={t('a11y_remove_icon')}>
         <Icon name='xmark' style={styles.clearIcon} />
       </TouchableOpacity>
     </View>

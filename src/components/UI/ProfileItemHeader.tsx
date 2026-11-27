@@ -5,6 +5,7 @@ import { colors } from '../../style';
 import { ProfileItemInterface } from './ProfileItem';
 import Text from './Text';
 import Icon from './Icon';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   icon: { fontSize: 20, marginHorizontal: 16, color: colors.white },
@@ -36,6 +37,7 @@ const ProfileItemHeader: React.FC<Props> = ({
   isUpdating,
 }) => {
   const onPress = showForm ? handleSubmit : showFormActions.setTrue;
+  const { t } = useTranslation();
 
   return (
     <View style={[styles.wrapper, { backgroundColor: userColor }]}>
@@ -43,7 +45,12 @@ const ProfileItemHeader: React.FC<Props> = ({
         <>{!iconName ? null : <Icon style={styles.icon} name={iconName} color={colors.gray} />}</>
         <Text style={[styles.label, readOnly && { marginRight: '33%' }]}>{label}</Text>
         {!readOnly ? (
-          <TouchableOpacity onPress={onPress} disabled={isUpdating}>
+          <TouchableOpacity
+            onPress={onPress}
+            disabled={isUpdating}
+            accessibilityRole='button'
+            accessibilityLabel={`${t(showForm ? 'a11y_save' : 'a11y_edit')} ${t(label)}`}
+            accessibilityState={{ busy: isUpdating, disabled: isUpdating }}>
             <>
               {isUpdating ? (
                 <ActivityIndicator size='small' color={colors.white} style={{ marginHorizontal: 16 }} />

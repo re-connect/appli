@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import HTML from 'react-native-render-html';
 import Screen from '../../components/Screen';
 import Text from '../../components/UI/Text';
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
 });
 
 const NoteScreen: React.FC<NoteScreenProps> = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const contentWidth = useWindowDimensions().width;
   const { list } = React.useContext(NoteContext);
   const { noteId } = route.params;
@@ -55,10 +57,10 @@ const NoteScreen: React.FC<NoteScreenProps> = ({ route, navigation }) => {
           </View>
           <Divider />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('EditNote', { noteId: note.id })}>
+            <TouchableOpacity onPress={() => navigation.navigate('EditNote', { noteId: note.id })} accessibilityRole='button' accessibilityLabel={t('a11y_edit')}>
               <Icon style={styles.icon} name='pen' color={colors.darkGray} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => deleteItem(true)} disabled={isDeleting}>
+            <TouchableOpacity onPress={() => deleteItem(true)} disabled={isDeleting} accessibilityRole='button' accessibilityLabel={t('delete')} accessibilityState={{ busy: isDeleting, disabled: isDeleting }}>
               {isDeleting ? (
                 <ActivityIndicator size='small' color={colors.primary} />
               ) : (

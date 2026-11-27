@@ -1,6 +1,7 @@
 import { compareAsc, format } from 'date-fns';
 import * as React from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import Screen from '../../components/Screen';
 import Separator from '../../components/UI/Separator';
 import Text from '../../components/UI/Text';
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
 const sortEvents = (a: ReminderInterface, b: ReminderInterface) => compareAsc(new Date(a.date), new Date(b.date));
 
 const EventScreen: React.FC<EventScreenProps> = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const { list } = React.useContext(EventContext);
   const { eventId } = route.params;
   const { isDeleting, deleteItem } = useDeleteData(EventContext, `events/${eventId}`, eventId);
@@ -90,10 +92,10 @@ const EventScreen: React.FC<EventScreenProps> = ({ route, navigation }) => {
           </View>
           <Divider />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity onPress={() => navigation.navigate('EditEvent', { eventId: event.id })}>
+            <TouchableOpacity onPress={() => navigation.navigate('EditEvent', { eventId: event.id })} accessibilityRole='button' accessibilityLabel={t('a11y_edit')}>
               <Icon style={styles.icon} name="pen" color={colors.darkGray} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => deleteItem(true)} disabled={isDeleting}>
+            <TouchableOpacity onPress={() => deleteItem(true)} disabled={isDeleting} accessibilityRole='button' accessibilityLabel={t('delete')} accessibilityState={{ busy: isDeleting, disabled: isDeleting }}>
               {isDeleting ? (
                 <ActivityIndicator size="small" color={colors.primary} />
               ) : (
