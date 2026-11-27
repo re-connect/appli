@@ -34,6 +34,19 @@ const styles = StyleSheet.create({
   },
 });
 
+// Android reads autoComplete, iOS reads textContentType: derive the first from the second
+// so that fields about the user can be filled automatically on both platforms (RAAM 5.7).
+const autoCompleteFromContentType: Record<string, string> = {
+  username: 'username',
+  password: 'password',
+  newPassword: 'password-new',
+  emailAddress: 'email',
+  telephoneNumber: 'tel',
+  name: 'name',
+  givenName: 'name-given',
+  familyName: 'name-family',
+};
+
 export interface TextFieldProps {
   autocompleteType?: any;
   contentType?: any;
@@ -102,7 +115,11 @@ const TextField: React.FC<TextFieldProps> = ({
           }
           style={[styles.input,showRightIcon && styles.inputWithRightIcon, style]}
           autoCapitalize="none"
-          autoComplete={!autocompleteType ? 'off' : autocompleteType}
+          autoComplete={
+            autocompleteType !== undefined
+              ? autocompleteType
+              : autoCompleteFromContentType[contentType] ?? 'off'
+          }
           editable={!disabled}
           keyboardType={keyboardType}
           onBlur={handleBlur}
