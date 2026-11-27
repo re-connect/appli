@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   input: {
     paddingLeft: 16,
     width: '100%',
-    height: 48,
+    minHeight: 48,
     paddingRight: IS_LITTLE_DEVICE && Platform.OS === 'android' ? 32 : 16,
     fontSize: IS_LITTLE_DEVICE ? 16 : 18,
   },

@@ -18,7 +18,7 @@ interface Props {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    height: 50,
+    minHeight: 50,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
